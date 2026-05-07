@@ -18,14 +18,26 @@ Every year's adventure is a standalone story: a new theme, new mechanics, new ch
 
 ---
 
+## The Game Room
+
+The Gootsocra one-shot is the centerpiece of a broader game room experience that runs throughout MSPGeekCon.
+
+**The one-shot kicks off the first night of the conference, immediately following the opening reception,** a great way to break the ice, shake off the conference-brain, and start building the community before the educational sessions even begin.
+
+Beyond the one-shot, the game room is home to a curated library of board games and tabletop games available to all attendees throughout the event. Drop in between sessions, decompress after a long day, or finally learn that game you've been meaning to try. The game room is intentionally lower-key than the main conference floor: no loud music, no dizzying lights — just people making things together.
+
+The goal has always been the same: give technically-minded people permission to play, and watch what happens when they do.
+
+---
+
 ## Event History
 
-| Year | Theme | Notes |
-|------|-------|-------|
-| 2023 | **A Wild Sheep Chase** | . 19 players across 3 parties; sponsored by OIT/OITVOIP |
-| 2024 | **The Chase for the Starlight Diadem** | sponsored by Cyberdrain |
-| 2025 | **The Feast of Yeast Heist** | sponsored by ImmyBot | 
-| 2026 | **Gootsocra Grand Prix** | sponsored by NinjaOne |
+| Year | Adventure | Sponsor | Notes |
+|------|-----------|---------|-------|
+| 2023 | **A Wild Sheep Chase** | OIT/OITVOIP | Inaugural event. 19 players, 3 DMs |
+| 2024 | **The Chase for the Starlight Diadem** | Cyberdrain | |
+| 2025 | **The Feast of Yeast Heist** | ImmyBot | |
+| 2026 | **Gootsocra Grand Prix** | NinjaOne | |
 
 ---
 
@@ -44,9 +56,9 @@ Each year's event materials live in its own directory. This top-level repository
 
 ---
 
-### Previous Years' Content
+## Previous Years' Content
 
-At this time, Full archives from past events — encounter packets, score sheets, DM guides, and post-event recaps — are available at:
+Full archives from past events — encounter packets, score sheets, DM guides, and post-event recaps — are available at:
 
 **[ttrpg.mspgeekcon.com](https://ttrpg.mspgeekcon.com)**
 
