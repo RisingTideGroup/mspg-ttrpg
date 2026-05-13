@@ -28,9 +28,8 @@
         padding: 0.35in 0.5in 0.32in;
         position: relative;
         overflow: hidden;
-        display: grid;
-        grid-template-rows: auto auto auto auto auto auto;
-        gap: 0;
+        display: flex;
+        flex-direction: column;
       }
 
       /* ── BORDER ── */
@@ -55,7 +54,7 @@
         align-items: end;
         padding-bottom: 6px;
         border-bottom: 2px solid #000;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         position: relative;
         z-index: 1;
       }
@@ -116,7 +115,8 @@
         display: grid;
         grid-template-columns: 1fr 1fr 0.6fr;
         gap: 8px;
-        margin-bottom: 6px;
+        margin-top: 14px;
+        margin-bottom: 14px;
         position: relative;
         z-index: 1;
       }
@@ -148,15 +148,15 @@
         color: #000;
         border-bottom: 1px solid #000;
         padding-bottom: 2px;
-        margin-bottom: 5px;
+        margin-bottom: 7px;
       }
 
       /* ── MAIN BODY GRID ── */
       .body-grid {
         display: grid;
-        grid-template-columns: 2.3in 1fr;
+        grid-template-columns: 2.4in 1fr;
         gap: 0.14in;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
         position: relative;
         z-index: 1;
       }
@@ -224,7 +224,7 @@
       .right-col {
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 7px;
       }
 
       /* ── COMBAT STATS ROW ── */
@@ -232,8 +232,8 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 0;
-        border: 1.5px solid #000;
-        margin-bottom: 2px;
+        border: 1px solid #000;
+        margin-bottom: 4px;
       }
       .combat-stat {
         text-align: center;
@@ -267,13 +267,13 @@
         color: #222;
         font-style: italic;
         padding: 4px 6px;
-        border: 0.75px solid #bbb;
+        border: 1px solid #bbb;
         background: #fafafa;
       }
 
       /* ── WEAPON BLOCK ── */
       .weapon-block {
-        border: 0.75px solid #bbb;
+        border: 1px solid #bbb;
         padding: 3px 6px;
       }
       .weapon-name {
@@ -320,7 +320,7 @@
 
       /* ── BOOST BLOCK ── */
       .boost-block {
-        border: 2px solid #000;
+        border: 1px solid #000;
         padding: 5px 8px;
         position: relative;
         z-index: 1;
@@ -391,14 +391,14 @@
 
       /* ── ACTION CHEAT SHEET ── */
       .action-sheet {
-        border: 1.5px solid #000;
+        border: 1px solid #000;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 0;
         position: relative;
         z-index: 1;
-        margin-bottom: 5px;
-        margin-top: 4px;
+        margin-bottom: 7px;
+        margin-top: 6px;
       }
       .action-col {
         padding: 4px 7px 5px;
@@ -465,21 +465,30 @@
 
       /* ── INVENTORY ── */
       .inventory-block {
-        border: 0.75px solid #bbb;
-        padding: 3px 7px 3px;
+        border: 1px solid #bbb;
+        padding: 5px 7px 5px;
         position: relative;
         z-index: 1;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
       }
       .inventory-lines {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0 0.15in;
+        flex: 1 1 auto;
+        background-image: repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent 15px,
+          #ccc 15px,
+          #ccc 16px
+        );
+        background-position: 0 0;
+        min-height: 1.5in;
       }
       .inv-line {
-        border-bottom: 0.75px solid #ccc;
-        height: 14px;
-        margin-bottom: 2px;
+        display: none;
       }
 
       /* ── FOOTER ── */
@@ -503,6 +512,143 @@
         font-size: 7.5pt;
         font-style: italic;
         color: #999;
+      }
+
+      /* ── LEFT COLUMN (portrait + stat block + modifiers) ── */
+      .left-col {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .portrait-box {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border: 1px solid #000;
+        background: repeating-linear-gradient(
+          45deg,
+          #fafafa 0,
+          #fafafa 6px,
+          #f0f0f0 6px,
+          #f0f0f0 12px
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .portrait-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 7pt;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: #888;
+        background: #fff;
+        padding: 1px 6px;
+        border: 0.5px solid #bbb;
+      }
+      .modifier-block {
+        border: 1px solid #bbb;
+        padding: 5px 7px 6px;
+        background: #fafafa;
+      }
+      .modifier-title {
+        font-family: "Cinzel", serif;
+        font-size: 7pt;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #000;
+        border-bottom: 1px solid #000;
+        padding-bottom: 2px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .car-icon {
+        font-size: 11pt;
+        line-height: 1;
+      }
+      .modifier-field {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        margin-bottom: 4px;
+      }
+      .modifier-field:last-child {
+        margin-bottom: 0;
+      }
+      .modifier-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 5.5pt;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #666;
+      }
+      .modifier-line {
+        border-bottom: 1px solid #000;
+        height: 12px;
+      }
+
+      /* ── WEAPON + SKILL ROW ── */
+      .weapon-skill-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+      }
+      .skill-block {
+        border: 1px solid #bbb;
+        padding: 3px 6px;
+      }
+      .skill-name {
+        font-family: "Cinzel", serif;
+        font-size: 9pt;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+      .skill-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        margin-bottom: 2px;
+      }
+      .skill-stat-pill {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: #f5f5f5;
+        border: 0.5px solid #ccc;
+        padding: 2px 5px;
+        font-size: 7pt;
+      }
+      .ssp-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 6pt;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #666;
+        white-space: nowrap;
+      }
+      .ssp-value {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 7pt;
+        font-weight: bold;
+        color: #000;
+        white-space: nowrap;
+      }
+      .skill-desc {
+        font-size: 7pt;
+        color: #555;
+        line-height: 1.35;
+        margin-top: 2px;
+      }
+
+      /* ── ACTION SHEET (single column after Battle removal) ── */
+      .action-sheet.single-col {
+        grid-template-columns: 1fr;
+      }
+      .action-sheet.single-col .action-col:first-child {
+        border-right: none;
       }
 
       /* ── PRINT ── */
@@ -580,60 +726,67 @@
 
       <div class="body-grid">
         <!-- LEFT: stat table -->
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">16</td>
                 <td class="td-mod">+3</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">10</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">10</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">11</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">9</td>
                 <td class="td-mod">−1</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
 
         <!-- RIGHT: combat stats, background, weapon, boost -->
@@ -641,15 +794,15 @@
           <div class="combat-stats-row">
             <div class="combat-stat">
               <span class="cs-label">Hit Points</span
-              ><span class="cs-value">10</span>
+              ><span class="cs-value">12</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
-              ><span class="cs-value">35ft</span>
+              ><span class="cs-value">30ft</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">10</span>
+              ><span class="cs-value">12</span>
             </div>
           </div>
 
@@ -672,6 +825,7 @@
 
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">The Forge Brand</div>
               <div class="weapon-row">
@@ -691,6 +845,23 @@
                 +2 weapon +3 VEL mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Rage</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Uses</span
+                  ><span class="ssp-value">2 / Rest</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Bonus</span
+                  ><span class="ssp-value">+2 dmg</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Bonus action. Resistance to bludgeoning/piercing/slashing. Advantage on STR checks/saves. +2 melee damage. Lasts 1 minute.
+              </div>
+            </div>
+          </div>
           </div>
 
           <div class="boost-block">
@@ -720,106 +891,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- ACTION CHEAT SHEET -->
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed (ft). Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double your movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + VEL mod to hit. Roll weapon damage on hit.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + VEL vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + VEL vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool from
-                inventory.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no question about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >Add +1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -911,11 +984,13 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
 
       <!-- INVENTORY -->
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
@@ -974,74 +1049,81 @@
         </div>
       </div>
       <div class="body-grid">
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">17</td>
                 <td class="td-mod">+3</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">9</td>
                 <td class="td-mod">−1</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">9</td>
                 <td class="td-mod">−1</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">12</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">11</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
         <div class="right-col">
           <div class="combat-stats-row">
             <div class="combat-stat">
               <span class="cs-label">Hit Points</span
-              ><span class="cs-value">10</span>
+              ><span class="cs-value">9</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
-              ><span class="cs-value">35ft</span>
+              ><span class="cs-value">30ft</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">9</span>
+              ><span class="cs-value">13</span>
             </div>
           </div>
           <div>
@@ -1063,6 +1145,7 @@
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">The Severance Package</div>
               <div class="weapon-row">
@@ -1082,6 +1165,23 @@
                 1. Damage = 1d8 base +3 VEL mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Hunter's Mark</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Save DC</span
+                  ><span class="ssp-value">Concentration</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Bonus</span
+                  ><span class="ssp-value">+1d6</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Bonus action. Mark a creature you can see within 90ft. Deal extra 1d6 damage when you hit it. Lasts up to 1hr.
+              </div>
+            </div>
+          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -1109,104 +1209,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed (ft). Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double your movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + VEL mod to hit. Roll weapon damage on hit.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + VEL vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + VEL vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool from
-                inventory.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no question about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >Add +1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -1298,9 +1302,11 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
@@ -1357,74 +1363,81 @@
         </div>
       </div>
       <div class="body-grid">
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">18</td>
                 <td class="td-mod">+4</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">8</td>
                 <td class="td-mod">−1</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">8</td>
                 <td class="td-mod">−1</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">13</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">8</td>
                 <td class="td-mod">−1</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
         <div class="right-col">
           <div class="combat-stats-row">
             <div class="combat-stat">
               <span class="cs-label">Hit Points</span
-              ><span class="cs-value">10</span>
+              ><span class="cs-value">11</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
-              ><span class="cs-value">35ft</span>
+              ><span class="cs-value">30ft</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">9</span>
+              ><span class="cs-value">11</span>
             </div>
           </div>
           <div>
@@ -1446,6 +1459,7 @@
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">The Sure Thing</div>
               <div class="weapon-row">
@@ -1464,6 +1478,23 @@
                 things get close. Lightning. Damage = 1d10 base +4 VEL mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Rage</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Uses</span
+                  ><span class="ssp-value">2 / Rest</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Bonus</span
+                  ><span class="ssp-value">+2 dmg</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Bonus action. Resistance to bludgeoning/piercing/slashing. Advantage on STR checks/saves. +2 melee damage. Lasts 1 minute.
+              </div>
+            </div>
+          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -1491,104 +1522,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed. Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + VEL mod to hit. Roll weapon damage on hit.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + VEL vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + VEL vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool from
-                inventory.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >+1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -1674,9 +1609,11 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
@@ -1731,66 +1668,73 @@
         </div>
       </div>
       <div class="body-grid">
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">10</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">17</td>
                 <td class="td-mod">+3</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">10</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">11</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">14</td>
                 <td class="td-mod">+2</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
         <div class="right-col">
           <div class="combat-stats-row">
             <div class="combat-stat">
               <span class="cs-label">Hit Points</span
-              ><span class="cs-value">12</span>
+              ><span class="cs-value">8</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
@@ -1798,7 +1742,7 @@
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">13</span>
+              ><span class="cs-value">15</span>
             </div>
           </div>
           <div>
@@ -1820,6 +1764,7 @@
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">The Annotator</div>
               <div class="weapon-row">
@@ -1840,6 +1785,23 @@
                 +3 HAN mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Martial Arts</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Unarmed</span
+                  ><span class="ssp-value">1d4 + DEX</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Bonus</span
+                  ><span class="ssp-value">Extra Strike</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Use DEX for unarmed attacks. After Attack action, make one unarmed strike as a bonus action. Unarmed dmg = 1d4.
+              </div>
+            </div>
+          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -1868,105 +1830,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed. Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + HAN mod to hit (finesse). Roll weapon damage on
-                hit.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + VEL vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + HAN vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool from
-                inventory.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >+1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -2052,9 +1917,11 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
@@ -2112,66 +1979,73 @@
         </div>
       </div>
       <div class="body-grid">
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">10</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">16</td>
                 <td class="td-mod">+3</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">11</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">12</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">15</td>
                 <td class="td-mod">+2</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
         <div class="right-col">
           <div class="combat-stats-row">
             <div class="combat-stat">
               <span class="cs-label">Hit Points</span
-              ><span class="cs-value">12</span>
+              ><span class="cs-value">10</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
@@ -2179,7 +2053,7 @@
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">13</span>
+              ><span class="cs-value">16</span>
             </div>
           </div>
           <div>
@@ -2200,6 +2074,7 @@
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">The Barge Needle</div>
               <div class="weapon-row">
@@ -2219,6 +2094,23 @@
                 1d4 base +3 weapon +3 HAN mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Favored Enemy</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Trained</span
+                  ><span class="ssp-value">Beasts</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Bonus</span
+                  ><span class="ssp-value">Advantage</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Advantage on Survival checks to track favored enemies, and on INT checks to recall info about them. Bonus languages.
+              </div>
+            </div>
+          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -2246,103 +2138,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed. Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + HAN mod to hit (finesse). Roll weapon damage.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + VEL vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + HAN vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >+1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -2428,9 +2225,11 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
@@ -2488,66 +2287,73 @@
         </div>
       </div>
       <div class="body-grid">
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">10</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">17</td>
                 <td class="td-mod">+3</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">11</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">13</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">14</td>
                 <td class="td-mod">+2</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
         <div class="right-col">
           <div class="combat-stats-row">
             <div class="combat-stat">
               <span class="cs-label">Hit Points</span
-              ><span class="cs-value">12</span>
+              ><span class="cs-value">8</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
@@ -2555,7 +2361,7 @@
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">13</span>
+              ><span class="cs-value">14</span>
             </div>
           </div>
           <div>
@@ -2576,6 +2382,7 @@
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">The Calibration Blade</div>
               <div class="weapon-row">
@@ -2595,6 +2402,23 @@
                 1d8 base +3 HAN mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Sneak Attack</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Trigger</span
+                  ><span class="ssp-value">Advantage</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Bonus</span
+                  ><span class="ssp-value">+1d6</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Once per turn, deal extra 1d6 damage when you have advantage, or an ally is within 5ft of the target. Finesse/ranged.
+              </div>
+            </div>
+          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -2622,103 +2446,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed. Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + HAN mod to hit (finesse). Roll weapon damage.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + VEL vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + HAN vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >+1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -2804,9 +2533,11 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
@@ -2864,74 +2595,81 @@
         </div>
       </div>
       <div class="body-grid">
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">12</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">10</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">18</td>
                 <td class="td-mod">+4</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">12</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">12</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
         <div class="right-col">
           <div class="combat-stats-row">
             <div class="combat-stat">
               <span class="cs-label">Hit Points</span
-              ><span class="cs-value">16</span>
+              ><span class="cs-value">14</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
-              ><span class="cs-value">25ft</span>
+              ><span class="cs-value">30ft</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">10</span>
+              ><span class="cs-value">18</span>
             </div>
           </div>
           <div>
@@ -2952,6 +2690,7 @@
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">Old Reliable</div>
               <div class="weapon-row">
@@ -2971,6 +2710,23 @@
                 Carried one-handed. Damage = 1d10 base +2 weapon +1 VEL mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Lay on Hands</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Pool</span
+                  ><span class="ssp-value">5 HP</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Action</span
+                  ><span class="ssp-value">Heal Touch</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Action. Touch a creature, restore HP from a pool of 5 (= Paladin level x5). Or expend 5 HP to cure a disease/poison.
+              </div>
+            </div>
+          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -2999,103 +2755,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed. Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + VEL mod to hit. Roll weapon damage on hit.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + RES vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + RES vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >+1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -3181,9 +2842,11 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
@@ -3241,74 +2904,81 @@
         </div>
       </div>
       <div class="body-grid">
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">12</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">10</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">17</td>
                 <td class="td-mod">+3</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">11</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">13</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
         <div class="right-col">
           <div class="combat-stats-row">
             <div class="combat-stat">
               <span class="cs-label">Hit Points</span
-              ><span class="cs-value">16</span>
+              ><span class="cs-value">13</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
-              ><span class="cs-value">25ft</span>
+              ><span class="cs-value">30ft</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">10</span>
+              ><span class="cs-value">18</span>
             </div>
           </div>
           <div>
@@ -3328,6 +2998,7 @@
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">The Borrowing</div>
               <div class="weapon-row">
@@ -3346,6 +3017,23 @@
                 Piercing/Force. Damage = 1d6 base +1 weapon +1 VEL mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Second Wind</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Uses</span
+                  ><span class="ssp-value">1 / Rest</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Heal</span
+                  ><span class="ssp-value">1d10 + 1</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Bonus action. Regain 1d10 + Fighter level HP. Recovers on a short or long rest.
+              </div>
+            </div>
+          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -3373,103 +3061,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed. Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + VEL mod to hit. Roll weapon damage on hit.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + RES vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + RES vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >+1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -3555,9 +3148,11 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
@@ -3616,60 +3211,67 @@
         </div>
       </div>
       <div class="body-grid">
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">14</td>
                 <td class="td-mod">+2</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">9</td>
                 <td class="td-mod">−1</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">18</td>
                 <td class="td-mod">+4</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">10</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">11</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
         <div class="right-col">
           <div class="combat-stats-row">
@@ -3679,11 +3281,11 @@
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
-              ><span class="cs-value">25ft</span>
+              ><span class="cs-value">30ft</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">9</span>
+              ><span class="cs-value">13</span>
             </div>
           </div>
           <div>
@@ -3705,6 +3307,7 @@
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">The Covenant's Answer</div>
               <div class="weapon-row">
@@ -3724,6 +3327,23 @@
                 2d6 base +2 VEL mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Rage</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Uses</span
+                  ><span class="ssp-value">2 / Rest</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Bonus</span
+                  ><span class="ssp-value">+2 dmg</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Bonus action. Resistance to bludgeoning/piercing/slashing. Advantage on STR checks/saves. +2 melee damage. Lasts 1 minute.
+              </div>
+            </div>
+          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -3751,103 +3371,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed. Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + VEL mod to hit. Roll weapon damage on hit.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + RES vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + RES vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >+1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -3933,9 +3458,11 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
@@ -3994,66 +3521,73 @@
         </div>
       </div>
       <div class="body-grid">
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">9</td>
                 <td class="td-mod">−1</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">11</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">12</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">18</td>
                 <td class="td-mod">+4</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">15</td>
                 <td class="td-mod">+2</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
         <div class="right-col">
           <div class="combat-stats-row">
             <div class="combat-stat">
               <span class="cs-label">Hit Points</span
-              ><span class="cs-value">14</span>
+              ><span class="cs-value">9</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
@@ -4061,7 +3595,7 @@
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">10</span>
+              ><span class="cs-value">11</span>
             </div>
           </div>
           <div>
@@ -4082,6 +3616,7 @@
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">The Manifest</div>
               <div class="weapon-row">
@@ -4101,6 +3636,23 @@
                 sentence. Uses HAG mod. Damage = 1d4 base +4 HAG mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Bardic Inspiration</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Uses</span
+                  ><span class="ssp-value">4 / Rest</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Die</span
+                  ><span class="ssp-value">1d6</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Bonus action. Choose a creature within 60ft. They add 1d6 to one attack roll, ability check, or save within 10 min.
+              </div>
+            </div>
+          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -4130,103 +3682,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed. Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + HAG mod to hit. Roll weapon damage on hit.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + HAG vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + HAG vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >+1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -4312,9 +3769,11 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
@@ -4372,66 +3831,73 @@
         </div>
       </div>
       <div class="body-grid">
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">9</td>
                 <td class="td-mod">−1</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">11</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">11</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">18</td>
                 <td class="td-mod">+4</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">14</td>
                 <td class="td-mod">+2</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
         <div class="right-col">
           <div class="combat-stats-row">
             <div class="combat-stat">
               <span class="cs-label">Hit Points</span
-              ><span class="cs-value">14</span>
+              ><span class="cs-value">8</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
@@ -4439,7 +3905,7 @@
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">10</span>
+              ><span class="cs-value">11</span>
             </div>
           </div>
           <div>
@@ -4460,6 +3926,7 @@
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">The Ledger</div>
               <div class="weapon-row">
@@ -4480,6 +3947,23 @@
                 HAG mod. Damage = 1d6 base +1 weapon +4 HAG mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Sneak Attack</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Trigger</span
+                  ><span class="ssp-value">Advantage</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Bonus</span
+                  ><span class="ssp-value">+1d6</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Once per turn, deal extra 1d6 damage when you have advantage, or an ally is within 5ft of the target. Finesse/ranged.
+              </div>
+            </div>
+          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -4507,103 +3991,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed. Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + HAG mod to hit. Roll weapon damage on hit.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + HAG vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + HAG vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >+1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -4689,9 +4078,11 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
@@ -4750,66 +4141,73 @@
         </div>
       </div>
       <div class="body-grid">
-        <div>
-          <div class="section-title">Stat Block</div>
-          <table class="stat-table">
+        <div class="left-col">
+          <div class="portrait-box">
+            <span class="portrait-label">Portrait</span>
+          </div>
+          <div>
+            <div class="section-title">Stat Block</div><table class="stat-table">
             <thead>
               <tr>
                 <th style="width: 64px">Skill</th>
                 <th class="center" style="width: 32px">Score</th>
                 <th class="center" style="width: 30px">Mod</th>
-                <th>Governs</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="td-skill">VELOCITY</td>
+                <td class="td-skill">STRENGTH</td>
                 <td class="td-stat">10</td>
                 <td class="td-mod">+0</td>
-                <td class="td-governs">
-                  Strength · Speed tiles, attacks, initiative bonus
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HANDLING</td>
+                <td class="td-skill">DEXTERITY</td>
                 <td class="td-stat">13</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Dexterity · Handling tiles, dodge, finesse attacks
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">RESILIENCE</td>
+                <td class="td-skill">CONSTITUTION</td>
                 <td class="td-stat">12</td>
                 <td class="td-mod">+1</td>
-                <td class="td-governs">
-                  Constitution · Resilience tiles, HP saves, damage threshold
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">HAGGLING</td>
+                <td class="td-skill">CHARISMA</td>
                 <td class="td-stat">18</td>
                 <td class="td-mod">+4</td>
-                <td class="td-governs">
-                  Charisma · Vendor challenges, Persuasion, Intimidation
-                </td>
               </tr>
               <tr>
-                <td class="td-skill">PERCEPTION</td>
+                <td class="td-skill">WISDOM</td>
                 <td class="td-stat">15</td>
                 <td class="td-mod">+2</td>
-                <td class="td-governs">
-                  Wisdom · Initiative rolls, insight, terrain reads
-                </td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="modifier-block">
+            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 1</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 2</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Modifier 3</span>
+              <div class="modifier-line"></div>
+            </div>
+            <div class="modifier-field">
+              <span class="modifier-label">Sponsor Modifier</span>
+              <div class="modifier-line"></div>
+            </div>
+          </div>
         </div>
         <div class="right-col">
           <div class="combat-stats-row">
             <div class="combat-stat">
               <span class="cs-label">Hit Points</span
-              ><span class="cs-value">14</span>
+              ><span class="cs-value">9</span>
             </div>
             <div class="combat-stat">
               <span class="cs-label">Movement</span
@@ -4817,7 +4215,7 @@
             </div>
             <div class="combat-stat">
               <span class="cs-label">Armor Class</span
-              ><span class="cs-value">11</span>
+              ><span class="cs-value">12</span>
             </div>
           </div>
           <div>
@@ -4840,6 +4238,7 @@
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
+            <div class="weapon-skill-row">
             <div class="weapon-block">
               <div class="weapon-name">The Notebook</div>
               <div class="weapon-row">
@@ -4860,6 +4259,23 @@
                 1d6 base +4 HAG mod.
               </div>
             </div>
+            <div class="skill-block">
+              <div class="skill-name">Sneak Attack</div>
+              <div class="skill-row">
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Trigger</span
+                  ><span class="ssp-value">Advantage</span>
+                </div>
+                <div class="skill-stat-pill">
+                  <span class="ssp-label">Bonus</span
+                  ><span class="ssp-value">+1d6</span>
+                </div>
+              </div>
+              <div class="skill-desc">
+                Once per turn, deal extra 1d6 damage when you have advantage, or an ally is within 5ft of the target. Finesse/ranged.
+              </div>
+            </div>
+          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -4887,103 +4303,8 @@
               >
             </div>
           </div>
-        </div>
-      </div>
-      <div class="action-sheet">
-        <div class="action-col">
-          <div class="action-col-title">
-            ⚔ Battle
-            <span class="col-eyebrow"
-              >Roll initiative first · d20 + PERCEPTION mod</span
-            >
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Movement — up to your speed per turn
-            </div>
-            <div class="action-item">
-              <span class="action-name">Move</span
-              ><span class="action-desc"
-                >Travel up to your speed. Can split around action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Disengage</span
-              ><span class="action-desc"
-                >Move without triggering opportunity attacks. Uses action.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Dash</span
-              ><span class="action-desc"
-                >Double movement this turn. Uses action.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Action — one per turn</div>
-            <div class="action-item">
-              <span class="action-name">Attack</span
-              ><span class="action-desc"
-                >Roll d20 + HAG mod to hit. Roll weapon damage on hit.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Shove</span
-              ><span class="action-desc"
-                >Contest: d20 + HAG vs target d20 + RES. Win = push 5ft.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Grapple</span
-              ><span class="action-desc"
-                >Contest: d20 + HAG vs target d20 + HAN. Win = restrain.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Help</span
-              ><span class="action-desc"
-                >Give ally advantage on their next attack or ability roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hide</span
-              ><span class="action-desc"
-                >d20 + HAN vs enemy PERCEPTION. Success = hidden.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Use Item</span
-              ><span class="action-desc"
-                >Activate a vendor part, field kit, or tool.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Bonus Action — one per turn, optional
-            </div>
-            <div class="action-item">
-              <span class="action-name">Quick Taunt</span
-              ><span class="action-desc"
-                >d20 + HAG vs target PERCEPTION. Disadvantage on their next
-                roll.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Scan</span
-              ><span class="action-desc"
-                >Ask the GM one yes/no about this encounter.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Assist Crew</span
-              ><span class="action-desc"
-                >+1 to any adjacent crewmate's roll this round.</span
-              >
-            </div>
-          </div>
-        </div>
+        
+          <div class="action-sheet single-col">
         <div class="action-col">
           <div class="action-col-title">
             🏁 Racing
@@ -5069,9 +4390,11 @@
           </div>
         </div>
       </div>
+        </div>
+      </div>
       <div class="inventory-block">
         <div class="section-title" style="margin-bottom: 5px">
-          Inventory — Parts purchased in Phase 1
+          Inventory &amp; Notes
         </div>
         <div class="inventory-lines">
           <div class="inv-line"></div>
