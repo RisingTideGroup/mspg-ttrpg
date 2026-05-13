@@ -232,11 +232,12 @@ body {
 .char-roster tr:last-child td { border-bottom: 1px solid #000; }
 .cr-id { font-family: 'Share Tech Mono', monospace; font-size: 7pt; font-weight: bold; color: #333; width: 40px; }
 .cr-name { font-family: 'Cinzel', serif; font-size: 8pt; font-weight: 700; width: 1.1in; }
-.cr-class { font-size: 7.5pt; font-style: italic; color: #444; width: 1.2in; }
 .cr-hp { font-family: 'Share Tech Mono', monospace; font-size: 7.5pt; text-align: center; width: 30px; font-weight: bold; }
 .cr-boost { font-family: 'Share Tech Mono', monospace; font-size: 7pt; font-weight: bold; width: 1.1in; }
-.cr-boon { font-size: 7.5pt; color: #222; }
-.cr-phase { font-family: 'Share Tech Mono', monospace; font-size: 6pt; text-align: center; width: 50px; color: #555; }
+.cr-stats { font-family: 'Share Tech Mono', monospace; font-size: 6.5pt; color: #222; width: 1.1in; letter-spacing: 0.02em; line-height: 1.35; }
+.cr-ac { font-family: 'Share Tech Mono', monospace; font-size: 7.5pt; text-align: center; width: 28px; font-weight: bold; color: #000; }
+.cr-skill { font-family: 'Share Tech Mono', monospace; font-size: 7pt; font-weight: bold; width: 0.95in; color: #000; }
+
 .roster-group-header td {
   font-family: 'Share Tech Mono', monospace;
   font-size: 6pt;
@@ -589,12 +590,30 @@ body {
 }
 .tile-attr-tag {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 6pt;
+  font-size: 9pt;
   font-weight: bold;
-  padding: 1px 4px;
-  border: 0.5px solid #000;
+  padding: 2px 7px;
+  border: 1px solid #000;
+  letter-spacing: 0.08em;
+  background: #000;
+  color: #fff;
+}
+.tile-dc-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9pt;
+  font-weight: bold;
+  padding: 2px 7px;
+  border: 1px solid #000;
   margin-left: auto;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  background: #fff;
+  color: #000;
+}
+.tile-desc {
+  padding: 4px 7px 2px;
+  font-size: 7.5pt;
+  line-height: 1.45;
+  color: #111;
 }
 .tile-special-tag {
   font-family: 'Share Tech Mono', monospace;
@@ -824,130 +843,130 @@ body {
   <div class="section-title">Playable Characters — Your Crew's Roster</div>
   <p style="font-size:8pt;color:#444;font-style:italic;margin-bottom:6px;">Each player picks one character. Characters share a table but race together as one crew. The boost is personal — activated only when that player rolls.</p>
 
-  <table class="char-roster">
+    <table class="char-roster">
     <thead>
       <tr>
         <th class="cr-id">ID</th>
         <th class="cr-name">Name</th>
-        <th class="cr-class">Class</th>
         <th class="cr-hp">HP</th>
+        <th class="cr-ac">AC</th>
+        <th class="cr-stats">Stats (mods)</th>
+        <th class="cr-skill">Skill</th>
         <th class="cr-boost">Boost</th>
-        <th class="cr-boon">What It Does</th>
-        <th class="cr-phase">Active</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="roster-group-header"><td colspan="7">⚡ Velocity — Strength-driven · Speed tiles · Forge challenges</td></tr>
+      <tr class="roster-group-header"><td colspan="7">⚡ Velocity Crews — Strength-driven · Speed tiles · Forge challenges</td></tr>
       <tr>
         <td class="cr-id">VEL-1</td>
         <td class="cr-name">Cinder Goss</td>
-        <td class="cr-class">Barbarian of the Open Road</td>
-        <td class="cr-hp">10</td>
+        <td class="cr-hp">12</td>
+        <td class="cr-ac">12</td>
+        <td class="cr-stats">S+3 D+0 C+0 H+0 W−1</td>
+        <td class="cr-skill">Rage</td>
         <td class="cr-boost">Road Rage!</td>
-        <td class="cr-boon">+1 to their d20 on a Velocity tile. Their roll only.</td>
-        <td class="cr-phase">Phase 3</td>
       </tr>
       <tr>
         <td class="cr-id">VEL-2</td>
         <td class="cr-name">Pip Blastwick</td>
-        <td class="cr-class">Ranger of Pure Instinct</td>
-        <td class="cr-hp">10</td>
+        <td class="cr-hp">9</td>
+        <td class="cr-ac">13</td>
+        <td class="cr-stats">S+3 D−1 C−1 H+1 W+0</td>
+        <td class="cr-skill">Hunter's Mark</td>
         <td class="cr-boost">The Quickest Route!</td>
-        <td class="cr-boon">+1 to their d20 on a Velocity tile. Their roll only.</td>
-        <td class="cr-phase">Phase 3</td>
       </tr>
       <tr>
         <td class="cr-id">VEL-3</td>
         <td class="cr-name">Sable Honk</td>
-        <td class="cr-class">Barbarian, Unbound</td>
-        <td class="cr-hp">10</td>
+        <td class="cr-hp">11</td>
+        <td class="cr-ac">11</td>
+        <td class="cr-stats">S+4 D−1 C−1 H+1 W−1</td>
+        <td class="cr-skill">Rage</td>
         <td class="cr-boost">Honk Honk!</td>
-        <td class="cr-boon">+1 to their d20 on a Velocity tile. Their roll only.</td>
-        <td class="cr-phase">Phase 3</td>
       </tr>
-      <tr class="roster-group-header"><td colspan="7">⚙ Handling — Dexterity-driven · Handling tiles · Finesse attacks</td></tr>
+      <tr class="roster-group-header"><td colspan="7">⚙ Handling Crews — Dexterity-driven · Handling tiles · Finesse attacks</td></tr>
       <tr>
         <td class="cr-id">HAN-1</td>
         <td class="cr-name">Mirabel Cog</td>
-        <td class="cr-class">Monk of the Perfect Corner</td>
-        <td class="cr-hp">12</td>
+        <td class="cr-hp">8</td>
+        <td class="cr-ac">15</td>
+        <td class="cr-stats">S+0 D+3 C+0 H+0 W+2</td>
+        <td class="cr-skill">Martial Arts</td>
         <td class="cr-boost">The Line!</td>
-        <td class="cr-boon">+1 to their d20 on a Handling tile. Their roll only.</td>
-        <td class="cr-phase">Phase 3</td>
       </tr>
       <tr>
         <td class="cr-id">HAN-2</td>
         <td class="cr-name">Teal Featherstone</td>
-        <td class="cr-class">Ranger of Known Terrain</td>
-        <td class="cr-hp">12</td>
+        <td class="cr-hp">10</td>
+        <td class="cr-ac">16</td>
+        <td class="cr-stats">S+0 D+3 C+0 H+1 W+2</td>
+        <td class="cr-skill">Favored Enemy</td>
         <td class="cr-boost">Tight Lines!</td>
-        <td class="cr-boon">+1 to their d20 on a Handling tile. Their roll only.</td>
-        <td class="cr-phase">Phase 3</td>
       </tr>
       <tr>
         <td class="cr-id">HAN-3</td>
         <td class="cr-name">Vex Drummond</td>
-        <td class="cr-class">Rogue of the Long Game</td>
-        <td class="cr-hp">12</td>
+        <td class="cr-hp">8</td>
+        <td class="cr-ac">14</td>
+        <td class="cr-stats">S+0 D+3 C+0 H+1 W+2</td>
+        <td class="cr-skill">Sneak Attack</td>
         <td class="cr-boost">Already Knew That.</td>
-        <td class="cr-boon">+1 to their d20 on a Handling tile. Their roll only.</td>
-        <td class="cr-phase">Phase 3</td>
       </tr>
-      <tr class="roster-group-header"><td colspan="7">★ Resilience — Constitution-driven · Resilience tiles · Gauntlet saves</td></tr>
+      <tr class="roster-group-header"><td colspan="7">★ Resilience Crews — Constitution-driven · Resilience tiles · Gauntlet saves</td></tr>
       <tr>
         <td class="cr-id">RES-1</td>
         <td class="cr-name">Brick Gander</td>
-        <td class="cr-class">Paladin of the Unbroken Frame</td>
-        <td class="cr-hp">16</td>
+        <td class="cr-hp">14</td>
+        <td class="cr-ac">18</td>
+        <td class="cr-stats">S+1 D+0 C+4 H+1 W+1</td>
+        <td class="cr-skill">Lay on Hands</td>
         <td class="cr-boost">The Spine Holds.</td>
-        <td class="cr-boon">+1 to their d20 on a Resilience tile. Their roll only.</td>
-        <td class="cr-phase">Phase 3</td>
       </tr>
       <tr>
         <td class="cr-id">RES-2</td>
         <td class="cr-name">Marta Sealwright</td>
-        <td class="cr-class">Fighter of the Long Race</td>
-        <td class="cr-hp">16</td>
+        <td class="cr-hp">13</td>
+        <td class="cr-ac">18</td>
+        <td class="cr-stats">S+1 D+0 C+3 H+0 W+1</td>
+        <td class="cr-skill">Second Wind</td>
         <td class="cr-boost">Still Moving.</td>
-        <td class="cr-boon">+1 to their d20 on a Resilience tile. Their roll only.</td>
-        <td class="cr-phase">Phase 3</td>
       </tr>
       <tr>
         <td class="cr-id">RES-3</td>
         <td class="cr-name">Hull</td>
-        <td class="cr-class">Barbarian of Structure</td>
         <td class="cr-hp">16</td>
+        <td class="cr-ac">13</td>
+        <td class="cr-stats">S+2 D−1 C+4 H+0 W+0</td>
+        <td class="cr-skill">Rage</td>
         <td class="cr-boost">Unbroken.</td>
-        <td class="cr-boon">+1 to their d20 on a Resilience tile. Their roll only.</td>
-        <td class="cr-phase">Phase 3</td>
       </tr>
-      <tr class="roster-group-header"><td colspan="7">⚙ Haggling — Charisma-driven · Vendor challenges · Persuasion &amp; Intimidation</td></tr>
+      <tr class="roster-group-header"><td colspan="7">⚙ Haggling Crews — Charisma-driven · Vendor challenges · Persuasion & Intimidation</td></tr>
       <tr>
         <td class="cr-id">HAG-1</td>
         <td class="cr-name">Goose Whitmore</td>
-        <td class="cr-class">Bard of the Closed Deal</td>
-        <td class="cr-hp">14</td>
+        <td class="cr-hp">9</td>
+        <td class="cr-ac">11</td>
+        <td class="cr-stats">S−1 D+0 C+1 H+4 W+2</td>
+        <td class="cr-skill">Bardic Inspiration</td>
         <td class="cr-boost">The Long Con!</td>
-        <td class="cr-boon">+1 to the group d20 average on any vendor challenge.</td>
-        <td class="cr-phase">Phase 1</td>
       </tr>
       <tr>
         <td class="cr-id">HAG-2</td>
         <td class="cr-name">Ophelia Brasswick</td>
-        <td class="cr-class">Rogue of Influence</td>
-        <td class="cr-hp">14</td>
+        <td class="cr-hp">8</td>
+        <td class="cr-ac">11</td>
+        <td class="cr-stats">S−1 D+0 C+0 H+4 W+2</td>
+        <td class="cr-skill">Sneak Attack</td>
         <td class="cr-boost">In Plain Sight!</td>
-        <td class="cr-boon">+1 to the group d20 average on any vendor challenge.</td>
-        <td class="cr-phase">Phase 1</td>
       </tr>
       <tr>
         <td class="cr-id">HAG-3</td>
         <td class="cr-name">Fen</td>
-        <td class="cr-class">Rogue of the Bazaar Circuit</td>
-        <td class="cr-hp">14</td>
+        <td class="cr-hp">9</td>
+        <td class="cr-ac">12</td>
+        <td class="cr-stats">S+0 D+1 C+1 H+4 W+2</td>
+        <td class="cr-skill">Sneak Attack</td>
         <td class="cr-boost">Already in the Book.</td>
-        <td class="cr-boon">+1 to the group d20 average on any vendor challenge.</td>
-        <td class="cr-phase">Phase 1</td>
       </tr>
     </tbody>
   </table>
@@ -967,7 +986,7 @@ body {
       <div class="rules-box-title">Getting Parts</div>
       <div class="inline-row"><span class="lbl">BUY</span><span>Pay gold. Any available tier is purchasable without a roll.</span></div>
       <div class="inline-row"><span class="lbl">CHALLENGE</span><span>Group roll. All players roll d20. Average beats DC = better tier unlocked.</span></div>
-      <div class="inline-row"><span class="lbl">BATTLE</span><span>Two crews contest the same vendor. Each rolls d20 + relevant mod. Higher result wins access to the contested item.</span></div>
+      <div class="inline-row"><span class="lbl">ENCOUNTERS</span><span>Optional. If your table likes a fight — or you have time to fill between vendors — drop one of the three scripted Random Encounters in this packet (Page 4). Run as many as fit. They're short by design.</span></div>
       <div class="inline-row"><span class="lbl">DC 12</span><span>Upgrade tier — roughly 60% success for an average group.</span></div>
       <div class="inline-row"><span class="lbl">DC 14</span><span>Champ Spec tier — roughly 35–40% success. Highest reward.</span></div>
     </div>
@@ -1022,6 +1041,10 @@ body {
         <strong>He can answer:</strong><br>
         — <em>"What makes the Signature Core worth 38 gold?"</em> "It doesn't fail at the wrong moment. The standard one does. Whether that matters depends on how fast you're going when it happens."<br>
         — <em>"What do you think of our build?"</em> He looks at the crew's list for a long time. Then: "You're buying speed and hoping the road is kind. It won't be."
+      <br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "If you've got the gold and the corner work to back it up, my Signature Core won't fail on the Foundry Flyover. The standard one will, eventually."<br>
+        — <em>On the street:</em> "Watch the alley behind the Overclock Pit. Bunch of kids calling themselves <strong>the Bolts</strong> have been lifting parts off carts. They run the moment you turn around — I've still lost a coil."<br>
+        — <em>On the track:</em> "Segment 1 is straight-line. After that you'll wish you'd bought a corner. Build for the bend you'll fail, not the one you'll clear."
       </div>
       <div class="vendor-parts">
         <div class="parts-label">Parts Available</div>
@@ -1057,6 +1080,10 @@ body {
         <strong>They can answer:</strong><br>
         — <em>"Are the overclock cells actually dangerous?"</em> Vael: "Yes." Corra: "Define dangerous." Vael: "That is not a reassuring response." Corra: "It was meant to be interesting."<br>
         — <em>"Which cells do you recommend?"</em> Both answer simultaneously, in opposite directions. The crew must choose.
+      <br><strong>May volunteer:</strong><br>
+        — <em>Corra, on parts:</em> "Overclock cells get you through the Copperworks Straight a heartbeat faster. That heartbeat is worth eighteen gold."<br>
+        — <em>Vael, on the street:</em> "Three crews lost satchels at Mira's last week — kids in matching scarves. <strong>The Bolts.</strong> Keep your hands on what you buy until you're back at your table."<br>
+        — <em>Corra, on the track:</em> "The Aether Bridge will eat anything we sell. Don't bring our cells there expecting them to behave."
       </div>
       <div class="vendor-parts">
         <div class="parts-label">Parts Available</div>
@@ -1089,6 +1116,10 @@ body {
         <strong>They can answer:</strong><br>
         — <em>"What's the difference between the standard and enhanced injector?"</em> One beat of silence. Then: "About three seconds a lap. On a good day." That's all they'll say.<br>
         — <em>"What do you think of our chances?"</em> They look at each other. The one who speaks: "That depends on the driver." They do not indicate whether the driver in front of them qualifies.
+      <br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Enhanced injector is the difference between catching them on a straight and watching them pull away. Standard is just standard."<br>
+        — <em>On the street:</em> "The scrappers — the Bolts. Lift parts in plain daylight. Don't carry anything loose through the alleys."<br>
+        — <em>On the track:</em> "Cogsworth has more corners than straights. Keep that in mind. Speed without handling is half a race."
       </div>
       <div class="vendor-parts">
         <div class="parts-label">Parts Available</div>
@@ -1123,6 +1154,10 @@ body {
         <strong>He can answer:</strong><br>
         — <em>"What does the overhaul kit actually do for us?"</em> "Covers two problems at once. Doesn't solve either perfectly. Depends whether you have time to do both properly."<br>
         — <em>"Do most crews come here first or last?"</em> "Depends what they think they need." A pause. "Most of them are wrong."
+      <br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Most crews skip the overhaul kit. They shouldn't. Two attributes covered for the price of one."<br>
+        — <em>On the street:</em> "There's a gang working the south corner of the Bazaar. Children, mostly, but they're organised. Watch your loose parts."<br>
+        — <em>On the track:</em> "Build for the bend you'll fail. Not the one you'll clear. The course always finds what you skipped."
       </div>
       <div class="vendor-parts">
         <div class="parts-label">Parts Available</div>
@@ -1159,6 +1194,10 @@ body {
         <strong>She can answer:</strong><br>
         — <em>"What do other crews usually buy from you?"</em> "Budget crews. Smart ones. The ones who want to cover ground fast without committing to one district. I see a lot of those at the start. Fewer at the end."<br>
         — <em>"Who's had the best build so far today?"</em> She names a table without hesitation. "They knew what they wanted before they got here. That's half of it."
+      <br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Spy any vendor — five gold. Pays for itself the moment it keeps you from wasting twenty on the wrong tier."<br>
+        — <em>On the street:</em> "The Bolts. That's what they're calling themselves. Three of them came past my stall this morning. I let them know I'd see them coming back. They moved on. Watch yours."<br>
+        — <em>On the track:</em> "Best builds today were the ones that didn't try to win every segment. Crews that picked a fight with the whole map are still here, lost."
       </div>
       <div class="vendor-parts">
         <div class="parts-label">Parts Available</div>
@@ -1190,6 +1229,10 @@ body {
         <strong>They can answer:</strong><br>
         — <em>"Is the Premium Package actually worth it?"</em> "The Guild Premium Package offers complete attribute coverage in a single transaction, which many crews find efficient." A pause. "I am not authorised to offer strategic advice."<br>
         — <em>"Can we negotiate on the modules?"</em> "Guild pricing is fixed by charter. I appreciate your interest in negotiating. The price is twenty-six gold." They smile. It is a Guild smile.
+      <br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Guild Spec hits everything. Costs accordingly. If you're spread thin across attributes, this is where the gold goes."<br>
+        — <em>On the street:</em> "A formal Guild advisory: a group identifying themselves as <strong>'the Bolts'</strong> is operating without licence. Report any sighting to the Guild Hall. Do not engage them."<br>
+        — <em>On the track:</em> "Segment 2 is where Guild builds shine. Three Handling tiles in a row. The investment will repay you there if anywhere."
       </div>
       <div class="vendor-parts">
         <div class="parts-label">Parts Available</div>
@@ -1222,6 +1265,10 @@ body {
         — <em>"What do you know about the other crews today?"</em> He flips back several pages. "One table spent everything in the Forge Quarter. Another went straight to the Docks. One hasn't decided yet — you can tell by the way they're walking." He closes the notebook. "That's five gold."<br>
         — <em>"Why are you at the back of the Bazaar?"</em> A long pause. He looks up. "Better light." He goes back to writing.
         Sable Knox
+      <br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Knox Resonance Coupling for your Velocity tile. Trust me on this. I've watched two crews already today win on it."<br>
+        — <em>On the street:</em> "Stay quiet through the south alleys after sundown. There's a young crew taking what they can. They're not dangerous yet — but they will be."<br>
+        — <em>On the track:</em> "The Lower Docks Straight is where Velocity builds make their money. Save your boost for the Copperworks if you've only got one."
       </div>
       <div class="vendor-parts">
         <div class="parts-label">Parts Available</div>
@@ -1252,6 +1299,10 @@ body {
         <strong>They can answer:</strong><br>
         — <em>"What does the diagnostic actually tell us?"</em> "Your current race modifiers across all three attributes — what you've built toward and what you haven't. It's the difference between knowing your position and guessing it." A pause. "Most crews guess."<br>
         — <em>"What would you upgrade if you were us?"</em> They look at the construct for a moment. "That depends on which segment you're afraid of." They wait for an answer, genuinely curious.
+      <br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Targeted optimisation — anywhere you've underspent, that's where I'd send your next gold. Cheap, surgical, no drama."<br>
+        — <em>On the street:</em> "Some of my apprentices ran into a band of scrappers last week. The Bolts. They took my apprentice's satchel and his composure. Watch your bags."<br>
+        — <em>On the track:</em> "If you've got an obvious weak attribute, the course will find it. The Aether Bridge in particular has no patience for incomplete builds."
       </div>
       <div class="vendor-parts">
         <div class="parts-label">Parts Available</div>
@@ -1292,7 +1343,11 @@ body {
         <strong>Characteristics:</strong> Warm, verbose, will talk for as long as anyone listens. Uses his hands constantly when explaining. The thread always leads somewhere worth following if you let it finish.<br>
         <strong>He can answer:</strong><br>
         — <em>"What does a precision articulation actually do for a racing construct?"</em> "It means the construct responds to what you want, not what you did half a second ago. That gap is where corners are lost."<br>
-        — <em>"What's the difference between the guidance set and the Master Articulation?"</em> "One is correct. The other is correct at the moments that matter." He moves to the case. "I can show you if you have time."</div>
+        — <em>"What's the difference between the guidance set and the Master Articulation?"</em> "One is correct. The other is correct at the moments that matter." He moves to the case. "I can show you if you have time."<br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Master Articulation is thirty-six gold and turns the Tunnel S-curve into a formality. That's the trade."<br>
+        — <em>On the street:</em> "A street crew has been seen near the showroom after hours. They didn't get in. They were close. I'd rather you know."<br>
+        — <em>On the track:</em> "Segment 2 is what the Master Articulation was designed for. Three Handling tests, back-to-back, no recovery between them."
+      </div>
       <div class="vendor-parts"><div class="parts-label">Parts Available</div>
         <table class="parts-table">
           <tr><td class="pt-name">Steering articulation (minor)</td><td class="pt-how how-buy">BUY</td><td class="pt-mod">−1 HAN</td><td class="pt-cost">12g</td></tr>
@@ -1312,7 +1367,11 @@ body {
         <strong>Characteristics:</strong> Petra answers technical questions with precision. Linn answers everything else with warmth that makes you feel you've won something even when you haven't. Their disagreements look like choreography.<br>
         <strong>They can answer:</strong><br>
         — <em>"What does a precession bearing actually do?"</em> Petra: "It resists changes to the rotational axis under lateral load. When the road pushes sideways, it pushes back." She waits. That's the answer.<br>
-        — <em>"Is the Tri-axis worth the price?"</em> Linn: "Every crew that's bought it has asked us that after the race." Petra: "Most say yes." Linn: "The ones who say no didn't get through the canyon."</div>
+        — <em>"Is the Tri-axis worth the price?"</em> Linn: "Every crew that's bought it has asked us that after the race." Petra: "Most say yes." Linn: "The ones who say no didn't get through the canyon."<br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Our matched pair is the cheapest reliable Handling upgrade in the Bazaar. We don't haggle on it."<br>
+        — <em>On the street:</em> "The Bolts hit a courier two stalls over. The courier was carrying our gyroscope shipment. We have not yet decided what to do about that."<br>
+        — <em>On the track:</em> "The Tunnel S-curve and the Gear-Lock Hairpin both reward precision over force. We tune for both. So should you."
+      </div>
       <div class="vendor-parts"><div class="parts-label">Parts Available</div>
         <table class="parts-table">
           <tr><td class="pt-name">Standard gyro mount</td><td class="pt-how how-buy">BUY</td><td class="pt-mod">−1 HAN</td><td class="pt-cost">10g</td></tr>
@@ -1332,7 +1391,11 @@ body {
         <strong>Characteristics:</strong> Spare with words in the way people are when they don't think most words are useful. Respond to questions with demonstrations where possible. If you ask something they respect, they'll answer it.<br>
         <strong>They can answer:</strong><br>
         — <em>"What do you look for in a good driver?"</em> "Whether they call the correction or wait to see what everyone else says." A pause. "You'd be surprised how many wait."<br>
-        — <em>"Is the upgraded torsion set worth the challenge?"</em> "It costs the same either way. What you're spending is the attempt." They look at the crew. "Some teams can't afford to find out they're wrong."</div>
+        — <em>"Is the upgraded torsion set worth the challenge?"</em> "It costs the same either way. What you're spending is the attempt." They look at the crew. "Some teams can't afford to find out they're wrong."<br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Competition torsion set if you've already committed to Handling. Otherwise: regular set, half the price, no shame in it."<br>
+        — <em>On the street:</em> "We have had two attempted thefts this week. The Bolts. They are not subtle. We've put a notice up. You'd see it."<br>
+        — <em>On the track:</em> "If you can survive the Wreckers' Crossing, you can survive the rest of Segment 3. Build for that moment. Not the average."
+      </div>
       <div class="vendor-parts"><div class="parts-label">Parts Available</div>
         <table class="parts-table">
           <tr><td class="pt-name">Precision torsion bar</td><td class="pt-how how-buy">BUY</td><td class="pt-mod">−1 HAN</td><td class="pt-cost">11g</td></tr>
@@ -1352,7 +1415,11 @@ body {
         <strong>Characteristics:</strong> Quiet until they have something precise to say. Asks to see proof of purchases before offering anything — not suspiciously, the way a craftsperson checks materials before beginning.<br>
         <strong>They can answer:</strong><br>
         — <em>"What does deep integration actually protect us from?"</em> "A natural 1 would normally trigger a breakdown. After deep integration it doesn't — the system absorbs the error. You bought three good things. I make them act like one."<br>
-        — <em>"Is it worth coming here last?"</em> "I can only work with what you've already built. So yes — arriving last is the only way to arrive."</div>
+        — <em>"Is it worth coming here last?"</em> "I can only work with what you've already built. So yes — arriving last is the only way to arrive."<br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Arcane integration is for crews who want the Aether Bridge not to undo them. That bridge is the only reason this part exists."<br>
+        — <em>On the street:</em> "The young street crew — the Bolts — have been around. They are afraid of arcane work. My door has stayed closed. Yours might not."<br>
+        — <em>On the track:</em> "Segment 3 is where Resilience builds prove themselves. The bridge is the moment they get paid back for everything they sacrificed in Phase 1."
+      </div>
       <div class="vendor-parts"><div class="parts-label">Parts Available — Requires proof of purchases</div>
         <table class="parts-table">
           <tr><td class="pt-name">System integration (2+ parts)</td><td class="pt-how how-buy">BUY</td><td class="pt-mod">+1 ALL</td><td class="pt-cost">25g</td></tr>
@@ -1374,7 +1441,11 @@ body {
         <strong>Characteristics:</strong> They do not perform warmth and do not expect it in return. They state prices and expect decisions. If a crew is direct, the transaction is fast and respectful. If a crew wavers, the brothers wait with the patience of people who have all day.<br>
         <strong>They can answer:</strong><br>
         — <em>"What's the difference between the reinforced plating and warship-grade?"</em> The elder: "One survives the race. The other survives the race and then some." He doesn't elaborate.<br>
-        — <em>"What do you think of our construct?"</em> A long look. "We've seen better. We've seen worse." A pause that feels like a verdict. "Whether it finishes depends on who's driving it."</div>
+        — <em>"What do you think of our construct?"</em> A long look. "We've seen better. We've seen worse." A pause that feels like a verdict. "Whether it finishes depends on who's driving it."<br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Warship-grade plating is for the Gauntlet. Anything less is a different race."<br>
+        — <em>On the street:</em> "The Bolts will not approach this yard. We have made that clear. Other vendors are softer targets — and they know it."<br>
+        — <em>On the track:</em> "If you cannot survive the Pressure Valve Row, the rest of Segment 3 will be wasted on you. Build accordingly."
+      </div>
       <div class="vendor-parts"><div class="parts-label">Parts Available</div>
         <table class="parts-table">
           <tr><td class="pt-name">Hull plating (light)</td><td class="pt-how how-buy">BUY</td><td class="pt-mod">−1 RES</td><td class="pt-cost">11g</td></tr>
@@ -1394,7 +1465,11 @@ body {
         <strong>Characteristics:</strong> Methodical, quiet, records everything. His silence is not unfriendly — he is thinking. He asks one question before selling upgraded stock and writes the answer down regardless of outcome. He remembers it.<br>
         <strong>He can answer:</strong><br>
         — <em>"Why does quality matter for the self-seal compound?"</em> "The standard seals the damage. The upgraded seals it and holds under continued stress." He looks up. "The Gauntlet is continued stress."<br>
-        — <em>"What does the emergency repair system do?"</em> "One-time hull restoration during the race — when something goes wrong that would otherwise end your run." A pause. He writes something. "Most crews who buy it don't use it. That's the point."</div>
+        — <em>"What does the emergency repair system do?"</em> "One-time hull restoration during the race — when something goes wrong that would otherwise end your run." A pause. He writes something. "Most crews who buy it don't use it. That's the point."<br><strong>May volunteer:</strong><br>
+        — <em>On parts:</em> "Self-seal upgraded version covers two failure modes for the price of one. Quiet upgrade. Most crews skip it."<br>
+        — <em>On the street:</em> "The Bolts mostly stick to the Bazaar. They've been seen near the Repair Bay once. Once was enough."<br>
+        — <em>On the track:</em> "Resilience tiles get the credit. But the small repairs between tiles are what win races. Buy patches."
+      </div>
       <div class="vendor-parts"><div class="parts-label">Parts Available</div>
         <table class="parts-table">
           <tr><td class="pt-name">Field repair kit</td><td class="pt-how how-buy">BUY</td><td class="pt-mod">−1 RES</td><td class="pt-cost">10g</td></tr>
@@ -1415,7 +1490,11 @@ body {
         <strong>Characteristics:</strong> Disinterested in conversation, not unfriendly. Answer direct questions directly. Stig evaluates every crew on arrival and has never been wrong about attitude, though he cannot explain his methodology. Pryce will arm-wrestle anyone who asks.<br>
         <strong>They can answer:</strong><br>
         — <em>"Is the salvaged core actually reliable?"</em> Danna looks up: "Came off a cargo barge that ran the river for fourteen years. Structural core doesn't wear the way engine parts do." Back to work. "It'll hold."<br>
-        — <em>"What's the cheapest way to cover Resilience?"</em> Pryce: "You're looking at it. Twenty-two. No conversation required." Stig thumps his tail once.</div>
+        — <em>"What's the cheapest way to cover Resilience?"</em> Pryce: "You're looking at it. Twenty-two. No conversation required." Stig thumps his tail once.<br><strong>May volunteer:</strong><br>
+        — <em>Danna, on parts:</em> "Salvage is cheap because someone died for it. Buy what fits. Don't ask what construct it came off."<br>
+        — <em>Pryce, on the street:</em> "We don't have problems with the Bolts. The Bolts have problems with us. Different thing." Stig thumps his tail once.<br>
+        — <em>Danna, on the track:</em> "Cogsworth Street eats the wrong build. We have parts off every wrong build. Choose to be right."
+      </div>
       <div class="vendor-parts"><div class="parts-label">Parts Available</div>
         <table class="parts-table">
           <tr><td class="pt-name">Salvaged armour plate (dinged)</td><td class="pt-how how-buy">BUY</td><td class="pt-mod">−1 RES</td><td class="pt-cost">6g</td></tr>
@@ -1433,7 +1512,11 @@ body {
         <strong>Characteristics:</strong> They speak slowly and with weight. The eldest speaks for the group. The other two assess. All three remember every crew that has ever stood in this room — and whether the construct finished.<br>
         <strong>They can answer:</strong><br>
         — <em>"What is the Hull Seal, exactly?"</em> The eldest: "The difference between a construct that holds because it was built well and one that holds because it decided to. We cannot explain the mechanism. We know the outcome."<br>
-        — <em>"Has a crew ever failed the challenge and won the race anyway?"</em> A long silence. Then: "Yes. Once." They do not say which crew. They do not say whether the blessing mattered. The question has been answered.</div>
+        — <em>"Has a crew ever failed the challenge and won the race anyway?"</em> A long silence. Then: "Yes. Once." They do not say which crew. They do not say whether the blessing mattered. The question has been answered.<br><strong>May volunteer:</strong><br>
+        — <em>The eldest, on parts:</em> "Hull Seal binds intent to material. You bring conviction or you bring gold. Both is best."<br>
+        — <em>The eldest, on the street:</em> "The young thieves do not approach the Sanctum. They sense what they cannot articulate. We will not name them aloud."<br>
+        — <em>The eldest, on the track:</em> "The Aether Bridge does not care for your speed. It asks what holds you together. Bring an answer."
+      </div>
       <div class="vendor-parts"><div class="parts-label">Parts Available — Same price regardless of outcome</div>
         <table class="parts-table">
           <tr><td class="pt-name">Covenant blessing (fallback)</td><td class="pt-how how-buy">BUY</td><td class="pt-mod">0 RES</td><td class="pt-cost">30g</td></tr>
@@ -1461,25 +1544,25 @@ body {
   <p style="font-size:8pt;font-style:italic;color:#444;margin-bottom:6px;">Three encounters are scripted and ready to run. You can drop one whenever you feel like it — between vendor visits, when pacing needs a jolt, or when players look like they want a fight. They are optional. Keep them short: each should resolve in five to ten minutes.</p>
   <div class="callout" style="margin-bottom:10px;">
     <p><strong>When to trigger:</strong> We recommend rolling a d6 or d12 after every other vendor visit. On a 1, the crew triggers a random encounter before reaching the next shop. Roll a d3 (or choose) to determine which encounter fires. You can also skip the roll entirely and just drop one when the table energy calls for it — you know your table.</p>
-    <p>You can run each encounter more than once if it fits. The Desperate Crew in particular can reappear — different crew, same problem.</p>
+    <p>You can run each encounter more than once if it fits. The Bolts in particular can reappear — different members, same scarf, same problem.</p>
   </div>
 
   <!-- ENCOUNTER 1 -->
   <div class="encounter-block">
     <div class="encounter-header">
       <span class="enc-num">ENCOUNTER 01</span>
-      <span class="enc-name">The Desperate Crew</span>
+      <span class="enc-name">The Bolts</span>
       <span class="enc-trigger">TRIGGER: Between any two vendor visits · Works anywhere in the district map</span>
     </div>
     <div class="encounter-body">
       <div class="enc-setup">
         <span class="trigger-label">The Setup</span>
-        Three rival racers cut across the crew's path — work gear, harried expressions, and the unmistakable look of people who have spent all their gold on the wrong things. They've run out and they know it. One of them is holding a wrench in a way that isn't quite threatening but isn't quite not.<br><br>
+        Three kids in matching scarves cut across the crew's path — work gear stitched with the same dark band at the cuff, harried expressions, and the unmistakable look of street operators who learned to lift parts before they learned to count them. The vendors have been talking about them all morning: <strong>the Bolts.</strong> One of them is holding a wrench in a way that isn't quite threatening but isn't quite not.<br><br>
         <em>"Look. We just need forty gold. Or — and we're not saying this is what's happening — you could just hand over whatever you bought at Grimshaw's."</em><br><br>
         They're not skilled fighters. They're desperate ones, which is sometimes worse.
       </div>
       <div class="enc-stat-block">
-        <div class="parts-label" style="margin-bottom:4px;">Stat Block — The Desperate Crew (×3)</div>
+        <div class="parts-label" style="margin-bottom:4px;">Stat Block — The Bolts (×3)</div>
         <table class="stat-block-inner">
           <tr><td class="sb-label">HP each</td><td class="sb-val">8</td></tr>
           <tr><td class="sb-label">AC</td><td class="sb-val">11 (work gear)</td></tr>
@@ -1492,7 +1575,7 @@ body {
       </div>
       <div class="enc-resolution">
         <span class="res-label">Resolution Options</span>
-        <div class="res-option"><strong>Fight</strong> — Standard combat. They break at first casualty. Dropped crew members are out but uninjured (this is a racing event, not a war).</div>
+        <div class="res-option"><strong>Fight</strong> — Standard combat. They break at the first casualty. Dropped Bolts are out but uninjured (this is a racing event, not a war).</div>
         <div class="res-option"><strong>Talk</strong> — HAG roll DC 12. Success: they stand down and ask for intel instead of gold. Crew can point them at Mira's Odds &amp; Ends.</div>
         <div class="res-option"><strong>Pay them off</strong> — Give them 15g. They leave. They feel bad about it for about thirty seconds.</div>
       </div>
@@ -1596,6 +1679,10 @@ body {
 
   <!-- PHASE 2 -->
   <div class="section-title" style="margin-top:0;">Phase 2 — The Sponsor Pavilion</div>
+  <div class="callout" style="margin-bottom:8px;">
+    <p><strong>How sponsors work:</strong> Each crew rolls a single d20 after their pitch. The roll determines the <em>tier</em> of the sponsor (boon strength and number of uses); the sponsor itself is assigned at random from the pavilion roster. Whatever tier you draw, the boon can be activated at any point in Act III — <strong>but it must be announced and applied before the affected die is rolled.</strong></p>
+  </div>
+
 
   <div class="callout" style="margin-bottom:8px;">
     <p><strong>Phase 2 has four steps. You run all of them at your table before the room comes together for the roll.</strong></p>
@@ -1624,14 +1711,14 @@ body {
     <table style="width:100%;border-collapse:collapse;font-size:8pt;margin-top:6px;">
       <thead><tr style="background:#000;color:#fff;"><th style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:6pt;letter-spacing:0.1em;font-weight:normal;text-align:left;">Roll</th><th style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:6pt;letter-spacing:0.1em;font-weight:normal;text-align:left;">Tier</th><th style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:6pt;letter-spacing:0.1em;font-weight:normal;text-align:center;">Uses</th><th style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:6pt;letter-spacing:0.1em;font-weight:normal;text-align:center;">Mod</th><th style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:6pt;letter-spacing:0.1em;font-weight:normal;">Notes</th></tr></thead>
       <tbody>
-        <tr style="border-bottom:0.5px solid #ddd;"><td style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:7pt;font-weight:bold;">Nat 20</td><td style="padding:3px 5px;font-weight:600;">Elite (Enhanced)</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">3</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;font-weight:bold;">±3</td><td style="padding:3px 5px;font-size:7.5pt;">Race DM announces to the whole room. Do not wait.</td></tr>
-        <tr style="border-bottom:0.5px solid #ddd;"><td style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:7pt;font-weight:bold;">15–19</td><td style="padding:3px 5px;font-weight:600;">Elite</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">2</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;font-weight:bold;">±3</td><td style="padding:3px 5px;font-size:7.5pt;">Strong pitch. Two powerful uses.</td></tr>
-        <tr style="border-bottom:0.5px solid #ddd;"><td style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:7pt;font-weight:bold;">8–14</td><td style="padding:3px 5px;font-weight:600;">Standard</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">2</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">±2</td><td style="padding:3px 5px;font-size:7.5pt;">1 positive (own table) + 1 negative (any table).</td></tr>
-        <tr style="border-bottom:0.5px solid #ddd;"><td style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:7pt;font-weight:bold;">2–7</td><td style="padding:3px 5px;font-weight:600;">GM Sponsor</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">3</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">±1</td><td style="padding:3px 5px;font-size:7.5pt;">Your Table DM advocates. Most uses, lowest mod.</td></tr>
-        <tr><td style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:7pt;font-weight:bold;">Nat 1</td><td style="padding:3px 5px;font-weight:600;">GM Sponsor</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">2</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">±1</td><td style="padding:3px 5px;font-size:7.5pt;">Pitch stumbled. Your DM shows up anyway.</td></tr>
+        <tr style="border-bottom:0.5px solid #ddd;"><td style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:7pt;font-weight:bold;">Nat 20</td><td style="padding:3px 5px;font-weight:600;">Elite (Enhanced)</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">3</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;font-weight:bold;">±3</td><td style="padding:3px 5px;font-size:7.5pt;">Pitch soared. Race DM calls it out to the room before resolution.</td></tr>
+        <tr style="border-bottom:0.5px solid #ddd;"><td style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:7pt;font-weight:bold;">15–19</td><td style="padding:3px 5px;font-weight:600;">Elite</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">2</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;font-weight:bold;">±3</td><td style="padding:3px 5px;font-size:7.5pt;">Pitch landed strong. Confident delivery; two powerful uses earned.</td></tr>
+        <tr style="border-bottom:0.5px solid #ddd;"><td style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:7pt;font-weight:bold;">8–14</td><td style="padding:3px 5px;font-weight:600;">Standard</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">2</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">±2</td><td style="padding:3px 5px;font-size:7.5pt;">Pitch landed. Solid case, mid-strength boon: one positive (your table) + one negative (any table).</td></tr>
+        <tr style="border-bottom:0.5px solid #ddd;"><td style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:7pt;font-weight:bold;">2–7</td><td style="padding:3px 5px;font-weight:600;">GM Sponsor</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">3</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">±1</td><td style="padding:3px 5px;font-size:7.5pt;">Pitch struggled — but your Table DM advocates loudly. Most uses, smallest mod.</td></tr>
+        <tr><td style="padding:3px 5px;font-family:'Share Tech Mono',monospace;font-size:7pt;font-weight:bold;">Nat 1</td><td style="padding:3px 5px;font-weight:600;">GM Sponsor</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">2</td><td style="padding:3px 5px;text-align:center;font-family:'Share Tech Mono',monospace;">±1</td><td style="padding:3px 5px;font-size:7.5pt;">Pitch stumbled badly. Your DM shows up for you anyway and talks the sponsor into something.</td></tr>
       </tbody>
     </table>
-    <p style="font-size:7pt;font-style:italic;color:#555;margin-top:5px;border-top:0.5px solid #ddd;padding-top:4px;"><strong>Sponsor use rules:</strong> All uses declared out loud before dice are touched. Positive = own table this turn. Negative = any table on the grid. Uses are spent on declaration regardless of outcome.</p>
+    <p style="font-size:7pt;font-style:italic;color:#555;margin-top:5px;border-top:0.5px solid #ddd;padding-top:4px;"><strong>Sponsor use rules:</strong> All uses declared out loud before dice are touched, and applied <em>before</em> the affected roll. Positive = own table this turn. Negative = any table on the grid.</p>
   </div>
 
   <!-- PHASE 3 -->
@@ -1647,103 +1734,53 @@ body {
   </div>
 
   <div class="section-title">Phase 3 — The Race · Your Role</div>
+  <div class="callout" style="margin-bottom:8px;border-left-width:3px;">
+    <p><strong>You are also your crew's advocate.</strong> The Race DM calls the official outcome, but you have the floor at your own table — colour the roll, name what your crew is doing on the tile, push the Race DM for a beat or two of narrative if your players earned it. A blazing run gets bigger because you sold it. A hard stall stings less when their Table DM tells the story.</p>
+  </div>
+
   <div class="callout" style="margin-bottom:8px;">
     <p>The Race DM runs the circuit for the whole room. <strong>The Race DM explains all roll outcomes — good and bad.</strong> Your players roll d20 at your table, you call the number to the Race DM, and they tell the room what it means. You do not judge success or failure.</p>
     <p>Your job in Phase 3 is to <strong>manage your table's rolls and be the crew's voice.</strong> Use the tile summaries below to brief your table before each roll and guide strategy discussion. The Race DM narrates everything that happens on the circuit. You can flag the Race DM with a question at any point — they are your resource throughout.</p>
   </div>
 
-  <div class="rules-box" style="margin-bottom:8px;">
-    <div class="rules-box-title">Roll Outcome Language — What to Say</div>
-    <div class="inline-row"><span class="lbl">BLAZING RUN</span><span>Race DM calls it and narrates it. Your job: collect the roll, call it clearly, then help your table decide their next move.</span></div>
-    <div class="inline-row"><span class="lbl">ADVANCE</span><span>Race DM calls it and narrates it. Brief your table on the next tile.</span></div>
-    <div class="inline-row"><span class="lbl">PARTIAL STALL</span><span>Race DM calls it and narrates it. Same tile next turn — discuss who rolls and whether to use a boost.</span></div>
-    <div class="inline-row"><span class="lbl">HARD STALL</span><span>Race DM calls it and narrates it. Same tile next turn — regroup your table.</span></div>
-    <div class="inline-row"><span class="lbl">NAT 1</span><span>Race DM calls outcome (skip or Boost) and narrates it. Relay to your table and prep for the next decision.</span></div>
-  </div>
-
   <!-- TILE SUMMARIES — SEGMENT 1 -->
   <div class="seg-label">⚡ Segment 1 — The Open City · Velocity favoured · Tiles 1-1 through 1-5</div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">1-1</span><span class="tile-name">The Factory Gate Launch</span><span class="tile-attr-tag">VEL</span><span class="tile-special-tag">No battles</span></div>
-    <div class="tile-sum-body">Velocity tile. Opening segment. No battles yet. Brief your crew: this is the launch — who rolls, and are they using a boost?</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">1-1</span><span class="tile-name">The Factory Gate Launch</span><span class="tile-dc-tag">DC 10</span><span class="tile-attr-tag">VEL</span></div><div class="tile-desc">Standing start. Pure reaction. The race begins. Easy opening — everyone gets moving.</div><div class="tile-sum-body">Velocity tile. Opening segment. No battles yet. Brief your crew: this is the launch — who rolls, and are they using a boost?</div></div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">1-2</span><span class="tile-name">The Copperworks Straight</span><span class="tile-attr-tag">VEL</span><span class="tile-special-tag">No battles</span></div>
-    <div class="tile-sum-body">Velocity tile. Long straight. No battles. Good tile for a Velocity boost if the crew has one and wants to use it early.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">1-2</span><span class="tile-name">The Copperworks Straight</span><span class="tile-dc-tag">DC 12</span><span class="tile-attr-tag">VEL</span></div><div class="tile-desc">400 yards, no corners. Velocity builds surge. The first real gap opens here.</div><div class="tile-sum-body">Long Velocity straight. No battles. Good tile for a Velocity boost if the crew has one and wants to use it early.</div></div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">1-3</span><span class="tile-name">The Foundry Flyover</span><span class="tile-attr-tag">HAN</span><span class="tile-special-tag">No battles</span></div>
-    <div class="tile-sum-body">Handling tile. Elevated road, crosswinds. No battles. First Handling test of the race — Handling builds have an edge here.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">1-3</span><span class="tile-name">The Foundry Flyover</span><span class="tile-dc-tag">DC 13</span><span class="tile-attr-tag">HAN</span></div><div class="tile-desc">Elevated road with crosswinds. Speed under lateral pressure — a taste of what is coming in Segment 2.</div><div class="tile-sum-body">First Handling test of the race. No battles yet. Handling builds have an edge here.</div></div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">1-4</span><span class="tile-name">The Steam Geyser Alley</span><span class="tile-attr-tag">RES</span><span class="tile-special-tag">No battles</span></div>
-    <div class="tile-sum-body">Resilience tile. Nine geysers, no pattern. No battles. Resilience builds hold up best here. Alert your crew before the roll.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">1-4</span><span class="tile-name">The Steam Geyser Alley</span><span class="tile-dc-tag">DC 13</span><span class="tile-attr-tag">RES</span></div><div class="tile-desc">Nine geysers, no pattern. Resilience absorbs the bumps. Everyone else loses half a breath.</div><div class="tile-sum-body">Resilience tile. No battles. Resilience builds hold up best here — alert your crew before the roll.</div></div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">1-5</span><span class="tile-name">The Exit Hairpin</span><span class="tile-attr-tag">HAN</span><span class="tile-special-tag">⚔ First legal battle</span></div>
-    <div class="tile-sum-body">Handling tile. First legal battle tile. If another table is here, the Race DM will call a battle roll — d20 + Handling modifier, highest wins +1 extra tile. Alert your crew: battles are live from here.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">1-5</span><span class="tile-name">The Exit Hairpin</span><span class="tile-dc-tag">DC 13</span><span class="tile-attr-tag">HAN</span></div><div class="tile-desc">180-degree entry into Segment 2. Hard Handling check. The field bunches here — battles likely.</div><div class="tile-sum-body">First legal battle tile. If another table shares this tile, the Race DM calls a battle roll. Highest wins +1 tile.</div></div>
 
   <!-- SEGMENT 2 -->
   <div class="seg-label">⚙ Segment 2 — The Canyon District · Handling favoured · Tiles 2-1 through 2-5</div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">2-1</span><span class="tile-name">The Canyon Entry Gate</span><span class="tile-attr-tag">HAN</span></div>
-    <div class="tile-sum-body">Handling tile. Canyon opens. Easy entry — good tile to save a boost for the harder corners ahead.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">2-1</span><span class="tile-name">The Canyon Entry Gate</span><span class="tile-dc-tag">DC 10</span><span class="tile-attr-tag">HAN</span></div><div class="tile-desc">Opening beat of Segment 2. The canyon swallows you. Easy entry — but the walls are close.</div><div class="tile-sum-body">Easy Handling entry. Good tile to save a boost for the harder corners ahead.</div></div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">2-2</span><span class="tile-name">The Gear-Lock Hairpin</span><span class="tile-attr-tag">HAN</span></div>
-    <div class="tile-sum-body">Handling tile. Tight hairpin. Handling builds are well-positioned here. Discuss whether to deploy a Handling boost.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">2-2</span><span class="tile-name">The Gear-Lock Hairpin</span><span class="tile-dc-tag">DC 12</span><span class="tile-attr-tag">HAN</span></div><div class="tile-desc">Tight 180. Handling builds rotate cleanly. Velocity-heavy crews brake late and suffer.</div><div class="tile-sum-body">Handling tile. Discuss whether to deploy a Handling boost here.</div></div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">2-3</span><span class="tile-name">The Undercroft Tunnel S-Curve</span><span class="tile-attr-tag">HAN</span><span class="tile-special-tag">Most atmospheric tile</span></div>
-    <div class="tile-sum-body">Handling tile. Hardest Handling test in Segment 2. Near-total darkness, S-curve. The Race DM will give this one atmosphere — your job is to make sure your table is ready for a tough roll. This is a strong tile for a Handling boost.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">2-3</span><span class="tile-name">The Undercroft Tunnel S-Curve</span><span class="tile-dc-tag">DC 13</span><span class="tile-attr-tag">HAN</span></div><div class="tile-desc">Near-total darkness, echoing. The S-curve is committed to before it can be seen. The hardest Handling test of the race.</div><div class="tile-sum-body">Hardest Handling tile in Segment 2. Race DM will give this one atmosphere — make sure your table is ready. Strong tile for a Handling boost.</div></div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">2-4</span><span class="tile-name">The Guild Quarter Sprint</span><span class="tile-attr-tag">VEL</span><span class="tile-special-tag">Surprise velocity tile</span></div>
-    <div class="tile-sum-body">Velocity tile — surprise in a Handling segment. Velocity builds get a chance to recover ground here. Worth flagging to your crew before the roll.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">2-4</span><span class="tile-name">The Guild Quarter Sprint</span><span class="tile-dc-tag">DC 13</span><span class="tile-attr-tag">VEL</span></div><div class="tile-desc">A brief open road through the Bazaar. Velocity crews recoup. Handling builds hold on.</div><div class="tile-sum-body">Surprise Velocity tile in a Handling segment. Velocity builds get a chance to recover ground here.</div></div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">2-5</span><span class="tile-name">The Wreckers' Crossing</span><span class="tile-attr-tag">RES</span><span class="tile-special-tag">Foreshadows Segment 3</span></div>
-    <div class="tile-sum-body">Resilience tile. Debris crossing. Preview of Segment 3. Alert your crew: the Gauntlet is coming and it's heavier than this.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">2-5</span><span class="tile-name">The Wreckers' Crossing</span><span class="tile-dc-tag">DC 13</span><span class="tile-attr-tag">RES</span></div><div class="tile-desc">Salvage debris strewn across the road. Resilience absorbs it. Handling-only builds skitter and pray.</div><div class="tile-sum-body">Resilience tile that foreshadows Segment 3. The Gauntlet is coming and it is heavier than this.</div></div>
 
   <!-- SEGMENT 3 -->
   <div class="seg-label">★ Segment 3 — The Industrial Gauntlet · Resilience favoured · Tiles 3-1 through 3-5</div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">3-1</span><span class="tile-name">The Ironworks Entry</span><span class="tile-attr-tag">RES</span></div>
-    <div class="tile-sum-body">Resilience tile. Easy entry to a hard segment. Brief your crew: the Gauntlet escalates fast from here. Resilience builds are now in their strongest segment.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">3-1</span><span class="tile-name">The Ironworks Entry</span><span class="tile-dc-tag">DC 10</span><span class="tile-attr-tag">RES</span></div><div class="tile-desc">The docks receive you. Opening beat — easier entry before the gauntlet truly begins.</div><div class="tile-sum-body">Easy Resilience entry. Brief your crew: the Gauntlet escalates fast from here.</div></div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">3-2</span><span class="tile-name">The Final Gauntlet Chicane</span><span class="tile-attr-tag">HAN</span><span class="tile-special-tag">Last Handling test</span></div>
-    <div class="tile-sum-body">Handling tile. Three direction changes. The finish straight is visible from here. Last Handling test of the race — Handling boosts are well spent here.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">3-2</span><span class="tile-name">The Final Gauntlet Chicane</span><span class="tile-dc-tag">DC 12</span><span class="tile-attr-tag">HAN</span></div><div class="tile-desc">Three direction changes in 60 feet before the bridge. Last real Handling test of the race.</div><div class="tile-sum-body">Last Handling test. Handling boosts are well spent here — the finish straight is visible from this tile.</div></div>
 
-  <div class="tile-summary" style="border-left-color:#000;border-left-width:3px;">
-    <div class="tile-sum-header" style="background:#eee;"><span class="tile-id" style="font-weight:900;">3-3 ⚠</span><span class="tile-name" style="font-weight:900;">The Aether Bridge</span><span class="tile-attr-tag" style="background:#000;color:#fff;">RES</span><span class="tile-special-tag" style="font-weight:bold;color:#000;border-color:#000;">ALL TABLES SIMULTANEOUS · RACE DM CALLS IT</span></div>
-    <div class="tile-sum-body" style="font-style:normal;"><strong>ALL TABLES ROLL SIMULTANEOUSLY.</strong> The Race DM runs this one for the whole room. Your job: make sure your table is ready when it's called, has declared any boosts or sponsor uses, and knows who is rolling. The Race DM will handle everything else. This is the hardest tile on the course.</div>
-  </div>
+  <div class="tile-summary" style="border-left-color:#000;border-left-width:3px;"><div class="tile-sum-header" style="background:#eee;"><span class="tile-id" style="font-weight:900;">3-3 ⚠</span><span class="tile-name" style="font-weight:900;">The Aether Bridge</span><span class="tile-dc-tag">DC 15</span><span class="tile-attr-tag">RES</span><span class="tile-special-tag" style="font-weight:bold;color:#000;border-color:#000;">ALL TABLES SIMULTANEOUS</span></div><div class="tile-desc">Ley-line convergence. Systems cut out mid-crossing. Brutal DC. The only tile rated 15 on the course.</div><div class="tile-sum-body">ALL TABLES ROLL SIMULTANEOUSLY. Race DM runs this one for the whole room. Make sure your table has declared boosts/sponsor uses and chosen a roller. Hardest tile on the course.</div></div>
 
-  <div class="tile-summary">
-    <div class="tile-sum-header"><span class="tile-id">3-4</span><span class="tile-name">The Pressure Valve Row</span><span class="tile-attr-tag">RES</span></div>
-    <div class="tile-sum-body">Resilience tile. Nearly there. Brief your table: one more Resilience tile after this, then the Finish Straight. Any remaining Resilience boosts are valuable here.</div>
-  </div>
+  <div class="tile-summary"><div class="tile-sum-header"><span class="tile-id">3-4</span><span class="tile-name">The Pressure Valve Row</span><span class="tile-dc-tag">DC 13</span><span class="tile-attr-tag">RES</span></div><div class="tile-desc">Industrial vents discharging across the road. High chaos. Resilience crews absorb; others pray.</div><div class="tile-sum-body">Nearly there. Brief your table: one more Resilience tile, then the Finish Straight. Any remaining Resilience boosts are valuable here.</div></div>
 
-  <div class="tile-summary" style="border-left-color:#000;border-left-width:3px;">
-    <div class="tile-sum-header" style="background:#f0f0f0;"><span class="tile-id" style="color:#000;">3-5 🏁</span><span class="tile-name">The Finish Straight</span><span class="tile-attr-tag">VEL</span><span class="tile-special-tag" style="font-weight:bold;">Final tile</span></div>
-    <div class="tile-sum-body">Velocity tile. Final tile. Easy DC. The Race DM closes the race. Your job: make sure your table's roll is in before the Race DM calls the final standings.</div>
-  </div>
+  <div class="tile-summary" style="border-left-color:#000;border-left-width:3px;"><div class="tile-sum-header" style="background:#f0f0f0;"><span class="tile-id">3-5 🏁</span><span class="tile-name">The Finish Straight</span><span class="tile-dc-tag">DC 10</span><span class="tile-attr-tag">VEL</span><span class="tile-special-tag" style="font-weight:bold;">Final tile</span></div><div class="tile-desc">400 yards. White line. Everything you have left. Velocity builds get one last surge. The crowd is standing.</div><div class="tile-sum-body">Final tile. Easy DC. Race DM closes the race. Make sure your table's roll is in before the Race DM calls the final standings.</div></div>
 
   <div class="page-footer">
     <span class="footer-text">⚙ Ironclad Grand Prix · Table DM Packet</span>
@@ -1754,3 +1791,4 @@ body {
 
 </body>
 </html>
+                                                                                                                                                                                                                                                  
