@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 2 — The Sponsor Pavilion MC Guide</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  background: #e8e5df;
+  color: #1a1a1a;
+  margin: 0;
+  padding: 20px 0;
+  transform: none;
+}
+
+/* ══════════════════════════════
+   PAGE
+══════════════════════════════ */
+.page {
+  width: 279.4mm;
+  height: 215.9mm;
+  margin: 10mm auto 8mm;
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
+.page-header {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 2.5px solid #1a1a1a;
+  flex-shrink: 0;
+}
+.seg-accent        { width: 11px; flex-shrink: 0; background: #B87333; }
+.header-inner {
+  flex: 1;
+  padding: 9px 18px 8px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.event-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #aaa; margin-bottom: 2px;
+}
+.page-title {
+  font-size: 21px; font-weight: 800; color: #1a1a1a;
+  letter-spacing: -0.02em; line-height: 1; margin-top: 2px;
+}
+.page-subtitle {
+  font-size: 11px; color: #666; font-style: italic; margin-top: 3px; line-height: 1.4;
+}
+.header-tag {
+  flex-shrink: 0; padding-top: 3px;
+  font-size: 9px; font-weight: 700; color: #aaa; text-align: right; white-space: nowrap;
+}
+
+/* ══════════════════════════════
+   BODY GRID — 3 column
+══════════════════════════════ */
+.body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  flex: 1;
+  min-height: 0;
+}
+.col {
+  padding: 10px 13px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  min-height: 0;
+}
+.col + .col { border-left: 1.5px solid #e4e0d8; }
+
+/* ══════════════════════════════
+   SECTION HEADING
+══════════════════════════════ */
+.section-heading {
+  font-size: 14px; font-weight: 800; color: #1a1a1a;
+  letter-spacing: -0.01em; padding-bottom: 4px;
+  border-bottom: 1.5px solid #1a1a1a; flex-shrink: 0;
+}
+
+/* ══════════════════════════════
+   OVERVIEW TABLE
+══════════════════════════════ */
+.overview-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.overview-table td { padding: 4px 7px; vertical-align: top; border-bottom: 1px solid #edeae4; line-height: 1.4; }
+.overview-table tr:last-child td { border-bottom: none; }
+.ov-label {
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: #888; width: 72px; white-space: nowrap; padding-top: 5px;
+}
+.ov-val { color: #333; }
+
+/* ══════════════════════════════
+   SCRIPT BLOCK (spoken MC words)
+══════════════════════════════ */
+.script-block {
+  background: #f9f8f5;
+  border: 1px solid #e4e0d8;
+  border-left: 3px solid #1a1a1a;
+  border-radius: 2px;
+  padding: 7px 10px;
+  font-size: 11px; color: #333; line-height: 1.55; font-style: italic;
+}
+
+/* ══════════════════════════════
+   MC NOTE BLOCK
+══════════════════════════════ */
+.mc-note {
+  background: #f9f8f5;
+  border: 1px solid #e4e0d8;
+  border-left: 3px solid #B87333;
+  border-radius: 2px;
+  padding: 5px 8px;
+  font-size: 11px; color: #333; line-height: 1.5;
+}
+
+/* ══════════════════════════════
+   STEP BLOCKS
+══════════════════════════════ */
+.steps-list { display: flex; flex-direction: column; gap: 9px; }
+.step-row   { display: grid; grid-template-columns: 20px 1fr; gap: 7px; align-items: start; }
+.step-num {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #1a1a1a; color: #fff;
+  font-size: 9px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.step-body  { display: flex; flex-direction: column; gap: 5px; }
+.step-label { font-size: 11px; font-weight: 800; color: #1a1a1a; line-height: 1.2; }
+.step-note  { font-size: 11px; color: #555; line-height: 1.4; }
+
+/* ══════════════════════════════
+   TIER TABLE (inline — Step 3)
+══════════════════════════════ */
+.tier-table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+.tier-table thead th {
+  padding: 3px 6px; font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #aaa; background: #f5f4f0;
+  border-bottom: 1px solid #e4e0d8; text-align: left;
+}
+.tier-table tbody td { padding: 4px 6px; border-bottom: 1px solid #edeae4; vertical-align: middle; line-height: 1.3; }
+.tier-table tr:last-child td { border-bottom: none; }
+.t-roll { font-weight: 800; font-size: 11px; white-space: nowrap; }
+.t-tier { font-weight: 700; }
+.t-uses { text-align: center; font-weight: 700; }
+.t-mod  { text-align: center; font-weight: 900; font-size: 12px; }
+.t-call { font-size: 10px; color: #555; }
+
+/* row tints */
+.tr-nat20 { background: #E8F0FF; }
+.tr-elite { background: #EEF5FF; }
+.tr-std   { background: #f9f8f5; }
+.tr-gm    { background: #E8F5EC; }
+.tr-nat1  { background: #FFF3E0; }
+
+/* ══════════════════════════════
+   PATRON SCAFFOLD (Step 4 / P2)
+══════════════════════════════ */
+.scaffold-table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+.scaffold-table td { padding: 4px 6px; border-bottom: 1px solid #edeae4; vertical-align: top; line-height: 1.4; }
+.scaffold-table tr:last-child td { border-bottom: none; }
+.sc-tier { font-weight: 700; font-size: 10px; color: #666; width: 94px; white-space: nowrap; }
+.sc-line { color: #333; font-style: italic; }
+
+/* ══════════════════════════════
+   INITIATIVE STEPS
+══════════════════════════════ */
+.init-steps { display: flex; flex-direction: column; gap: 5px; }
+.init-step  { display: grid; grid-template-columns: 20px 1fr; gap: 7px; font-size: 11px; color: #333; line-height: 1.4; align-items: start; }
+
+/* ══════════════════════════════
+   TIMING TABLE
+══════════════════════════════ */
+.timing-table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+.timing-table thead th {
+  padding: 3px 6px; font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #aaa; background: #f5f4f0;
+  border-bottom: 1px solid #e4e0d8; text-align: left;
+}
+.timing-table tbody td { padding: 4px 6px; border-bottom: 1px solid #edeae4; vertical-align: top; line-height: 1.35; }
+.timing-table tr:last-child td { border-bottom: none; }
+.timing-total td { background: #f5f4f0; font-weight: 800; }
+
+/* ══════════════════════════════
+   PAGE 2 — CHECKLIST
+══════════════════════════════ */
+.checklist { display: flex; flex-direction: column; gap: 5px; }
+.check-item { display: grid; grid-template-columns: 16px 1fr; gap: 6px; font-size: 11px; line-height: 1.4; color: #333; align-items: start; }
+.check-box  { width: 13px; height: 13px; border: 1.5px solid #999; border-radius: 2px; flex-shrink: 0; margin-top: 1px; }
+
+/* ══════════════════════════════
+   PAGE 2 — SPONSOR LOOKUP (large)
+══════════════════════════════ */
+.lookup-table { width: 100%; border-collapse: collapse; }
+.lookup-table thead th {
+  padding: 5px 10px; font-size: 9px; font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; color: #aaa; background: #f5f4f0;
+  border-bottom: 1px solid #e4e0d8; text-align: left;
+}
+.lookup-table tbody td { padding: 8px 10px; border-bottom: 1px solid #edeae4; vertical-align: middle; }
+.lookup-table tr:last-child td { border-bottom: none; }
+.lu-roll { font-weight: 900; font-size: 15px; color: #1a1a1a; white-space: nowrap; width: 68px; }
+.lu-tier { font-weight: 700; font-size: 13px; }
+.lu-sub  { font-size: 10px; font-weight: 400; color: #888; display: block; margin-top: 1px; }
+.lu-uses { font-weight: 800; font-size: 14px; text-align: center; color: #444; width: 44px; }
+.lu-mod  { font-weight: 900; font-size: 18px; text-align: center; color: #1a1a1a; width: 44px; }
+
+/* PAGE 2 — SEQUENCE */
+.seq-list { display: flex; flex-direction: column; gap: 6px; }
+.seq-item { display: grid; grid-template-columns: 20px 1fr; gap: 7px; font-size: 11px; line-height: 1.45; color: #333; align-items: start; }
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+
+/* ══════════════════════════════
+   PRINT
+══════════════════════════════ */
+@page { size: 11in 8.5in landscape; margin: 0; }
+@media print {
+  body { background: #fff; padding: 0; margin: 0; }
+  .page { margin: 0; border-radius: 0; box-shadow: none; page-break-after: always; }
+}
+</style>
+</head>
+<body>
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1 — FULL OPERATIONAL GUIDE
+══════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="seg-accent"></div>
+    <div class="header-inner">
+      <div>
+        <div class="event-label">&#9881; &nbsp; Golden Goots Grand Prix &mdash; Phase 2 MC Guide</div>
+        <div class="page-title">The Sponsor Pavilion</div>
+        <div class="page-subtitle">Overview &nbsp;&middot;&nbsp; Cold open script &nbsp;&middot;&nbsp; Per-table sequence &nbsp;&middot;&nbsp; Initiative roll</div>
+      </div>
+      <div class="header-tag">Page 1 of 2 &nbsp;&middot;&nbsp; Full Guide</div>
+    </div>
+  </div>
+
+  <div class="body-grid">
+
+    <!-- ══ COL 1 — Overview + Cold Open ══ -->
+    <div class="col">
+
+      <div class="section-heading">Phase 2 Overview</div>
+
+      <table class="overview-table">
+        <tr>
+          <td class="ov-label">When</td>
+          <td class="ov-val">Immediately after Phase 1 closes. GM at each table signals MC when their table is done buying.</td>
+        </tr>
+        <tr>
+          <td class="ov-label">Duration</td>
+          <td class="ov-val">~20 min for up to 10 tables &middot; ~90 sec per table for presentation + sponsor roll.</td>
+        </tr>
+        <tr>
+          <td class="ov-label">What happens</td>
+          <td class="ov-val">Each table presents crew and construct. One rep rolls for their sponsor. MC reveals the patron. Course map displayed. Race rules briefed. Race begins.</td>
+        </tr>
+        <tr>
+          <td class="ov-label">MC materials</td>
+          <td class="ov-val">Sponsor patron pool (tier-sorted). Course map on projector. This guide. Room tracker ready.</td>
+        </tr>
+        <tr>
+          <td class="ov-label">Sequence</td>
+          <td class="ov-val">Presentations &rarr; Sponsor rolls &rarr; Initiative roll &rarr; Break &rarr; Course reveal &rarr; Phase 3.</td>
+        </tr>
+      </table>
+
+      <div class="section-heading">Opening &mdash; MC Cold Open</div>
+
+      <div class="script-block">
+        Phase 1 is over. The gold is spent. The parts are bolted. Your constructs are as ready as they are going to get. Now it&rsquo;s time to step out of the workshop and into the Sponsor Pavilion &mdash; because every crew racing tonight needs a backer. We&rsquo;re going to hear from each table, one at a time. You&rsquo;ll introduce your crew and your construct to the sponsors in this room. Then you&rsquo;ll roll to see what kind of support you&rsquo;ve earned. Tables &mdash; get your crew name and construct ready. We&rsquo;ll start at Table 1.
+      </div>
+
+      <div class="mc-note">
+        &#9881;&nbsp; If tables aren&rsquo;t all done, it&rsquo;s fine to start Phase 2 while the last 1&ndash;2 tables finish their final purchase. Don&rsquo;t let the room go cold waiting.
+      </div>
+
+    </div>
+
+    <!-- ══ COL 2 — Per-Table Sequence Steps 1–5 ══ -->
+    <div class="col">
+
+      <div class="section-heading">Per-Table Sequence &mdash; Repeat for Every Table</div>
+
+      <div class="mc-note" style="padding:4px 8px;">~90 sec per table. Stay tight &mdash; energy drops if presentations drag.</div>
+
+      <div class="steps-list">
+
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">Call the Table</div>
+            <div class="script-block">Table [NUMBER] &mdash; who speaks for your crew? Stand up, tell us your crew name, your construct, and make your pitch to the sponsors.</div>
+            <div class="step-note">Rep delivers pitch. 30&ndash;60 sec ideal. <em>&ldquo;Love it &mdash; now let&rsquo;s see what the sponsors think&rdquo;</em> if a table runs long.</div>
+          </div>
+        </div>
+
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">The Persuasion Roll</div>
+            <div class="script-block">Thank you. Now &mdash; roll your persuasion. One person from your crew picks up one d20. Let&rsquo;s see what kind of sponsor you can attract.</div>
+            <div class="mc-note">&#9881;&nbsp; <strong>Nat 20:</strong> announce immediately &mdash; <em>&ldquo;Table [X] just rolled a Natural 20.&rdquo;</em> Pause. Room reacts. <strong>Nat 1:</strong> equally public. Their GM steps up as backer. Play warmly.</div>
+          </div>
+        </div>
+
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Assign the Tier</div>
+          </div>
+        </div>
+
+      </div>
+
+      <table class="tier-table">
+        <thead>
+          <tr><th>Roll</th><th>Tier</th><th>Uses</th><th>Mod</th><th>MC Call</th></tr>
+        </thead>
+        <tbody>
+          <tr class="tr-nat20"><td class="t-roll">Nat 20</td><td class="t-tier">Elite (Enhanced)</td><td class="t-uses">3</td><td class="t-mod">&#177;3</td><td class="t-call">Announce to room before anything else. This is the room moment.</td></tr>
+          <tr class="tr-elite"><td class="t-roll">15&ndash;19</td><td class="t-tier">Elite</td><td class="t-uses">2</td><td class="t-mod">&#177;3</td><td class="t-call">Strong pitch. Sponsor impressed and commits.</td></tr>
+          <tr class="tr-std"><td class="t-roll">8&ndash;14</td><td class="t-tier">Standard</td><td class="t-uses">2</td><td class="t-mod">&#177;2</td><td class="t-call">Solid backing. Most common result.</td></tr>
+          <tr class="tr-gm"><td class="t-roll">2&ndash;7</td><td class="t-tier">GM Sponsor</td><td class="t-uses">3</td><td class="t-mod">&#177;1</td><td class="t-call">GM advocates for them. Most uses, lowest modifier.</td></tr>
+          <tr class="tr-nat1"><td class="t-roll">Nat 1</td><td class="t-tier">GM Sponsor</td><td class="t-uses">2</td><td class="t-mod">&#177;1</td><td class="t-call">Pitch stumbled. GM shows up anyway. Play warmly.</td></tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- ══ COL 3 — Steps 4–5 + Initiative + Timing ══ -->
+    <div class="col">
+
+      <div class="steps-list">
+
+        <div class="step-row">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-label">Reveal the Patron</div>
+            <div class="step-note">Draw a community legend patron from the matching tier pool. Deliver as a character moment &mdash; the patron has a presence and a reason they back this crew.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <table class="scaffold-table">
+        <tbody>
+          <tr class="tr-nat20"><td class="sc-tier">Elite Enhanced</td><td class="sc-line">&ldquo;I&rsquo;ve seen a lot of crews in this Pavilion. You&rsquo;ve got something. I&rsquo;m backing you &mdash; all the way to the finish line.&rdquo; Three uses. The room should feel this one.</td></tr>
+          <tr class="tr-elite"><td class="sc-tier">Elite</td><td class="sc-line">&ldquo;You&rsquo;ve earned it. I&rsquo;ll be watching.&rdquo; Two uses of Elite.</td></tr>
+          <tr class="tr-std"><td class="sc-tier">Standard</td><td class="sc-line">&ldquo;Reliable backing for a reliable crew. Don&rsquo;t waste it.&rdquo; Two uses.</td></tr>
+          <tr class="tr-gm"><td class="sc-tier">GM Sponsor</td><td class="sc-line">[GM name] at Table [X], your own GM, is stepping up as your backer. Three uses. Voice it warmly &mdash; it&rsquo;s the most personal outcome.</td></tr>
+          <tr class="tr-nat1"><td class="sc-tier">GM Sponsor (Nat 1)</td><td class="sc-line">The pitch had moments. [GM name] puts their hand up anyway. Two uses. Loyalty over enthusiasm &mdash; but they&rsquo;re there.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="steps-list" style="margin-top:2px;">
+        <div class="step-row">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-label">Log and Move On</div>
+            <div class="script-block">Table [NUMBER] &mdash; [Patron] is in your corner. [Tier], [uses] uses, [modifier]. Mark it on your card. Table [NEXT] &mdash; you&rsquo;re up. Who speaks for your crew?</div>
+            <div class="mc-note">&#9881;&nbsp; Don&rsquo;t let the room idle. Call the next table before the last one finishes writing.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-heading">Initiative Roll</div>
+
+      <div class="script-block" style="margin-bottom:5px;">Before we race &mdash; we need to know who goes first in Round 1. Every player picks up a d20. On my count &mdash; three, two, one, roll. GMs &mdash; add up your results and divide by the number of players. Round down. Call out your number.</div>
+
+      <div class="init-steps">
+        <div class="init-step"><div class="step-num">1</div><span>All tables roll simultaneously on MC&rsquo;s count.</span></div>
+        <div class="init-step"><div class="step-num">2</div><span>Each GM sums results &divide; player count (round down). Call score to MC.</span></div>
+        <div class="init-step"><div class="step-num">3</div><span>Ties: re-roll between tied tables only &mdash; single die, highest wins.</span></div>
+        <div class="init-step"><div class="step-num">4</div><span>MC announces Round 1 order. <em>From Round 2: reverse grid &mdash; last place first.</em></span></div>
+      </div>
+
+      <div class="section-heading" style="margin-top:4px;">Timing Target</div>
+
+      <table class="timing-table">
+        <thead><tr><th>Section</th><th>Target</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>MC cold open</td><td style="white-space:nowrap;font-weight:700;">~1 min</td><td>Energy setter. Don&rsquo;t rush or pad.</td></tr>
+          <tr><td>Presentations</td><td style="white-space:nowrap;font-weight:700;">90 sec &times; tables</td><td>10 tables &asymp; 15 min. Tight transitions are key.</td></tr>
+          <tr><td>Initiative roll</td><td style="white-space:nowrap;font-weight:700;">~1&ndash;2 min</td><td>All tables simultaneously. Fast to resolve.</td></tr>
+          <tr class="timing-total"><td>Total</td><td style="white-space:nowrap;">~16&ndash;18 min</td><td>Adjust per table count.</td></tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2 — MC QUICK REFERENCE
+══════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="seg-accent"></div>
+    <div class="header-inner">
+      <div>
+        <div class="event-label">&#9881; &nbsp; Golden Goots Grand Prix &mdash; Phase 2 MC Quick Reference</div>
+        <div class="page-title">Sponsor Pavilion &mdash; Day-of Card</div>
+        <div class="page-subtitle">Per-table checklist &nbsp;&middot;&nbsp; Sponsor roll lookup &nbsp;&middot;&nbsp; Patron voice &nbsp;&middot;&nbsp; Phase 2 sequence</div>
+      </div>
+      <div class="header-tag">Page 2 of 2 &nbsp;&middot;&nbsp; Quick Reference</div>
+    </div>
+  </div>
+
+  <div class="body-grid">
+
+    <!-- ══ COL 1 — Checklist + Sequence ══ -->
+    <div class="col">
+
+      <div class="section-heading">Per-Table Checklist</div>
+
+      <div class="checklist">
+        <div class="check-item"><div class="check-box"></div><span>Call the table &mdash; <em>&ldquo;Who speaks for your crew?&rdquo;</em></span></div>
+        <div class="check-item"><div class="check-box"></div><span>Table delivers pitch &mdash; crew name, construct, motto</span></div>
+        <div class="check-item"><div class="check-box"></div><span><em>&ldquo;Thank you. Roll your persuasion.&rdquo;</em></span></div>
+        <div class="check-item"><div class="check-box"></div><span>Rep rolls one d20 solo &mdash; full room can see</span></div>
+        <div class="check-item"><div class="check-box"></div><span><strong>Natural 20 &mdash; announce to room immediately</strong></span></div>
+        <div class="check-item"><div class="check-box"></div><span>Assign tier from roll result (see table)</span></div>
+        <div class="check-item"><div class="check-box"></div><span>Draw patron from matching tier pool</span></div>
+        <div class="check-item"><div class="check-box"></div><span>Deliver patron reveal in character</span></div>
+        <div class="check-item"><div class="check-box"></div><span>Table marks sponsor on player card</span></div>
+        <div class="check-item"><div class="check-box"></div><span>Move immediately to next table &mdash; don&rsquo;t idle</span></div>
+      </div>
+
+      <div class="section-heading" style="margin-top:4px;">Phase 2 Sequence</div>
+
+      <div class="seq-list">
+        <div class="seq-item"><div class="step-num">1</div><span><strong>MC cold open</strong> &mdash; Welcome to the Pavilion. Deliver to full room.</span></div>
+        <div class="seq-item"><div class="step-num">2</div><span><strong>All tables present + sponsor roll</strong> &mdash; one table at a time, in order.</span></div>
+        <div class="seq-item"><div class="step-num">3</div><span><strong>Initiative roll</strong> &mdash; all tables simultaneously. Highest group average goes first in Round 1.</span></div>
+        <div class="seq-item"><div class="step-num">4</div><span><strong>Race begins</strong> &mdash; after break &amp; course reveal.</span></div>
+      </div>
+
+    </div>
+
+    <!-- ══ COL 2 — Sponsor Roll Lookup ══ -->
+    <div class="col">
+
+      <div class="section-heading">Sponsor Roll &mdash; Quick Lookup</div>
+
+      <table class="lookup-table">
+        <thead>
+          <tr><th>Roll</th><th>Tier</th><th style="text-align:center;">Uses</th><th style="text-align:center;">Mod</th></tr>
+        </thead>
+        <tbody>
+          <tr class="tr-nat20">
+            <td class="lu-roll">Nat 20</td>
+            <td class="lu-tier">Elite (Enhanced)<span class="lu-sub">Room moment &mdash; announce immediately</span></td>
+            <td class="lu-uses">3</td>
+            <td class="lu-mod">&#177;3</td>
+          </tr>
+          <tr class="tr-elite">
+            <td class="lu-roll">15&ndash;19</td>
+            <td class="lu-tier">Elite<span class="lu-sub">Strong pitch. Sponsor commits.</span></td>
+            <td class="lu-uses">2</td>
+            <td class="lu-mod">&#177;3</td>
+          </tr>
+          <tr class="tr-std">
+            <td class="lu-roll">8&ndash;14</td>
+            <td class="lu-tier">Standard<span class="lu-sub">Solid backing. Most common result.</span></td>
+            <td class="lu-uses">2</td>
+            <td class="lu-mod">&#177;2</td>
+          </tr>
+          <tr class="tr-gm">
+            <td class="lu-roll">2&ndash;7</td>
+            <td class="lu-tier">GM Sponsor<span class="lu-sub">GM advocates. Most uses, lowest mod.</span></td>
+            <td class="lu-uses">3</td>
+            <td class="lu-mod">&#177;1</td>
+          </tr>
+          <tr class="tr-nat1">
+            <td class="lu-roll">Nat 1</td>
+            <td class="lu-tier">GM Sponsor<span class="lu-sub">Pitch stumbled. GM shows up anyway.</span></td>
+            <td class="lu-uses">2</td>
+            <td class="lu-mod">&#177;1</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="mc-note" style="margin-top:6px;">
+        <strong>All uses:</strong> Declared out loud before dice are touched. MC acknowledges publicly. Uses expended on declaration regardless of outcome.<br>
+        <strong>Negative uses:</strong> Can target any team on the grid &mdash; no adjacency required.
+      </div>
+
+    </div>
+
+    <!-- ══ COL 3 — Patron Voice + Key Reminders ══ -->
+    <div class="col">
+
+      <div class="section-heading">Patron Voice Scaffolds</div>
+
+      <table class="scaffold-table">
+        <tbody>
+          <tr class="tr-nat20"><td class="sc-tier">Elite Enhanced</td><td class="sc-line">&ldquo;I&rsquo;ve seen a lot of crews in this Pavilion. You&rsquo;ve got something. I&rsquo;m backing you &mdash; all the way to the finish line.&rdquo; Three uses. The room should feel this one.</td></tr>
+          <tr class="tr-elite"><td class="sc-tier">Elite</td><td class="sc-line">&ldquo;You&rsquo;ve earned it. I&rsquo;ll be watching.&rdquo; Two uses.</td></tr>
+          <tr class="tr-std"><td class="sc-tier">Standard</td><td class="sc-line">&ldquo;Reliable backing for a reliable crew. Don&rsquo;t waste it.&rdquo; Two uses.</td></tr>
+          <tr class="tr-gm"><td class="sc-tier">GM Sponsor</td><td class="sc-line">[GM name] at Table [X], your own GM, steps up as backer. Three uses. Voice it warmly &mdash; most personal outcome in the Pavilion.</td></tr>
+          <tr class="tr-nat1"><td class="sc-tier">GM Sponsor (Nat 1)</td><td class="sc-line">The pitch had moments. [GM name] puts their hand up anyway. Two uses. Loyalty over enthusiasm &mdash; but they&rsquo;re there.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-heading" style="margin-top:8px;">Key MC Reminders</div>
+
+      <div class="mc-note" style="margin-bottom:5px;">
+        <strong>Natural 20:</strong> Stop everything. <em>&ldquo;Table [X] just rolled a Natural 20.&rdquo;</em> Pause. Let the room react. Then reveal the patron. Elite Enhanced &mdash; three uses of &plusmn;3.
+      </div>
+
+      <div class="mc-note" style="margin-bottom:5px;">
+        <strong>Natural 1:</strong> Their GM is their backer. Play it warmly &mdash; never as a punishment. Two uses of &plusmn;1 is still two uses.
+      </div>
+
+      <div class="mc-note">
+        <strong>Transitions:</strong> Call the next table before the last one finishes writing. The room&rsquo;s energy drops with every second of dead air between presentations.
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+</body>
+</html>

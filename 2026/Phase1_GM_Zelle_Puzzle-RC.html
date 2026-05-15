@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Professor Zelle — The Calibration Puzzle</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    background: #e8e5df;
+    margin: 0;
+    padding: 20px 0;
+    transform: none;
+  }
+
+  @page { size: 11in 8.5in landscape; margin: 0; }
+  @media print {
+    body { background: #fff; padding: 0; margin: 0; }
+    .page { margin: 0; border-radius: 0; box-shadow: none; page-break-after: always; }
+  }
+
+  .page {
+    width: 279.4mm;
+    height: 215.9mm;
+    margin: 10mm auto 8mm;
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 7px 14px 6px;
+    flex-shrink: 0;
+  }
+  .page-title {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: #fff;
+  }
+  .page-sub {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-top: 2px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex: 1;
+    min-height: 0;
+    padding: 10px 12px 24px;
+    overflow: hidden;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    overflow: hidden;
+    min-height: 0;
+    padding: 0 12px;
+  }
+  .col:first-child { padding-left: 0; border-right: 1px solid #e4e0d8; }
+  .col:last-child { padding-right: 0; }
+
+  /* OVERVIEW STRIP */
+  .overview-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border: 1px solid #d0ccc4;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .overview-cell {
+    padding: 5px 7px;
+    border-right: 1px solid #d0ccc4;
+  }
+  .overview-cell:last-child { border-right: none; }
+  .ov-label {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 2px;
+  }
+  .ov-value {
+    font-size: 10px;
+    font-weight: 700;
+    color: #1a1a2e;
+    line-height: 1.3;
+  }
+
+  /* TYPOGRAPHY */
+  .section-heading {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1a1a1a;
+    letter-spacing: -0.01em;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid #1a1a1a;
+    flex-shrink: 0;
+  }
+
+  /* SCRIPT BLOCK */
+  .script-block {
+    background: #f9f8f5;
+    border: 1px solid #e4e0d8;
+    border-left: 3px solid #1a1a1a;
+    border-radius: 2px;
+    padding: 7px 10px;
+    font-size: 11px;
+    color: #333;
+    line-height: 1.55;
+    font-style: italic;
+    flex-shrink: 0;
+  }
+
+  /* MC NOTE */
+  .mc-note {
+    background: #f9f8f5;
+    border: 1px solid #e4e0d8;
+    border-left: 3px solid #1a1a2e;
+    border-radius: 2px;
+    padding: 5px 8px;
+    font-size: 11px;
+    color: #333;
+    line-height: 1.5;
+    flex-shrink: 0;
+  }
+  .mc-note .note-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+  }
+
+  /* CLUE LIST */
+  .clue-intro {
+    font-size: 10.5px;
+    color: #444;
+    line-height: 1.45;
+    flex-shrink: 0;
+  }
+  .clue-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+  .clue-list li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 11px;
+    color: #1a1a1a;
+    line-height: 1.45;
+  }
+  .clue-num {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* QUESTION CALLOUT */
+  .question-callout {
+    background: #1a1a2e;
+    color: #fff;
+    border-radius: 3px;
+    padding: 8px 11px;
+    flex-shrink: 0;
+  }
+  .q-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 3px;
+  }
+  .q-text {
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.3;
+    font-style: italic;
+  }
+
+  /* SOLUTION TABLE */
+  .solution-wrap {
+    background: #f0eee9;
+    border: 1.5px solid #1a1a2e;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .solution-label {
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+  }
+  .solution-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+  }
+  .solution-table thead th {
+    background: #2e2e4a;
+    color: rgba(255,255,255,0.85);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    text-align: left;
+  }
+  .solution-table tbody tr { border-bottom: 1px solid #d4d0c8; }
+  .solution-table tbody td {
+    padding: 4px 9px;
+    color: #1a1a1a;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+  .solution-table tbody td:first-child { font-weight: 700; }
+  .solution-table tbody tr:nth-child(odd) { background: #f9f8f5; }
+  .solution-table tbody tr:nth-child(even) { background: #fff; }
+  .solution-table tbody tr.answer-row { background: #E8F0FF; }
+  .solution-table tbody tr.answer-row td { font-weight: 700; color: #0C3D5E; }
+
+  /* RESULT ROWS */
+  .answer-results {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .result-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 11px;
+    line-height: 1.45;
+    padding: 5px 8px;
+    border-radius: 2px;
+  }
+  .result-row.win { background: #E8F5EC; }
+  .result-row.fail { background: #F5F0E8; }
+  .result-row.wrong { background: #FFF3E0; }
+  .r-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+  .result-row.win .r-label { color: #0F4020; }
+  .result-row.fail .r-label { color: #4A1B0C; }
+  .result-row.wrong .r-label { color: #7a4500; }
+
+  /* VARIANT TABLE */
+  .variant-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5px;
+    flex-shrink: 0;
+  }
+  .variant-table thead th {
+    background: #e8e4de;
+    color: #333;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    text-align: left;
+  }
+  .variant-table tbody tr { border-bottom: 1px solid #e4e0d8; }
+  .variant-table tbody td { padding: 3px 8px; color: #222; line-height: 1.35; }
+  .variant-table tbody td:first-child { font-style: italic; }
+  .variant-table tbody td:last-child { font-weight: 700; color: #555; white-space: nowrap; }
+  .variant-table tbody tr:nth-child(odd) { background: #f9f8f5; }
+
+  .footer-text {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #555;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .footer-answer { font-weight: 800; color: #1a1a2e; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PAGE 1 — PLAYER-FACING CONTENT                     -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-title">PROFESSOR ZELLE — THE CALIBRATION PUZZLE</div>
+    <div class="page-sub">Phase 1 GM Reference &nbsp;·&nbsp; Logic Grid Puzzle &nbsp;·&nbsp; Roving Encounter &nbsp;·&nbsp; Page 1 of 2 — Player Content</div>
+  </div>
+
+  <div class="two-col">
+
+      <!-- LEFT: Overview + Scene -->
+      <div class="col">
+        <div class="overview-strip">
+          <div class="overview-cell">
+            <div class="ov-label">Format</div>
+            <div class="ov-value">4×4 Logic Grid</div>
+          </div>
+          <div class="overview-cell">
+            <div class="ov-label">Time</div>
+            <div class="ov-value">5–10 minutes</div>
+          </div>
+          <div class="overview-cell">
+            <div class="ov-label">Difficulty</div>
+            <div class="ov-value">Medium — 3–4 deductive steps</div>
+          </div>
+          <div class="overview-cell">
+            <div class="ov-label">Reward on Pass</div>
+            <div class="ov-value">20g → +1 to any attribute</div>
+          </div>
+        </div>
+
+        <div class="section-heading">SETUP — READ TO PLAYERS</div>
+        <div class="script-block">
+          Zelle doesn't look up from her field journal when you arrive. A cup of tea sits beside her — cold, forgotten. She's crouched in a doorway, and the instrument in her other hand is measuring something you'd need more context to identify.<br><br>
+          When she does look up, she looks at your construct first. A long look — the kind that is clearly calculating something.<br><br>
+          <em>"Interesting configuration. Slightly unusual weight distribution in the rear third."</em><br><br>
+          She's right. You don't know how she knew that.<br><br>
+          <em>"I was working on something."</em> She turns the journal to show you a page of four annotated schematics — four competing designs, each with a different fuel system, stabiliser type, and the name of the theoretical engineer who proposed it. <em>"I'm trying to sort out which design belongs to whom. The notes are intact, but the attribution got scrambled."</em><br><br>
+          She pulls a folded card from her coat pocket and holds it out.<br><br>
+          <em>"Four engineers. Four designs. All the information you need is here. Give me the correct attribution, and we'll have a conversation about your construct."</em>
+        </div>
+
+        <div class="mc-note">
+          <div class="note-label">Mechanic Summary</div>
+          Players work together verbally, then call their answer as a group. On a correct answer: roll DC 10 (group average). Pass → 20g for +1 to any attribute. Fail → no purchase. Wrong answer → no roll, no purchase. See page 2 for full GM delivery notes.
+        </div>
+      </div>
+
+      <!-- RIGHT: Puzzle Clues + Question -->
+      <div class="col">
+        <div class="section-heading">THE PUZZLE CARD — READ ALOUD</div>
+        <div class="clue-intro">
+          Four constructs entered last season's <strong>Cogsworth Calibration Trials</strong> by four different engineers: <strong>Ashwick, Brenn, Voss, and Dray.</strong><br>
+          Each ran a different <strong>fuel system</strong> <em>(coal-gas, aether cell, pressure steam, arcane compound)</em>, used a different <strong>stabiliser</strong> <em>(gyroscopic, torsion coil, magnetic damper, pendulum brace)</em>, and placed in a different <strong>finishing position</strong> <em>(1st, 2nd, 3rd, 4th)</em>.
+        </div>
+
+        <ol class="clue-list">
+          <li><span class="clue-num">1</span><span>Ashwick's construct did not use coal-gas or arcane compound.</span></li>
+          <li><span class="clue-num">2</span><span>The gyroscopic stabiliser finished in 1st place.</span></li>
+          <li><span class="clue-num">3</span><span>Brenn's construct used pressure steam.</span></li>
+          <li><span class="clue-num">4</span><span>The construct with the magnetic damper finished directly ahead of Ashwick's construct — one place higher.</span></li>
+          <li><span class="clue-num">5</span><span>Voss did not finish in 4th place.</span></li>
+          <li><span class="clue-num">6</span><span>The arcane compound construct used a pendulum brace.</span></li>
+          <li><span class="clue-num">7</span><span>Dray's construct finished in 3rd place.</span></li>
+        </ol>
+
+        <div class="question-callout">
+          <div class="q-label">The Question — all players call simultaneously</div>
+          <div class="q-text">"Which stabiliser did Voss's construct use?"</div>
+        </div>
+
+        <div class="mc-note">
+          <div class="note-label">Hint — Only If Stuck After 3–4 Minutes</div>
+          Zelle looks up, without emphasis: <em>"The finishing positions tend to unlock the rest."</em> That is the only hint she offers. She delivers it the way she'd deliver any observation — flatly, without drama.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PAGE 2 — GM REFERENCE                              -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-title">PROFESSOR ZELLE — GM REFERENCE</div>
+    <div class="page-sub">Phase 1 GM Reference &nbsp;·&nbsp; Solution &nbsp;·&nbsp; Delivery Notes &nbsp;·&nbsp; Variants &nbsp;·&nbsp; Page 2 of 2</div>
+  </div>
+
+  <div class="two-col">
+
+      <!-- LEFT: Solution + Results + Variants -->
+      <div class="col">
+        <div class="solution-wrap">
+          <div class="solution-label">⚙ COMPLETE SOLUTION — GM EYES ONLY</div>
+          <table class="solution-table">
+            <thead>
+              <tr>
+                <th>Engineer</th>
+                <th>Fuel System</th>
+                <th>Stabiliser</th>
+                <th>Position</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Brenn</td><td>Pressure steam</td><td>Gyroscopic</td><td>1st</td></tr>
+              <tr class="answer-row"><td>Voss ← ANSWER</td><td>Arcane compound</td><td>Pendulum brace</td><td>2nd</td></tr>
+              <tr><td>Dray</td><td>Coal-gas</td><td>Magnetic damper</td><td>3rd</td></tr>
+              <tr><td>Ashwick</td><td>Aether cell</td><td>Torsion coil</td><td>4th</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-heading">TAKING THE ANSWER</div>
+        <div class="mc-note" style="margin-bottom:2px;">
+          All players must call simultaneously — one voice while others are silent doesn't satisfy her. She writes whatever they say in her journal, right or wrong.
+        </div>
+
+        <div class="answer-results">
+          <div class="result-row win">
+            <span class="r-label">Correct + Pass DC 10</span>
+            <span><em>"Yes. That's consistent with everything I have."</em> She closes the journal. <em>"Now. Your construct — the rear weight distribution. There's something you could do about that."</em> → <strong>20g for +1 to any attribute.</strong></span>
+          </div>
+          <div class="result-row fail">
+            <span class="r-label">Correct + Fail DC 10</span>
+            <span><em>"The reasoning was sound. The execution, apparently, less so."</em> No purchase available. She moves on.</span>
+          </div>
+          <div class="result-row wrong">
+            <span class="r-label">Wrong Answer</span>
+            <span>She writes it down. Pauses. Writes something beside it. <em>"Interesting. That's not what the data shows — but it's an understandable path to take."</em> No roll. No purchase.</span>
+          </div>
+        </div>
+
+        <div class="section-heading">VARIANT QUESTIONS</div>
+        <table class="variant-table">
+          <thead>
+            <tr><th>Question</th><th>Answer</th><th>Difficulty</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>"Which fuel system did Dray use?"</td><td>Coal-gas</td><td>Easier</td></tr>
+            <tr><td>"Which engineer finished last?"</td><td>Ashwick</td><td>Easiest</td></tr>
+            <tr><td>"Which engineer used the gyroscopic stabiliser?"</td><td>Brenn</td><td>Medium</td></tr>
+            <tr><td>"Which stabiliser did Ashwick use?"</td><td>Torsion coil</td><td>Medium</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- RIGHT: GM Delivery Notes -->
+      <div class="col">
+        <div class="section-heading">GM DELIVERY NOTES</div>
+
+        <div class="mc-note">
+          <div class="note-label">Before the Session</div>
+          Write the 7 clues on an index card for yourself. Keep this solution sheet handy. <strong>Do not prepare a handout</strong> — players work from what they hear and remember. That's intentional: the group has to hold the logic together verbally, which is where the collaboration lives.
+        </div>
+
+        <div class="mc-note">
+          <div class="note-label">Running the Encounter</div>
+          Read clues aloud one at a time, at a pace the group can follow. Pause between each. Let them ask you to re-read individual clues — that's fine, Zelle doesn't mind repeating herself. What she won't do is interpret or rephrase.<br><br>
+          Zelle is already writing in her journal while they think. She is not impatient. She is occupied.
+        </div>
+
+        <div class="mc-note">
+          <div class="note-label">Tone</div>
+          Zelle is not a teacher giving a test. She's an academic who found a puzzle and is delighted when someone else engages with it genuinely. Play her as <strong>curious, not evaluating.</strong> The answer matters to her because the problem matters to her — not because she's gatekeeping.<br><br>
+          She will not be visibly excited when they get it right. She will write it down and close the journal. That's the tell.
+        </div>
+
+        <div class="mc-note">
+          <div class="note-label">Deduction Path — If You Need to Follow Along</div>
+          Clue 3: Brenn → pressure steam. Clue 6: arcane compound → pendulum brace. Clue 1: Ashwick has neither coal-gas nor arcane compound, and Brenn has pressure steam → <strong>Ashwick → aether cell.</strong> Clue 7: Dray → 3rd. Clue 4: magnetic damper is one place ahead of Ashwick; if Ashwick is 4th, magnetic damper is 3rd → <strong>Dray → magnetic damper, Ashwick → 4th.</strong> Clue 2: gyroscopic → 1st. Voss and Brenn take 1st and 2nd. Remaining fuel for Voss and Dray: coal-gas and arcane compound. Dray has magnetic damper, not pendulum brace → Dray ≠ arcane compound → <strong>Voss → arcane compound → pendulum brace.</strong> Dray → coal-gas. Brenn → 1st → gyroscopic. Ashwick → torsion coil. Voss → 2nd.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+</body>
+</html>

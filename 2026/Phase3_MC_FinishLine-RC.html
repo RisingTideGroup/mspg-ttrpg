@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 3 — Finish Line MC Cue Card</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  background: #e8e5df;
+  color: #1a1a1a;
+  margin: 0;
+  padding: 20px 0;
+  transform: none;
+}
+
+/* ══════════════════════════════
+   PAGE
+══════════════════════════════ */
+.page {
+  width: 279.4mm;
+  height: 215.9mm;
+  margin: 10mm auto 8mm;
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
+.page-header {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 2.5px solid #1a1a1a;
+  flex-shrink: 0;
+}
+.seg-accent {
+  width: 11px;
+  flex-shrink: 0;
+  background: #1a1a2e;
+}
+.header-inner {
+  flex: 1;
+  padding: 10px 18px 9px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.event-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 2px;
+}
+.page-title {
+  font-size: 21px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-top: 3px;
+}
+.page-subtitle {
+  font-size: 11px;
+  color: #666;
+  font-style: italic;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+.header-badge {
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+.finish-pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 3px;
+  white-space: nowrap;
+  background: #0C2566;
+  color: #aac4ff;
+}
+
+/* ══════════════════════════════
+   BODY GRID
+══════════════════════════════ */
+.body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  min-height: 0;
+}
+.col {
+  padding: 11px 14px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  min-height: 0;
+}
+.col-left { border-right: 1.5px solid #e4e0d8; }
+
+/* ══════════════════════════════
+   SECTION HEADING
+══════════════════════════════ */
+.section-heading {
+  font-size: 14px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.01em;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid #1a1a1a;
+}
+
+/* ══════════════════════════════
+   RULE TEXT
+══════════════════════════════ */
+.rule-text {
+  font-size: 12px;
+  color: #444;
+  line-height: 1.55;
+}
+
+/* ══════════════════════════════
+   GM NOTE BLOCK
+══════════════════════════════ */
+.gm-note {
+  background: #f9f8f5;
+  border: 1px solid #e4e0d8;
+  border-left: 3px solid #B87333;
+  border-radius: 2px;
+  padding: 6px 9px;
+  font-size: 11px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════
+   RESULT TABLE — Finish Straight
+══════════════════════════════ */
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.result-table td {
+  padding: 7px 8px;
+  vertical-align: middle;
+  border-bottom: 1px solid #edeae4;
+  line-height: 1.4;
+}
+.result-table tr:last-child td { border-bottom: none; }
+
+.result-icon {
+  width: 26px;
+  text-align: center;
+  font-size: 15px;
+}
+.result-name {
+  width: 155px;
+  font-weight: 700;
+  font-size: 11px;
+  color: #1a1a1a;
+}
+.result-sub {
+  font-weight: 400;
+  font-size: 10px;
+  color: #666;
+  display: block;
+  margin-top: 1px;
+}
+.result-instr {
+  font-size: 11px;
+  color: #444;
+}
+
+.row-blazing { background: #E8F0FF; }
+.row-clean   { background: #E8F5EC; }
+.row-miss    { background: #F5F0E8; }
+
+/* ══════════════════════════════
+   STANDINGS TABLE
+══════════════════════════════ */
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.standings-table td {
+  padding: 7px 9px;
+  vertical-align: top;
+  border-bottom: 1px solid #edeae4;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.standings-table tr:last-child td { border-bottom: none; }
+
+.pos-label {
+  width: 72px;
+  font-weight: 800;
+  font-size: 11px;
+  color: #1a1a1a;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.pos-1st    { color: #0C2566; }
+.pos-last   { color: #555; }
+.pos-instr  { color: #444; }
+
+/* ══════════════════════════════
+   PLACEHOLDER ROWS — Post-Race
+══════════════════════════════ */
+.placeholder-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.placeholder-table td {
+  padding: 7px 9px;
+  border-bottom: 1px dashed #ccc;
+  font-size: 11px;
+  line-height: 1.45;
+  vertical-align: middle;
+}
+.ph-label {
+  width: 110px;
+  font-weight: 700;
+  font-size: 10px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.ph-fill {
+  color: #bbb;
+  font-style: italic;
+}
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+.footer-left   { font-size: 9px; color: #bbb; letter-spacing: 0.04em; }
+.footer-center { font-size: 9px; color: #bbb; }
+.footer-right  { font-size: 9px; color: #999; font-style: italic; max-width: 360px; text-align: right; line-height: 1.4; }
+
+/* ══════════════════════════════
+   PRINT
+══════════════════════════════ */
+@page { size: 11in 8.5in landscape; margin: 0; }
+@media print {
+  body { background: #fff; padding: 0; margin: 0; }
+  .page { margin: 0; border-radius: 0; box-shadow: none; page-break-after: always; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="seg-accent"></div>
+    <div class="header-inner">
+      <div>
+        <div class="event-label">⚙ &nbsp; Golden Goots Grand Prix &mdash; Phase 3 MC Cue Card</div>
+        <div class="page-title">Finish Line</div>
+        <div class="page-subtitle">Photo Finish &nbsp;&middot;&nbsp; Standings &nbsp;&middot;&nbsp; Celebration &nbsp;&middot;&nbsp; Fill in Post-Race section before event day</div>
+      </div>
+      <div class="header-badge">
+        <span class="finish-pill">&#127937; Finish Line</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body-grid">
+
+    <!-- ══ LEFT COLUMN ══ -->
+    <div class="col col-left">
+
+      <div class="section-heading">How the Finish Works</div>
+
+      <div class="rule-text">
+        No stop-the-room moment. The Greylag Run ends the same way it was raced &mdash; every table completes their turn. The Finish Straight (tile 3-5, Velocity, DC 10) is called like any other tile. When the round ends, call standings. If two or more tables cleared in the same round, run the photo finish roll-off first.
+      </div>
+
+      <div class="gm-note">
+        &#9881;&nbsp; After any finish result &mdash; two seconds of room reaction, then continue turn order. Do not hold the round for extended narration.
+      </div>
+
+      <div class="section-heading">Finish Straight &mdash; Result Calls</div>
+
+      <table class="result-table">
+        <tr class="row-blazing">
+          <td class="result-icon">&#127937;</td>
+          <td class="result-name">
+            Blazing Run
+            <span class="result-sub">Beat DC by 5+</span>
+          </td>
+          <td class="result-instr">Call it to the room. Give it a line. Mark tracker. Keep going in turn order.</td>
+        </tr>
+        <tr class="row-clean">
+          <td class="result-icon" style="font-size:14px;font-weight:700;">&#10003;</td>
+          <td class="result-name">
+            Clean Finish
+            <span class="result-sub">Beat DC</span>
+          </td>
+          <td class="result-instr">Name the crew. Give it a line. Move on.</td>
+        </tr>
+        <tr class="row-miss">
+          <td class="result-icon" style="font-size:14px;font-weight:700;color:#A32D2D;">&#10007;</td>
+          <td class="result-name">
+            Miss
+            <span class="result-sub">Fail DC &mdash; roll again next round</span>
+          </td>
+          <td class="result-instr">One line &mdash; they roll again next round. DC&nbsp;10, won&rsquo;t last long.</td>
+        </tr>
+      </table>
+
+    </div>
+
+    <!-- ══ RIGHT COLUMN ══ -->
+    <div class="col">
+
+      <div class="section-heading">Photo Finish &mdash; Two or More Tables Clear Same Round</div>
+
+      <div class="rule-text">
+        Finish the round first. Once all tables have rolled, announce the dead heat. Each tied table&rsquo;s chosen roller picks up one d20. Roll simultaneously. Highest result wins. Re-roll ties until broken. No modifiers &mdash; raw dice only. Then proceed to full standings.
+      </div>
+
+      <div class="gm-note">
+        &#9881;&nbsp; If a tied table had a Blazing Run on the Finish Straight, call that out when announcing the tie &mdash; not during the roll-off.
+      </div>
+
+      <div class="section-heading">Calling Standings</div>
+
+      <table class="standings-table">
+        <tr>
+          <td class="pos-label pos-1st">1st place</td>
+          <td class="pos-instr">Call it with weight. Name the crew, name the construct. One specific line on their race if you have it.</td>
+        </tr>
+        <tr>
+          <td class="pos-label">2nd / 3rd</td>
+          <td class="pos-instr">Name and position. One line if warranted.</td>
+        </tr>
+        <tr>
+          <td class="pos-label">4th &ndash; last</td>
+          <td class="pos-instr">Name and position. Keep pace. Don&rsquo;t skip anyone.</td>
+        </tr>
+        <tr>
+          <td class="pos-label pos-last">Last place</td>
+          <td class="pos-instr">Give it a line. Never a joke at their expense.</td>
+        </tr>
+      </table>
+
+      <div class="section-heading">Post-Race Celebration</div>
+
+      <table class="placeholder-table">
+        <tr>
+          <td class="ph-label">After standings</td>
+          <td class="ph-fill">Fill in before event day &mdash; prize ceremony format, recognition</td>
+        </tr>
+        <tr>
+          <td class="ph-label">GM / player thanks</td>
+          <td class="ph-fill">Fill in before event day</td>
+        </tr>
+        <tr>
+          <td class="ph-label">Closing line</td>
+          <td class="ph-fill">Fill in before event day &mdash; send the room off in the world of Answick</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GM Advisor Brief · Golden Goots Grand Prix</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  background: #e8e5df;
+  margin: 0;
+  padding: 20px 0;
+  transform: none;
+}
+@page { size: 11in 8.5in landscape; margin: 0; }
+@media print {
+  body { background: #fff; padding: 0; margin: 0; }
+  .page { margin: 0; border-radius: 0; box-shadow: none; page-break-after: always; }
+}
+.page {
+  width: 279.4mm;
+  height: 215.9mm;
+  margin: 10mm auto 8mm;
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+  flex-shrink: 0;
+  background: #1a1a2e;
+  color: #fff;
+  padding: 8px 16px 7px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.page-header .title    { font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
+.page-header .subtitle { font-size: 10px; color: #b0b8d0; letter-spacing: 0.06em; text-transform: uppercase; }
+.page-header .gear     { color: #B87333; font-size: 13px; }
+
+.body-grid {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  padding: 10px 12px 24px;
+  overflow: hidden;
+}
+.two-col { grid-template-columns: 1fr 1fr; }
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 10px;
+}
+.col:first-child { padding-left: 0; }
+.col:last-child  { padding-right: 0; }
+.col + .col { border-left: 1px solid #e4e0d8; }
+
+.section-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #1a1a2e;
+  border-bottom: 2px solid #1a1a2e;
+  padding-bottom: 3px;
+  margin-bottom: 1px;
+  flex-shrink: 0;
+}
+.phase-label {
+  font-size: 8.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #B87333;
+  margin-bottom: -3px;
+  flex-shrink: 0;
+}
+
+.body-text {
+  font-size: 9px;
+  color: #333;
+  line-height: 1.45;
+  flex-shrink: 0;
+}
+
+.quote-box {
+  background: #f0f0f8;
+  border-left: 3px solid #1a1a2e;
+  padding: 5px 8px;
+  font-size: 8.5px;
+  font-style: italic;
+  color: #333;
+  line-height: 1.45;
+  border-radius: 0 3px 3px 0;
+  flex-shrink: 0;
+}
+
+.sub-title {
+  font-size: 9px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: -3px;
+  flex-shrink: 0;
+}
+
+.body-list {
+  margin: 0;
+  padding-left: 14px;
+  font-size: 9px;
+  color: #333;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+.body-list li { margin-bottom: 1px; }
+
+table { width: 100%; border-collapse: collapse; flex-shrink: 0; }
+th {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 3px 5px;
+  text-align: left;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+td {
+  padding: 3px 5px;
+  border-bottom: 1px solid #e8e5df;
+  vertical-align: top;
+  font-size: 9px;
+  line-height: 1.35;
+  color: #222;
+}
+tr:nth-child(even) td { background: #f5f4f1; }
+td strong { font-weight: 700; color: #1a1a2e; }
+
+/* Sponsor tier rows */
+.tier-elite-plus td { background: #fff9e0 !important; }
+.tier-elite td      { background: #fff4d0 !important; }
+.tier-standard td   { background: #f5f4f1 !important; }
+.tier-gm td         { background: #eef3ee !important; }
+
+/* Build advice pills */
+.build-list { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+.build-item {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  font-size: 9px;
+  line-height: 1.4;
+}
+.build-badge {
+  flex-shrink: 0;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 7.5px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 1px;
+}
+.badge-v { background: #3a6db5; }
+.badge-h { background: #4a7a4a; }
+.badge-r { background: #a03030; }
+.badge-b { background: #6a4a8a; }
+
+.build-item .build-script { font-style: italic; color: #444; font-size: 8.5px; }
+
+/* Sponsor timing condensed */
+.sponsor-timing { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+.sponsor-item {
+  background: #f5f4f1;
+  border: 1px solid #e4e0d8;
+  border-radius: 3px;
+  padding: 4px 7px;
+  font-size: 8.5px;
+  line-height: 1.4;
+}
+.sponsor-item strong { color: #1a1a2e; font-size: 9px; }
+.sponsor-item span   { color: #444; }
+
+/* Closing note */
+.closing-note {
+  background: #1a1a2e;
+  color: #e8e5df;
+  padding: 7px 10px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-style: italic;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+.gm-note {
+  font-size: 8px;
+  color: #555;
+  font-style: italic;
+  border-left: 2px solid #1a1a2e;
+  padding: 3px 0 3px 6px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+.gm-note strong { color: #1a1a2e; font-style: normal; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: Phase 1 Advisory -->
+<div class="page">
+  <div class="page-header">
+    <span class="gear">⚙</span>
+    <span class="title">GM ADVISOR BRIEF</span>
+    <span class="subtitle">Strategic Layer · What to Know &amp; What to Share · Phase 1</span>
+    <span class="gear">⚙</span>
+  </div>
+  <div class="body-grid two-col">
+
+    <!-- LEFT COL -->
+    <div class="col">
+
+      <div class="section-title">Your Role</div>
+      <p class="body-text">You are the closest advisor this crew has. The MC runs the room. The Table DM Brief tells you what to <em>do</em>. This document tells you what to <em>know</em> and what to <em>share</em>. Think of yourself as a pseudo-sponsor — guide them toward informed choices, not optimised builds.</p>
+
+      <div class="phase-label">Phase 1 — Shopping</div>
+      <div class="sub-title">Tell them the course shape early</div>
+      <p class="body-text">Before they commit any gold, make sure they understand the three-segment structure. You don't need to give numbers. Say this:</p>
+      <div class="quote-box">"The race has three segments. The Open City favours Velocity — that's your opening stretch. The Canyon District is almost all Handling tiles. The Industrial Gauntlet is Resilience-heavy, with one brutal tile near the end. Your 100g decides which segments you shine in and which you'll feel."</div>
+      <p class="body-text">Encourage them to sketch a route plan on their card before spending. That's what it's for.</p>
+
+      <div class="sub-title">When a table wants to specialise</div>
+      <p class="body-text">Don't steer them away from it — specialising is valid and creates strong table identity. Just make sure they know the cost. Ask:</p>
+      <div class="quote-box">"You'll be strong through your home segment. What's your plan for the other two?"</div>
+      <p class="body-text">That's enough. If they've thought about it, they'll have an answer. If not, they will now.</p>
+
+      <div class="sub-title">Hard off-attribute tiles are the real pinch point</div>
+      <p class="body-text">A Hard tile with −2 attribute is roughly 30% chance of advancing. Players should know this — especially these clusters:</p>
+      <ul class="body-list">
+        <li>Segment 1 has three consecutive Hard tiles at 1-3, 1-4, and 1-5 — two are off-type for Velocity specialists.</li>
+        <li>Segment 2 has four Hard tiles, mostly Handling. A −2 Handling crew will grind through most of Segment 2.</li>
+      </ul>
+
+    </div>
+
+    <!-- RIGHT COL -->
+    <div class="col">
+
+      <div class="sub-title">The Aether Bridge — surface if Resilience is being skipped</div>
+      <p class="body-text">Tile 3-3 is the only Brutal tile on the course. It's a Resilience tile. Fully invested Resilience crew: ~40% chance of advancing. A −2 Resilience crew: ~20%. Surface this late in Phase 1 if they're considering skipping Resilience entirely — not as a warning, just information:</p>
+      <div class="quote-box">"One tile near the end of the race is significantly harder than anything else on the course. It's a Resilience tile. Worth knowing before you finalise."</div>
+
+      <div class="sub-title">Maestro Anyx — flag early, don't over-explain</div>
+      <p class="body-text">Anyx is Vendor 12 in Tinkerers' Lane. Deep integration, 40g, +1 to all three attributes plus Natural 1 breakdown immunity. Qualification: all three attributes must be at −1 or better — no exceptions, no gold upfront. The MC will call this out at Phase 1 opening. Your job: make sure your table understands that Anyx only works for crews that have spread their investment. A pure specialist won't qualify. Don't explain unprompted — let them discover it. If they ask, answer fully.</p>
+
+      <div class="sub-title">Professor Zelle — deploy once, choose your moment</div>
+      <p class="body-text">Zelle is your one roving encounter. 20g, DC 12 group roll, +1 to any attribute of their choice on a win. Deploy once, mid-Phase 1, when a crew is mid-route and has 20g+ left. Don't drop her on a table that's budget-strapped in the final minutes. Let them feel like they found her.</p>
+
+      <div class="gm-note" style="margin-top:4px;"><strong>Timing guidance:</strong> Both Anyx and Zelle are most impactful when the crew has room to respond — not in the last five minutes when they've already committed. Work backwards from the Phase 1 cutoff and identify your window early.</div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- PAGE 2: Phase 2 + Phase 3 Advisory -->
+<div class="page">
+  <div class="page-header">
+    <span class="gear">⚙</span>
+    <span class="title">GM ADVISOR BRIEF</span>
+    <span class="subtitle">Strategic Layer · Sponsor Guidance · Course Read · Phase 2 &amp; 3</span>
+    <span class="gear">⚙</span>
+  </div>
+  <div class="body-grid two-col">
+
+    <!-- LEFT COL -->
+    <div class="col">
+
+      <div class="phase-label">Phase 2 — Sponsors &amp; Course Reveal</div>
+      <div class="section-title">Every Sponsor Tier Has Genuine Value</div>
+      <table>
+        <thead>
+          <tr><th>Roll</th><th>Tier</th><th>Mod / Uses</th><th>How to frame it</th></tr>
+        </thead>
+        <tbody>
+          <tr class="tier-elite-plus">
+            <td>Nat 20</td>
+            <td><strong>Elite Enhanced</strong></td>
+            <td>±3 / 3 uses</td>
+            <td>Let the room react. Then bring it back: three uses of the highest modifier in the race is a real weapon. When should you use them?</td>
+          </tr>
+          <tr class="tier-elite">
+            <td>15–19</td>
+            <td><strong>Elite</strong></td>
+            <td>±3 / 2 uses</td>
+            <td>Two powerful uses, each a major swing. Start the conversation about saving them for Hard tiles — not burning them on tiles they'd likely clear anyway.</td>
+          </tr>
+          <tr class="tier-standard">
+            <td>8–14</td>
+            <td><strong>Standard</strong></td>
+            <td>±2 / 2 uses</td>
+            <td>Most common result. One positive, one negative — both matter. The negative is often undervalued: a well-timed −2 on the race leader at a Hard tile can change positions.</td>
+          </tr>
+          <tr class="tier-gm">
+            <td>2–7</td>
+            <td><strong>GM Sponsor</strong></td>
+            <td>±1 / 3 uses</td>
+            <td>You are their backer. Play warmly, in character — you chose to advocate for them. Three uses across the race is real value. Frequency is the asset.</td>
+          </tr>
+          <tr class="tier-gm">
+            <td>Nat 1</td>
+            <td><strong>GM Sponsor</strong></td>
+            <td>±1 / 2 uses</td>
+            <td>The pitch stumbled. You showed up anyway. Don't apologise — own it: <em>"I'm still here. Two uses. Let's make them count."</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sub-title" style="margin-top:6px;">Course Reveal — One Observation Per Build</div>
+      <p class="body-text" style="margin-bottom:4px;">When the map goes up, give your table thirty seconds to absorb it. Then offer one targeted observation:</p>
+      <div class="build-list">
+        <div class="build-item">
+          <span class="build-badge badge-v">V</span>
+          <span class="build-script">"Your first two tiles are home ground. The canyon is your test — five tiles, mostly Handling. Think about when you want sponsor support in there."</span>
+        </div>
+        <div class="build-item">
+          <span class="build-badge badge-h">H</span>
+          <span class="build-script">"Segment 2 is yours. Watch the Guild Quarter Sprint in the middle — Velocity tile, Hard DC. Plan around it."</span>
+        </div>
+        <div class="build-item">
+          <span class="build-badge badge-r">R</span>
+          <span class="build-script">"The back half of the race favours you. The Aether Bridge near the end is the hardest tile on the course — that's your tile. Save something for it."</span>
+        </div>
+        <div class="build-item">
+          <span class="build-badge badge-b">BAL</span>
+          <span class="build-script">"No segment carries you, but none punishes you badly either. Your sponsor timing matters more than anyone else's — you don't have a safety net, but you don't have a weak spot either."</span>
+        </div>
+      </div>
+      <p class="body-text" style="margin-top:2px;">One observation. Then let them think. Not a Phase 3 strategy lecture.</p>
+
+    </div>
+
+    <!-- RIGHT COL -->
+    <div class="col">
+
+      <div class="phase-label">Phase 3 — Race Runtime</div>
+      <div class="section-title">Sponsor Timing — Core Principle</div>
+      <p class="body-text" style="margin-bottom:4px;">Sponsor uses are most valuable on your table's <em>hardest tiles</em>, not their easiest. The instinct is to save them for "something important" — which means they often don't fire at maximum value.</p>
+      <div class="sponsor-timing">
+        <div class="sponsor-item">
+          <strong>Elite ±3:</strong> <span>On a Hard off-attribute tile, +3 turns ~30% into ~45–50%. Best saved for the tile type they invested least in, at the hardest difficulty on that type.</span>
+        </div>
+        <div class="sponsor-item">
+          <strong>Standard ±2:</strong> <span>The negative use is often forgotten. A −2 on the race leader at a Hard tile is frequently a better play than +2 on your own tile you'd probably clear. Fire the negative in Segment 2 when the field is bunched.</span>
+        </div>
+        <div class="sponsor-item">
+          <strong>GM Sponsor ±1:</strong> <span>Three modest uses across genuinely difficult moments. One per segment is a reasonable rhythm — three small boosts across three hard tiles beats one big moment that never comes.</span>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:6px;">Boost Decision Guide — Help Your Table Choose Fast</div>
+      <p class="body-text" style="margin-bottom:3px;">The race has a rhythm. Know the options so your table doesn't agonise.</p>
+      <table>
+        <thead>
+          <tr><th>Situation</th><th>Best Option</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Stuck on Hard off-attribute tile</td>
+            <td><strong>Wild Fuel Cell</strong> <em>(d6: 4)</em></td>
+            <td>Move 2 tiles, no roll. Skip the tile entirely.</td>
+          </tr>
+          <tr>
+            <td>On home tile, want to surge</td>
+            <td><strong>Slipstream</strong> <em>(d6: 1)</em></td>
+            <td>Double your best modifier. Best when you'd advance anyway and want 2 tiles.</td>
+          </tr>
+          <tr>
+            <td>Need to pass tile, modifier is decent</td>
+            <td><strong>Crowd Surge</strong> <em>(d6: 2)</em></td>
+            <td>+3 to result after rolling.</td>
+          </tr>
+          <tr>
+            <td>Punishing off-type tile, neutral odds better</td>
+            <td><strong>Arcane Repair</strong> <em>(d6: 3)</em></td>
+            <td>Treat tile as neutral — raw d20 only, no modifier.</td>
+          </tr>
+          <tr>
+            <td>Someone just rolled 17+ this round</td>
+            <td><strong>Ghost Draft</strong> <em>(d6: 5)</em></td>
+            <td>Use highest result already rolled this round + your modifier.</td>
+          </tr>
+          <tr>
+            <td>Roll a 6</td>
+            <td><strong>Table chooses</strong></td>
+            <td>Give them a huddle moment. MC will hold the room for it.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="closing-note" style="margin-top:6px;">Your job is to make sure their choices meant something to them — and that they feel it by the time the race ends.</div>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

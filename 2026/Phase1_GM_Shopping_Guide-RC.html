@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 1 GM Shopping Guide · Golden Goots Grand Prix</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  background: #e8e5df;
+  margin: 0;
+  padding: 20px 0;
+  transform: none;
+}
+@page { size: 11in 8.5in landscape; margin: 0; }
+@media print {
+  body { background: #fff; padding: 0; margin: 0; }
+  .page { margin: 0; border-radius: 0; box-shadow: none; page-break-after: always; }
+}
+.page {
+  width: 279.4mm;
+  height: 215.9mm;
+  margin: 10mm auto 8mm;
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+  flex-shrink: 0;
+  background: #1a1a2e;
+  color: #fff;
+  padding: 8px 16px 7px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.page-header .title    { font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
+.page-header .subtitle { font-size: 10px; color: #b0b8d0; letter-spacing: 0.06em; text-transform: uppercase; }
+.page-header .gear     { color: #B87333; font-size: 13px; }
+
+.body-grid {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  padding: 10px 12px 24px;
+  overflow: hidden;
+}
+.two-col   { grid-template-columns: 1fr 1fr; }
+.three-col { grid-template-columns: 1fr 1fr 1fr; }
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 9px;
+}
+.col:first-child { padding-left: 0; }
+.col:last-child  { padding-right: 0; }
+.col + .col { border-left: 1px solid #e4e0d8; }
+
+/* Rules page */
+.section-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #1a1a2e;
+  border-bottom: 2px solid #1a1a2e;
+  padding-bottom: 3px;
+  flex-shrink: 0;
+}
+
+.body-text { font-size: 9px; color: #333; line-height: 1.45; flex-shrink: 0; }
+
+table { width: 100%; border-collapse: collapse; flex-shrink: 0; }
+th {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 3px 5px;
+  text-align: left;
+  font-size: 7.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+td {
+  padding: 3px 5px;
+  border-bottom: 1px solid #e8e5df;
+  vertical-align: top;
+  font-size: 8.5px;
+  line-height: 1.3;
+  color: #222;
+}
+tr:nth-child(even) td { background: #f5f4f1; }
+td strong { font-weight: 700; color: #1a1a2e; }
+td em { font-style: italic; color: #555; }
+
+.rule-box {
+  background: #f5f4f1;
+  border: 1px solid #e4e0d8;
+  border-radius: 3px;
+  padding: 5px 8px;
+  font-size: 9px;
+  line-height: 1.45;
+  color: #333;
+  flex-shrink: 0;
+}
+.rule-box strong { color: #1a1a2e; }
+
+.gm-note {
+  font-size: 8px;
+  color: #555;
+  font-style: italic;
+  border-left: 2px solid #1a1a2e;
+  padding: 3px 0 3px 6px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+.gm-note strong { color: #1a1a2e; font-style: normal; }
+
+/* Attribute badge */
+.badge {
+  display: inline-block;
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 7.5px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+}
+.badge-v   { background: #3a6db5; }
+.badge-h   { background: #4a7a4a; }
+.badge-r   { background: #a03030; }
+.badge-all { background: #6a4a8a; }
+
+/* Modifier scale rows */
+.mod-start { background: #ffe8e8 !important; }
+.mod-peak  { background: #e8ffe8 !important; }
+
+/* Sponsor tier rows */
+.tier-elite-plus td { background: #fff9e0 !important; }
+.tier-elite td      { background: #fff4d0 !important; }
+.tier-gm td         { background: #eef3ee !important; }
+
+/* Three attribute summary */
+.attr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.attr-box {
+  border: 1.5px solid #1a1a2e;
+  border-radius: 3px;
+  padding: 4px 6px;
+  text-align: center;
+}
+.attr-box .attr-label { font-size: 9px; font-weight: 700; color: #1a1a2e; display: block; }
+.attr-box .attr-desc  { font-size: 7.5px; color: #555; display: block; line-height: 1.3; }
+
+/* ===== VENDOR PAGE STYLES ===== */
+
+/* District banner */
+.district-banner {
+  flex-shrink: 0;
+  border-radius: 3px;
+  padding: 4px 7px;
+  color: #fff;
+}
+.district-banner.velocity   { background: #2a4f8a; }
+.district-banner.mixed      { background: #5a4a2a; }
+.district-banner.handling   { background: #2a5a2a; }
+.district-banner.resilience { background: #7a2a2a; }
+.district-banner .dist-name { font-size: 9.5px; font-weight: 700; }
+.district-banner .dist-sub  { font-size: 8px; color: rgba(255,255,255,0.75); }
+
+/* Vendor card */
+.vendor-card {
+  border: 1px solid #d8d4cc;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.vendor-header {
+  background: #2a2a40;
+  color: #fff;
+  padding: 3px 6px;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+.vendor-num  { font-size: 9px; font-weight: 700; color: #B87333; }
+.vendor-name { font-size: 9px; font-weight: 700; color: #fff; }
+.vendor-loc  { font-size: 7.5px; color: #9090b0; margin-left: auto; }
+.vendor-star { font-size: 9px; color: #ffd700; margin-left: 2px; }
+
+.vendor-flavor {
+  font-size: 7.5px;
+  font-style: italic;
+  color: #555;
+  padding: 2px 6px 3px;
+  background: #f8f7f5;
+  border-bottom: 1px solid #e8e5df;
+}
+
+/* Parts table inside vendor card */
+.vendor-parts table { margin: 0; }
+.vendor-parts th    { font-size: 7px; padding: 2px 4px; }
+.vendor-parts td    { font-size: 8px; padding: 2px 4px; }
+.vendor-parts .part-name  { font-weight: 600; }
+.vendor-parts .part-price { font-weight: 700; color: #1a1a2e; text-align: right; white-space: nowrap; }
+.vendor-parts .part-note  { font-size: 7px; color: #666; font-style: italic; }
+
+/* Challenge box */
+.challenge-box {
+  background: #f0f0f8;
+  border-left: 3px solid #1a1a2e;
+  padding: 3px 6px;
+  font-size: 7.5px;
+  line-height: 1.45;
+  color: #333;
+}
+.challenge-box .ch-header { font-weight: 700; color: #1a1a2e; font-size: 8px; font-style: normal; }
+.challenge-box .ch-desc   { color: #444; font-style: italic; }
+.challenge-box .ch-result { color: #333; }
+.ch-win  { color: #1a5e2a; font-weight: 700; }
+.ch-fail { color: #7a3030; font-weight: 700; }
+
+/* Vendor GM note (smaller) */
+.vendor-gm-note {
+  font-size: 7px;
+  color: #666;
+  font-style: italic;
+  padding: 2px 6px 3px;
+  border-top: 1px solid #eee;
+  background: #fafaf8;
+}
+.vendor-gm-note strong { color: #1a1a2e; font-style: normal; }
+
+/* Zelle special card */
+.zelle-card {
+  border: 1.5px solid #1a1a2e;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.zelle-header {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 3px 7px;
+  font-size: 8.5px;
+  font-weight: 700;
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+}
+.zelle-header span { color: #B87333; font-size: 8px; font-weight: 400; }
+
+/* Build tracker */
+.build-tracker {
+  border: 1.5px solid #1a1a2e;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.build-tracker-header {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 9px;
+  font-weight: 700;
+}
+.build-tracker-body {
+  padding: 5px 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: #fafaf8;
+}
+.build-row { display: flex; gap: 8px; font-size: 8.5px; }
+.build-label { color: #666; width: 60px; flex-shrink: 0; font-size: 8px; }
+.build-field {
+  flex: 1;
+  border-bottom: 1px solid #888;
+  min-height: 12px;
+}
+.attr-track-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+}
+.attr-track {
+  background: #fff;
+  border: 1px solid #d8d4cc;
+  border-radius: 3px;
+  padding: 3px 5px;
+  text-align: center;
+  font-size: 8px;
+}
+.attr-track .at-label { font-weight: 700; display: block; font-size: 8.5px; }
+.attr-track .at-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3px;
+  font-size: 7px;
+  color: #888;
+}
+.route-table td { font-size: 8px; padding: 3px 5px; }
+.route-table td.rt-stop { font-weight: 700; color: #1a1a2e; text-align: center; }
+.checkbox { display: inline-block; width: 9px; height: 9px; border: 1px solid #888; border-radius: 1px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: Rules Reference -->
+<div class="page">
+  <div class="page-header">
+    <span class="gear">⚙</span>
+    <span class="title">PHASE 1 — GM SHOPPING GUIDE</span>
+    <span class="subtitle">Rules · Attributes · Group Roll · Sponsors · Cogsworth Parts District</span>
+    <span class="gear">⚙</span>
+  </div>
+  <div class="body-grid two-col">
+
+    <!-- LEFT COL -->
+    <div class="col">
+
+      <div class="section-title">The Three Attributes</div>
+      <div class="attr-grid">
+        <div class="attr-box"><span class="attr-label" style="color:#3a6db5;">VELOCITY</span><span class="attr-desc">Raw top-end pace. Affects Velocity tile rolls.</span></div>
+        <div class="attr-box"><span class="attr-label" style="color:#4a7a4a;">HANDLING</span><span class="attr-desc">Cornering &amp; precision. Affects Handling tile rolls.</span></div>
+        <div class="attr-box"><span class="attr-label" style="color:#a03030;">RESILIENCE</span><span class="attr-desc">Structural durability. Affects Resilience tile rolls.</span></div>
+      </div>
+      <p class="body-text">All three attributes <strong>start at −2</strong>. Investment during Phase 1 is the only way to climb. It is <strong>mathematically impossible to max all three</strong> within 100g.</p>
+
+      <div class="section-title">Attribute Bonus Scale</div>
+      <table>
+        <thead>
+          <tr><th>Modifier</th><th>Label</th><th>How to Get There</th><th>Challenge?</th></tr>
+        </thead>
+        <tbody>
+          <tr class="mod-start"><td><strong>−2</strong></td><td>Uninvested ← START</td><td>Default — no parts purchased</td><td>—</td></tr>
+          <tr><td><strong>−1</strong></td><td>Minor Investment</td><td>9–14g in parts</td><td>No — gold only</td></tr>
+          <tr><td><strong>0</strong></td><td>Neutral</td><td>18–26g in parts</td><td>No — gold only</td></tr>
+          <tr><td><strong>+1</strong></td><td>Strong Investment</td><td>20–28g — unlocked by Upgrade challenge win</td><td>Upgrade DC 12 — win to unlock. Fail = standard tier.</td></tr>
+          <tr class="mod-peak"><td><strong>+2</strong></td><td>Peak — Champ Spec</td><td>35–38g — unlocked by Champ Spec challenge win</td><td>Champ Spec DC 14 — win to unlock. Fail = lower tiers still available.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title">The Group Roll</div>
+      <div class="rule-box">
+        <strong>All Phase 1 challenges use the same mechanic.</strong> Every player rolls a d20 simultaneously. GM sums all results and divides by player count (round down). If the average beats the DC, the challenge succeeds.<br>
+        <em>Example: 6 players roll 14, 8, 19, 11, 6, 16. Sum = 74 ÷ 6 = 12.3 → round down = 12. Beats DC 12. Fails DC 13.</em>
+      </div>
+      <div class="gm-note"><strong>DC 12 (Upgrade):</strong> ~60–65% success. Groups usually make this. <strong>DC 14 (Champ Spec):</strong> ~35–40% success. Should feel genuinely risky. Natural 20s from any player: announce them individually before calculating the average.</div>
+
+      <div class="section-title">Gold Budget</div>
+      <div class="rule-box">
+        <strong>100g per crew. Unspent gold is lost when Phase 1 ends — no bank.</strong><br>
+        Focused build (two strong attributes): ~55–65g. Balanced build (three at 0 or better): ~60–70g.<br>
+        Encourage crews to complete the Vendor Route Planner before spending their first gold.
+      </div>
+
+    </div>
+
+    <!-- RIGHT COL -->
+    <div class="col">
+
+      <div class="section-title">Phase 2 — Sponsor Roll Results</div>
+      <p class="body-text" style="margin-bottom:3px;">Sponsors are earned during Phase 2 at the Sponsor Pavilion — a solo persuasion roll by one crew rep in front of the full room. Gold is never a factor.</p>
+      <table>
+        <thead>
+          <tr><th>Roll</th><th>Tier</th><th>Uses</th><th>Mod</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr class="tier-elite-plus"><td>Nat 20</td><td><strong>Elite Enhanced</strong></td><td>3</td><td>±3</td><td>Room eruption. Announce before anything else.</td></tr>
+          <tr class="tier-elite"><td>15–19</td><td><strong>Elite</strong></td><td>2</td><td>±3</td><td>Strong showing. Sponsor commits fully.</td></tr>
+          <tr><td>8–14</td><td><strong>Standard</strong></td><td>2</td><td>±2</td><td>Solid backing. Most common result.</td></tr>
+          <tr class="tier-gm"><td>2–7</td><td><strong>GM Sponsor</strong></td><td>3</td><td>±1</td><td>GM advocates. 3 uses compensates. Play warmly.</td></tr>
+          <tr class="tier-gm"><td>Nat 1</td><td><strong>GM Sponsor</strong></td><td>2</td><td>±1</td><td>Pitch stumbled. GM shows up anyway — loyalty.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title" style="margin-top:4px;">Sponsor Tier Reference</div>
+      <table>
+        <thead>
+          <tr><th>Tier</th><th>Uses</th><th>Modifier</th><th>Rules</th></tr>
+        </thead>
+        <tbody>
+          <tr class="tier-gm"><td>GM Sponsor</td><td>3</td><td>+1 / −1</td><td>Unrestricted — any roll, any time.</td></tr>
+          <tr><td>Standard</td><td>2</td><td>+2 / −2</td><td>1 positive (own table) + 1 negative (any team).</td></tr>
+          <tr class="tier-elite"><td>Elite</td><td>2</td><td>+3 / −3</td><td>Declared publicly. Negative targets any team.</td></tr>
+          <tr class="tier-elite-plus"><td>Elite Enhanced</td><td>3</td><td>+3 / −3</td><td>As Elite, 3 uses. Nat 20 only. Announce to room.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title" style="margin-top:4px;">Universal Sponsor Rules</div>
+      <table>
+        <tbody>
+          <tr><td><strong>Positive uses</strong></td><td>Applied to your own team's roll. Declare before dice are thrown.</td></tr>
+          <tr><td><strong>Negative uses</strong></td><td>Applied to any rival team's roll — no adjacency needed.</td></tr>
+          <tr><td><strong>All uses</strong></td><td>Declared out loud to the room. MC acknowledges publicly.</td></tr>
+          <tr><td><strong>Expended on declaration</strong></td><td>Use is spent whether or not it changes the outcome.</td></tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- PAGE 2: Forge Quarter + Brass Bazaar + Zelle -->
+<div class="page">
+  <div class="page-header">
+    <span class="gear">⚙</span>
+    <span class="title">PHASE 1 — VENDORS</span>
+    <span class="subtitle">Forge Quarter (V) · Brass Bazaar (Mixed) · Roving: Professor Zelle</span>
+    <span class="gear">⚙</span>
+  </div>
+  <div class="body-grid three-col">
+
+    <!-- COL 1: Forge Quarter 01-02 -->
+    <div class="col">
+      <div class="district-banner velocity">
+        <div class="dist-name">THE FORGE QUARTER</div>
+        <div class="dist-sub">Northwest · Velocity Specialists · Vendors 01–04</div>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">01</span>
+          <span class="vendor-name">GRIMSHAW'S COMBUSTION WORKS</span>
+        </div>
+        <div class="vendor-flavor">Large, deliberate man. Champ Spec is an explanation test — he wants to know you understand what you're buying.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td class="part-name">Rotor coil</td><td><span class="badge badge-v">+1V</span></td><td class="part-price">12g</td></tr>
+              <tr><td class="part-name">Combustion core</td><td><span class="badge badge-v">+2V</span></td><td class="part-price">22g</td></tr>
+              <tr><td class="part-name">⚡ Grimshaw Signature Core</td><td><span class="badge badge-v">+2V</span></td><td class="part-price">38g</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="challenge-box">
+          <span class="ch-header">⚡ CHAMP SPEC DC 14</span><br>
+          <span class="ch-desc">Crew explains what makes a combustion core different from a standard fuel cell. One member speaks.</span><br>
+          <span class="ch-result"><span class="ch-win">WIN:</span> Signature Core unlocked at 38g. <span class="ch-fail">FAIL:</span> Standard tiers remain.</span>
+        </div>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">02</span>
+          <span class="vendor-name">THE PRESSURE SISTERS</span>
+        </div>
+        <div class="vendor-flavor">Vael and Corra disagree constantly. Two cells, two opinions, one ongoing argument.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th><th></th></tr></thead>
+            <tbody>
+              <tr><td class="part-name">Fuel cell pack</td><td><span class="badge badge-v">−1V</span></td><td class="part-price">10g</td><td></td></tr>
+              <tr><td class="part-name">Hot-mix cells (Vael)</td><td><span class="badge badge-v">0V</span></td><td class="part-price">20g</td><td></td></tr>
+              <tr><td class="part-name">Overclock cells (Corra)</td><td><span class="badge badge-v">0V</span></td><td class="part-price">18g</td><td class="part-note">Volatile: Nat 1 on V tile = breakdown risk</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="vendor-gm-note">Corra's cells are cheaper but volatile — crews gambling on never rolling a 1 on a V tile. Vael will point this out. Corra will not.</div>
+      </div>
+
+    </div>
+
+    <!-- COL 2: Forge Quarter 03-04 -->
+    <div class="col">
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">03</span>
+          <span class="vendor-name">THE OVERCLOCK PIT</span>
+        </div>
+        <div class="vendor-flavor">Three engineers in matching coats. They reward commitment — hesitation costs atmospherically.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td class="part-name">Turbo injector (standard)</td><td><span class="badge badge-v">−1V</span></td><td class="part-price">14g</td></tr>
+              <tr><td class="part-name">⚡ Turbo injector (enhanced)</td><td><span class="badge badge-v">+1V</span></td><td class="part-price">25g</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="challenge-box">
+          <span class="ch-header">⚡ UPGRADE DC 12</span><br>
+          <span class="ch-desc">Count visible components on the injector in 10 real seconds — all players call simultaneously, then roll.</span><br>
+          <span class="ch-result"><span class="ch-win">WIN:</span> Enhanced injector at 25g. <span class="ch-fail">FAIL:</span> Standard at 14g.</span>
+        </div>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">04</span>
+          <span class="vendor-name">HENDRICKS &amp; SONS DRIVETRAIN</span>
+        </div>
+        <div class="vendor-flavor">Three generations. The elder Hendricks waits for the crew to state what they need first.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th><th></th></tr></thead>
+            <tbody>
+              <tr><td class="part-name">Drive-shaft bearings</td><td><span class="badge badge-v">−1V</span></td><td class="part-price">11g</td><td></td></tr>
+              <tr><td class="part-name">Race-spec drive shaft</td><td><span class="badge badge-v">0V</span></td><td class="part-price">21g</td><td></td></tr>
+              <tr><td class="part-name">★ Drivetrain overhaul kit</td><td><span class="badge badge-v">0V</span> <span class="badge badge-r">−1R</span></td><td class="part-price">30g</td><td class="part-note">Dual attr</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="vendor-gm-note"><strong>Overhaul kit</strong> is the only dual-attr V item in the district — good for crews shoring up Resilience without a dedicated Docks run.</div>
+      </div>
+
+      <!-- Duplicate district banner for Bazaar preview is in col 3 -->
+
+    </div>
+
+    <!-- COL 3: Brass Bazaar + Zelle -->
+    <div class="col">
+      <div class="district-banner mixed">
+        <div class="dist-name">THE BRASS BAZAAR</div>
+        <div class="dist-sub">Central · Mixed Market · Vendors 05–07 + Zelle</div>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">05</span>
+          <span class="vendor-name">MIRA'S ODDS &amp; ENDS</span>
+        </div>
+        <div class="vendor-flavor">She has everything and knows where everything else is. Her intel is underrated.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td>Handling plate (used)</td><td><span class="badge badge-h">−1H</span></td><td class="part-price">9g</td></tr>
+              <tr><td>Velocity coil (used)</td><td><span class="badge badge-v">−1V</span></td><td class="part-price">9g</td></tr>
+              <tr><td>Structural patch (used)</td><td><span class="badge badge-r">−1R</span></td><td class="part-price">9g</td></tr>
+              <tr><td>Matched pair (any two −1s)</td><td>Two attrs</td><td class="part-price">16g</td></tr>
+              <tr><td><em>Intel: spy on any vendor's stock</em></td><td>—</td><td class="part-price">5g</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">06</span>
+          <span class="vendor-name">GEARWRIGHT'S GUILD ★</span>
+        </div>
+        <div class="vendor-flavor">Precise, impersonal, does not haggle. The Premium Package is a trap for indecisive crews.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td>Guild handling module</td><td><span class="badge badge-h">0H</span></td><td class="part-price">26g</td></tr>
+              <tr><td>Guild velocity module</td><td><span class="badge badge-v">0V</span></td><td class="part-price">26g</td></tr>
+              <tr><td>Guild resilience module</td><td><span class="badge badge-r">0R</span></td><td class="part-price">26g</td></tr>
+              <tr><td>★ Premium Package (all −1)</td><td><span class="badge badge-all">all</span></td><td class="part-price">55g</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="vendor-gm-note"><strong>Premium Package:</strong> lifts all three from −2 to −1 fast but burns >half budget. Best for balanced builds that don't want to route-plan.</div>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">07</span>
+          <span class="vendor-name">FEN THE FENCE</span>
+        </div>
+        <div class="vendor-flavor">At the back of the Bazaar for reasons he does not volunteer. Has intel on rivals — will share, for the right conversation.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td>★ Prototype arcane stabiliser</td><td><span class="badge badge-h">+1H</span></td><td class="part-price">28g</td></tr>
+              <tr><td>'Liberated' velocity injector</td><td><span class="badge badge-v">0V</span></td><td class="part-price">15g</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="vendor-gm-note"><strong>+1H for 28g, no challenge</strong> — best straight-gold Handling deal in the Bazaar.</div>
+      </div>
+
+      <div class="zelle-card">
+        <div class="zelle-header">⚗ PROFESSOR ZELLE <span>Roving · No fixed stall · Deploy once per table</span></div>
+        <div style="padding:4px 6px; font-size:8px; line-height:1.45; color:#333;">
+          <strong>20g · DC 12 group roll · +1 any attribute (crew's choice)</strong><br>
+          Deploy mid-Phase 1 when crew has 20g+ and is mid-route. The only all-attribute upgrade challenge. Not on player menu — she appears when you introduce her.<br>
+          <em>Challenge: logic or pattern puzzle. All work together, call answer, then roll. Win = unlock 20g purchase. Fail = no purchase, no penalty. She is not a fallback vendor.</em>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- PAGE 3: Tinkerers' Lane + Ironworks Docks + Build Tracker -->
+<div class="page">
+  <div class="page-header">
+    <span class="gear">⚙</span>
+    <span class="title">PHASE 1 — VENDORS</span>
+    <span class="subtitle">Tinkerers' Lane (H) · Ironworks Docks (R) · Build Tracker</span>
+    <span class="gear">⚙</span>
+  </div>
+  <div class="body-grid three-col">
+
+    <!-- COL 1: Tinkerers' Lane 09-10 -->
+    <div class="col">
+      <div class="district-banner handling">
+        <div class="dist-name">TINKERERS' LANE</div>
+        <div class="dist-sub">Southeast · Handling Specialists · Vendors 09–12</div>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">09</span>
+          <span class="vendor-name">CALLOWAY FINE MECHANISMS</span>
+        </div>
+        <div class="vendor-flavor">Calloway explains things — he cannot help it. Knowing what you want earns a different conversation.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td>Steering articulation (minor)</td><td><span class="badge badge-h">−1H</span></td><td class="part-price">12g</td></tr>
+              <tr><td>Precision guidance set</td><td><span class="badge badge-h">0H</span></td><td class="part-price">24g</td></tr>
+              <tr><td>⚡ Calloway Master Articulation</td><td><span class="badge badge-h">+2H</span></td><td class="part-price">36g</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="challenge-box">
+          <span class="ch-header">⚡ CHAMP SPEC DC 14</span><br>
+          <span class="ch-desc">"Tell me what a precision articulation does. In your own words." One member speaks — the rest may prompt quietly.</span><br>
+          <span class="ch-result"><span class="ch-win">WIN:</span> Master Articulation at 36g. <span class="ch-fail">FAIL:</span> Standard tiers remain. (He will explain what they got wrong, at length.)</span>
+        </div>
+        <div class="vendor-gm-note">Rewards genuine engagement, not technical perfection. If players ask him to explain it first — he will, then asks them to repeat it back. That IS the challenge.</div>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">10</span>
+          <span class="vendor-name">THE GYROSCOPE SISTERS ★</span>
+        </div>
+        <div class="vendor-flavor">One serious, one finds everything faintly amusing. The Tri-axis tradeoff is not hidden — they explain if asked.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td>Standard gyro mount</td><td><span class="badge badge-h">−1H</span></td><td class="part-price">10g</td></tr>
+              <tr><td>Dual-axis gyro stabiliser</td><td><span class="badge badge-h">0H</span></td><td class="part-price">22g</td></tr>
+              <tr><td>★ Tri-axis competition gyro</td><td><span class="badge badge-h">+1H</span> <span class="badge badge-r">−1R</span></td><td class="part-price">40g</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="vendor-gm-note"><strong>Tri-axis (40g):</strong> only dual-attr item in district with positive modifier. No challenge, straight gold. A crew that buys only this finishes at −1R — Segment 3 will punish that.</div>
+      </div>
+
+    </div>
+
+    <!-- COL 2: Tinkerers' Lane 11-12 + Docks 13 start -->
+    <div class="col">
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">11</span>
+          <span class="vendor-name">THE GAUNTLET POST ★</span>
+        </div>
+        <div class="vendor-flavor">The upgrade challenge is a racing scenario. Best-value challenge in Phase 1 — upgraded part costs same as standard.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td>Precision torsion bar</td><td><span class="badge badge-h">−1H</span></td><td class="part-price">11g</td></tr>
+              <tr><td>Competition torsion set</td><td><span class="badge badge-h">0H</span></td><td class="part-price">22g</td></tr>
+              <tr><td>⚡ Competition torsion set (upgraded)</td><td><span class="badge badge-h">+1H</span></td><td class="part-price">22g</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="challenge-box">
+          <span class="ch-header">⚡ UPGRADE DC 12 — same price win or fail</span><br>
+          <span class="ch-desc">GM describes a racing scenario. All players call their correction simultaneously. Then roll.</span><br>
+          <span class="ch-result"><span class="ch-win">WIN:</span> Upgraded torsion at 22g. <span class="ch-fail">FAIL:</span> Standard at 22g. <strong>No gold risk at all.</strong></span>
+        </div>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">12</span>
+          <span class="vendor-name">MAESTRO ANYX ★</span>
+          <span class="vendor-loc">Upper Workshop</span>
+        </div>
+        <div class="vendor-flavor">Last stop, by design. Does not negotiate. Does not explain the qualification rule unprompted.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th><th>Requirement</th></tr></thead>
+            <tbody>
+              <tr><td>★ Deep integration</td><td><span class="badge badge-all">+1 ALL</span></td><td class="part-price">40g</td><td class="part-note">All attrs must be ≥−1 to qualify. Gold only, no challenge.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="vendor-gm-note"><strong>+1 all attributes + Nat 1 breakdown immunity.</strong> Crew shows build sheet; GM confirms qualification. MC makes room callout at Phase 1 start: "Somewhere in Tinkerers' Lane there's a craftsman who only works on complete machines." Do not explain the mechanic — let tables discover it.</div>
+      </div>
+
+      <div class="district-banner resilience" style="margin-top:3px;">
+        <div class="dist-name">IRONWORKS DOCKS</div>
+        <div class="dist-sub">Southwest · Resilience Specialists · Vendors 13–15</div>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">13</span>
+          <span class="vendor-name">BULWARK BROTHERS STRUCTURAL</span>
+        </div>
+        <div class="vendor-flavor">The brothers do not perform warmth. The Champ Spec is a commitment test — declare before rolling.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td>Hull plating (light)</td><td><span class="badge badge-r">−1R</span></td><td class="part-price">11g</td></tr>
+              <tr><td>Reinforced hull plate set</td><td><span class="badge badge-r">0R</span></td><td class="part-price">22g</td></tr>
+              <tr><td>⚡ Warship-grade armour plating</td><td><span class="badge badge-r">+2R</span></td><td class="part-price">35g</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="challenge-box">
+          <span class="ch-header">⚡ CHAMP SPEC DC 14</span><br>
+          <span class="ch-desc">Crew declares yes/no whether strongest member can hold heavy iron weight at arm's length for 10 seconds — <em>before rolling</em>. Declaration comes first.</span><br>
+          <span class="ch-result"><span class="ch-win">WIN:</span> Warship-grade at 35g. <span class="ch-fail">FAIL:</span> Standard tiers remain.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COL 3: Docks 14-15 + Build Tracker -->
+    <div class="col">
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">14</span>
+          <span class="vendor-name">THE WRECKERS ★</span>
+        </div>
+        <div class="vendor-flavor">Stacked salvage, a working dog, two people more interested in the pile than the customer.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td>Salvaged armour plate (dinged)</td><td><span class="badge badge-r">−1R</span></td><td class="part-price">6g</td></tr>
+              <tr><td>★ Salvaged structural core</td><td><span class="badge badge-r">+1R</span></td><td class="part-price">22g</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="vendor-gm-note"><strong>+1R for 22g, no challenge</strong> — best gold-per-point Resilience deal in the district. No hoops. Stig will arm-wrestle anyone who asks (no mechanical benefit — pure table entertainment).</div>
+      </div>
+
+      <div class="vendor-card">
+        <div class="vendor-header">
+          <span class="vendor-num">15</span>
+          <span class="vendor-name">COVENANT OF THE UNBROKEN HULL ★</span>
+        </div>
+        <div class="vendor-flavor">A racing fraternity as much as a vendor. Full crew stands before the Three Elders.</div>
+        <div class="vendor-parts">
+          <table>
+            <thead><tr><th>Part</th><th>Attr</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td>Covenant blessing</td><td><span class="badge badge-r">0R</span></td><td class="part-price">30g</td></tr>
+              <tr><td>⚡ Covenant Hull Seal ★</td><td><span class="badge badge-r">+2R</span></td><td class="part-price">30g</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="challenge-box">
+          <span class="ch-header">⚡ CHAMP SPEC DC 14 — zero gold risk</span><br>
+          <span class="ch-desc">Each crew member may speak. Elder asks: "Why does your construct deserve to be unbreakable?" Roll measures sincerity.</span><br>
+          <span class="ch-result"><span class="ch-win">WIN:</span> Hull Seal at 30g. <span class="ch-fail">FAIL:</span> Blessing at 30g still available. Same price either way.</span>
+        </div>
+        <div class="vendor-gm-note">The only Champ Spec with no gold penalty for failure. Blessing and Hull Seal cost the same 30g — the only thing at stake is the roll. Give the Three Elders ceremony the time it deserves.</div>
+      </div>
+
+      <!-- Build Tracker -->
+      <div class="build-tracker">
+        <div class="build-tracker-header">CREW BUILD TRACKER — Phase 1</div>
+        <div class="build-tracker-body">
+          <div class="build-row"><span class="build-label">Crew Name:</span><div class="build-field"></div></div>
+          <div class="build-row"><span class="build-label">Construct:</span><div class="build-field"></div></div>
+          <div class="attr-track-row">
+            <div class="attr-track">
+              <span class="at-label" style="color:#3a6db5;">VEL</span>
+              <div class="at-scale">
+                <span>−2</span><span>−1</span><span>0</span><span>+1</span><span>+2</span>
+              </div>
+              <div style="font-size:8px;margin-top:3px;">Final: ____</div>
+            </div>
+            <div class="attr-track">
+              <span class="at-label" style="color:#4a7a4a;">HAN</span>
+              <div class="at-scale">
+                <span>−2</span><span>−1</span><span>0</span><span>+1</span><span>+2</span>
+              </div>
+              <div style="font-size:8px;margin-top:3px;">Final: ____</div>
+            </div>
+            <div class="attr-track">
+              <span class="at-label" style="color:#a03030;">RES</span>
+              <div class="at-scale">
+                <span>−2</span><span>−1</span><span>0</span><span>+1</span><span>+2</span>
+              </div>
+              <div style="font-size:8px;margin-top:3px;">Final: ____</div>
+            </div>
+          </div>
+          <div class="build-row"><span class="build-label">Gold spent:</span><div class="build-field"></div><span style="font-size:7.5px;color:#888;">/ 100g</span></div>
+          <div class="build-row"><span class="build-label">Anyx qual?</span><div class="build-field" style="max-width:30px;"></div><span style="font-size:7.5px;color:#888;margin-left:4px;">All attrs ≥−1 required</span></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 3 — GM Race Reference · Golden Goots Grand Prix</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  background: #e8e5df;
+  margin: 0;
+  padding: 20px 0;
+  transform: none;
+}
+@page { size: 11in 8.5in landscape; margin: 0; }
+@media print {
+  body { background: #fff; padding: 0; margin: 0; }
+  .page { margin: 0; border-radius: 0; box-shadow: none; page-break-after: always; }
+}
+.page {
+  width: 279.4mm;
+  height: 215.9mm;
+  margin: 10mm auto 8mm;
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+  flex-shrink: 0;
+  background: #1a1a2e;
+  color: #fff;
+  padding: 8px 16px 7px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.page-header .title { font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
+.page-header .subtitle { font-size: 10px; color: #b0b8d0; letter-spacing: 0.06em; text-transform: uppercase; }
+.page-header .gear { color: #B87333; font-size: 13px; }
+
+.body-grid {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  padding: 10px 12px 24px;
+  overflow: hidden;
+}
+.two-col   { grid-template-columns: 1fr 1fr; }
+.three-col { grid-template-columns: 1fr 1fr 1fr; }
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 10px;
+}
+.col:first-child { padding-left: 0; }
+.col:last-child  { padding-right: 0; }
+.col + .col { border-left: 1px solid #e4e0d8; }
+
+.section-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #1a1a2e;
+  border-bottom: 2px solid #1a1a2e;
+  padding-bottom: 3px;
+  margin-bottom: 1px;
+}
+
+.intro { font-size: 9.5px; color: #333; line-height: 1.4; }
+
+table { width: 100%; border-collapse: collapse; }
+th {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 3px 5px;
+  text-align: left;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+td {
+  padding: 3px 5px;
+  border-bottom: 1px solid #e8e5df;
+  vertical-align: top;
+  font-size: 9px;
+  line-height: 1.3;
+  color: #222;
+}
+tr:nth-child(even) td { background: #f5f4f1; }
+td strong { font-weight: 700; color: #1a1a2e; }
+td em { font-style: italic; color: #555; font-size: 8.5px; }
+
+.badge {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 8px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.badge-v { background: #3a6db5; }
+.badge-h { background: #4a7a4a; }
+.badge-r { background: #a03030; }
+
+.mod-neg2 { color: #c0392b; font-weight: 700; }
+.mod-neg1 { color: #e67e22; font-weight: 700; }
+.mod-zero { color: #7f8c8d; font-weight: 600; }
+.mod-pos1 { color: #27ae60; font-weight: 700; }
+.mod-pos2 { color: #1a6e3c; font-weight: 700; }
+
+.outcome-nat1 td  { background: #fde8e8 !important; }
+.outcome-stall td { background: #fef3e2 !important; }
+.outcome-advance td { background: #e8f4ec !important; }
+.outcome-blaze td { background: #e0f0ff !important; }
+
+.gm-note {
+  font-size: 8px;
+  color: #555;
+  font-style: italic;
+  border-left: 2px solid #1a1a2e;
+  padding: 3px 0 3px 6px;
+  line-height: 1.4;
+}
+.gm-note strong { color: #1a1a2e; font-style: normal; }
+
+.two-item-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.two-item-grid > div {
+  background: #f5f4f1;
+  border: 1px solid #e4e0d8;
+  border-radius: 3px;
+  padding: 5px 7px;
+  font-size: 8.5px;
+  line-height: 1.4;
+}
+.two-item-grid > div strong { display: block; font-size: 9px; color: #1a1a2e; margin-bottom: 2px; font-style: normal; }
+
+.rule-box {
+  background: #f5f4f1;
+  border: 1px solid #e4e0d8;
+  border-radius: 3px;
+  padding: 5px 8px;
+  font-size: 9px;
+  line-height: 1.4;
+  color: #333;
+}
+.rule-box strong { color: #1a1a2e; }
+
+/* Course page styles */
+.seg-header {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 3px 3px 0 0;
+}
+.seg-header .seg-name { font-size: 9.5px; font-weight: 700; color: #fff; }
+.seg-header .seg-sub  { font-size: 8px; color: #d4c9a8; font-style: italic; }
+.seg-header .seg-desc { font-size: 8px; color: #b0b8d0; line-height: 1.35; margin-top: 1px; }
+
+.course-table table { font-size: 8.5px; }
+.course-table th    { font-size: 7.5px; padding: 2px 4px; }
+.course-table td    { padding: 3px 4px; font-size: 8.5px; }
+.course-table .tile-num  { color: #888; font-weight: 600; font-size: 8px; white-space: nowrap; }
+.course-table .tile-dc   { font-weight: 700; text-align: center; color: #1a1a2e; }
+.course-table .tile-name { font-weight: 700; color: #1a1a2e; }
+.course-table .tile-desc { font-size: 7.5px; color: #555; font-style: italic; }
+
+.no-battle {
+  font-size: 7.5px;
+  color: #888;
+  text-align: center;
+  padding: 2px 4px;
+  background: #f5f4f1;
+  border-top: 1px solid #e4e0d8;
+  font-style: italic;
+}
+
+.finish-row td { background: #fff9e6 !important; }
+.finish-row td.tile-name { color: #B87333 !important; }
+
+/* Round steps */
+.steps { display: flex; flex-direction: column; gap: 4px; }
+.step  { display: flex; gap: 7px; align-items: flex-start; font-size: 9px; line-height: 1.35; }
+.step-num {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  background: #1a1a2e;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8.5px;
+  font-weight: 700;
+}
+.step-content strong { color: #1a1a2e; display: block; font-size: 9px; }
+.step-content span   { color: #444; font-size: 8.5px; }
+
+/* Boost options */
+.boost-list { display: flex; flex-direction: column; gap: 4px; }
+.boost-item {
+  background: #f5f4f1;
+  border-left: 3px solid #1a1a2e;
+  padding: 3px 7px;
+  border-radius: 0 3px 3px 0;
+}
+.boost-item strong { display: block; font-size: 9px; color: #1a1a2e; font-weight: 700; }
+.boost-item span   { font-size: 8.5px; color: #444; line-height: 1.35; }
+
+.win-box {
+  background: #e8f4ec;
+  border: 1px solid #4a8a4a;
+  border-radius: 3px;
+  padding: 6px 8px;
+  font-size: 9px;
+  line-height: 1.5;
+  color: #1a3a1a;
+}
+.win-box strong { color: #1a5e2a; font-size: 9.5px; display: block; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: Core Mechanics -->
+<div class="page">
+  <div class="page-header">
+    <span class="gear">⚙</span>
+    <span class="title">PHASE 3 — THE RACE</span>
+    <span class="subtitle">Attribute Modifiers · Roll Outcomes · DC Reference · Turn Order</span>
+    <span class="gear">⚙</span>
+  </div>
+  <div class="body-grid two-col">
+
+    <!-- LEFT COL -->
+    <div class="col">
+
+      <div class="section-title">How the Race Works</div>
+      <p class="intro">Three major segments. Five tiles each. Fifteen tiles total. One die per turn — all tables roll simultaneously. Phase 1 attribute investment is your effective modifier against each tile's DC. Beat the DC to advance. Beat it by 5+ to surge. Miss it to stay. Natural 1 has special consequences.</p>
+
+      <div class="section-title">Attribute Modifier Scale</div>
+      <table>
+        <thead>
+          <tr><th>Modifier</th><th>Label</th><th>What it means</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="mod-neg2">−2</span></td><td><strong>Deficit</strong></td><td>Fighting the terrain. Not your investment.</td></tr>
+          <tr><td><span class="mod-neg1">−1</span></td><td><strong>Slight Deficit</strong></td><td>You feel the resistance. One below neutral.</td></tr>
+          <tr><td><span class="mod-zero">+0</span></td><td><strong>Neutral</strong></td><td>No bonus, no penalty. Raw dice decide.</td></tr>
+          <tr><td><span class="mod-pos1">+1</span></td><td><strong>Slight Edge</strong></td><td>Investment starts to pay. Better odds.</td></tr>
+          <tr><td><span class="mod-pos2">+2</span></td><td><strong>Full Advantage</strong></td><td>Championship Spec. This is what Phase 1 was for.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title">The Single Roller</div>
+      <div class="rule-box">One player per table rolls each turn. Any player — can change every turn, no restriction. Roll one d20, add the effective attribute modifier for the current tile type, compare to tile DC. <strong>Group rolls are Phase 1 only.</strong> One die. One roller. One result.</div>
+
+      <div class="section-title">Initiative — Turn Order</div>
+      <div class="two-item-grid">
+        <div><strong>Round 1 — Group Initiative</strong>All players roll d20. GM sums and divides by player count (round down). Highest average goes first. Ties: re-roll between tied tables only.</div>
+        <div><strong>Round 2+ — Reverse Grid</strong>Last place goes first. First place goes last. Same-tile position ties: MC picks the most interesting moment. Trailing table goes first AND gets Boost.</div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COL -->
+    <div class="col">
+
+      <div class="section-title">Roll Outcomes</div>
+      <table>
+        <thead>
+          <tr><th>Result</th><th>Name</th><th>Effect</th><th>Token</th></tr>
+        </thead>
+        <tbody>
+          <tr class="outcome-nat1">
+            <td><strong>Nat 1</strong><br><em>bottom 50%</em></td>
+            <td>Setback + Boost</td>
+            <td>Crew jumps to top of Boost list next round. GM narrates.</td>
+            <td>★ Boost</td>
+          </tr>
+          <tr class="outcome-nat1">
+            <td><strong>Nat 1</strong><br><em>top 50%</em></td>
+            <td>Setback + Skip</td>
+            <td>Top-half crew loses their next turn entirely. MC marks SKIP on tracker.</td>
+            <td>SKIP</td>
+          </tr>
+          <tr class="outcome-stall">
+            <td><strong>Miss DC by 5+</strong></td>
+            <td>Hard Stall</td>
+            <td>Stay on tile. The terrain wins. GM narrates the struggle.</td>
+            <td>Stay</td>
+          </tr>
+          <tr>
+            <td><strong>Miss DC by 1–4</strong></td>
+            <td>Partial</td>
+            <td>Close but not through. Stay on tile.</td>
+            <td>Stay</td>
+          </tr>
+          <tr class="outcome-advance">
+            <td><strong>Beat DC</strong></td>
+            <td>Advance</td>
+            <td>Through the tile. Move token forward 1. 30 sec narration max.</td>
+            <td>+1 tile</td>
+          </tr>
+          <tr class="outcome-blaze">
+            <td><strong>Beat DC by 5+</strong></td>
+            <td>Blazing Run</td>
+            <td>Move 2 tiles. MC announces to the room. This is what Phase 1 was for.</td>
+            <td>+2 tiles</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="section-title">DC Reference</div>
+      <table>
+        <thead>
+          <tr><th>DC</th><th>Label</th><th>Used for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>10</strong></td><td>Easy</td><td>Opening tiles, Finish Straight. Achievable for all — investment still shows.</td></tr>
+          <tr><td><strong>12</strong></td><td>Standard</td><td>Most home-attribute tiles. Invested crews clear reliably.</td></tr>
+          <tr><td><strong>13</strong></td><td>Hard</td><td>Off-type tiles, segment transitions. Coin-flip for neutral crews.</td></tr>
+          <tr><td><strong>15</strong></td><td>Brutal</td><td><strong>Aether Bridge only (tile 3-3).</strong> Even invested crews sweat.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="gm-note"><strong>DC 15 is rare and intentional.</strong> One tile on the entire course. A Blazing Run on the Aether Bridge should stop the room. This is the dramatic centrepiece.</div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- PAGE 2: The Course — All 15 Tiles -->
+<div class="page">
+  <div class="page-header">
+    <span class="gear">⚙</span>
+    <span class="title">PHASE 3 — THE COURSE</span>
+    <span class="subtitle">All 15 Tiles · Segment by Segment · DCs &amp; Attributes</span>
+    <span class="gear">⚙</span>
+  </div>
+  <div class="body-grid three-col">
+
+    <!-- SEGMENT 1 -->
+    <div class="col course-table">
+      <div class="seg-header">
+        <div class="seg-name">SEGMENT 1 — THE OPEN CITY</div>
+        <div class="seg-sub">Velocity favoured</div>
+        <div class="seg-desc">Two V tiles open the gap. Then Handling and Resilience gut-checks before the canyon.</div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>#</th><th>Type</th><th>DC</th><th>Tile Name</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tile-num">1-1</td>
+            <td><span class="badge badge-v">V</span></td>
+            <td class="tile-dc">10</td>
+            <td class="tile-name">Factory Gate Launch</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">Standing start. Pure reaction. Easy — everyone gets moving. V builds clock it.</td></tr>
+          <tr>
+            <td class="tile-num">1-2</td>
+            <td><span class="badge badge-v">V</span></td>
+            <td class="tile-dc">12</td>
+            <td class="tile-name">Copperworks Straight</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">400 yards, no corners. V builds surge here. First real gap opens.</td></tr>
+          <tr>
+            <td class="tile-num">1-3</td>
+            <td><span class="badge badge-h">H</span></td>
+            <td class="tile-dc">13</td>
+            <td class="tile-name">Foundry Flyover</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">Elevated road with crosswinds. First Handling check — V builds feel the floor shift.</td></tr>
+          <tr>
+            <td class="tile-num">1-4</td>
+            <td><span class="badge badge-r">R</span></td>
+            <td class="tile-dc">13</td>
+            <td class="tile-name">Steam Geyser Alley</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">Irregular geyser discharge. Resilience eats it. Preview of Segment 3 gauntlet.</td></tr>
+          <tr>
+            <td class="tile-num">1-5</td>
+            <td><span class="badge badge-h">H</span></td>
+            <td class="tile-dc">13</td>
+            <td class="tile-name">Exit Hairpin</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">180° entry to Segment 2. Field bunches. <strong>Battles highly likely here.</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="no-battle">⚠ No-Battle Zone: tiles 1-1 through 1-4 · First legal battle: 1-5</div>
+      <div class="gm-note" style="margin-top:4px;">Two consecutive V tiles let V builds build a visible lead without a runaway. Exit Hairpin is the natural drama moment before the canyon — field bunches, battles likely.</div>
+    </div>
+
+    <!-- SEGMENT 2 -->
+    <div class="col course-table">
+      <div class="seg-header">
+        <div class="seg-name">SEGMENT 2 — THE CANYON DISTRICT</div>
+        <div class="seg-sub">Handling favoured</div>
+        <div class="seg-desc">Three H tiles of escalating difficulty. A V reprieve and R foreshadowing at the end.</div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>#</th><th>Type</th><th>DC</th><th>Tile Name</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tile-num">2-1</td>
+            <td><span class="badge badge-h">H</span></td>
+            <td class="tile-dc">10</td>
+            <td class="tile-name">Canyon Entry Gate</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">Walls close on both sides. Easy opener — H builds breathe easy for one tile.</td></tr>
+          <tr>
+            <td class="tile-num">2-2</td>
+            <td><span class="badge badge-h">H</span></td>
+            <td class="tile-dc">12</td>
+            <td class="tile-name">Gear-Lock Hairpin</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">180° over 40 feet. No good line — only least-bad. H builds rotate clean.</td></tr>
+          <tr>
+            <td class="tile-num">2-3</td>
+            <td><span class="badge badge-h">H</span></td>
+            <td class="tile-dc">13</td>
+            <td class="tile-name">Undercroft Tunnel S</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">Near-total darkness. S-curve you can't see ahead. You commit before you know. <strong>Most atmospheric tile.</strong></td></tr>
+          <tr>
+            <td class="tile-num">2-4</td>
+            <td><span class="badge badge-v">V</span></td>
+            <td class="tile-dc">13</td>
+            <td class="tile-name">Guild Quarter Sprint</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">Open road through the Bazaar. V crews recoup. H builds hold on.</td></tr>
+          <tr>
+            <td class="tile-num">2-5</td>
+            <td><span class="badge badge-r">R</span></td>
+            <td class="tile-dc">13</td>
+            <td class="tile-name">Wreckers' Crossing</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">Salvage debris across road. R absorbs. H-only builds skitter. Warning shot.</td></tr>
+        </tbody>
+      </table>
+      <div class="gm-note" style="margin-top:4px;"><strong>Undercroft Tunnel S (2-3)</strong> is the hardest H tile and the most atmospheric — use the Sensory Atlas. Wreckers' Crossing punishes H-only builds who skipped Resilience.</div>
+    </div>
+
+    <!-- SEGMENT 3 -->
+    <div class="col course-table">
+      <div class="seg-header">
+        <div class="seg-name">SEGMENT 3 — THE INDUSTRIAL GAUNTLET</div>
+        <div class="seg-sub">Resilience favoured</div>
+        <div class="seg-desc">Three R tiles including the only DC 15 on the course. One H check. V sprint to the line.</div>
+      </div>
+      <table>
+        <thead>
+          <tr><th>#</th><th>Type</th><th>DC</th><th>Tile Name</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tile-num">3-1</td>
+            <td><span class="badge badge-r">R</span></td>
+            <td class="tile-dc">10</td>
+            <td class="tile-name">Ironworks Entry</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">The docks receive you. Easier opener before the gauntlet truly begins.</td></tr>
+          <tr>
+            <td class="tile-num">3-2</td>
+            <td><span class="badge badge-h">H</span></td>
+            <td class="tile-dc">12</td>
+            <td class="tile-name">Final Gauntlet Chicane</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">Three direction changes in 60 feet. Last real Handling test of the race.</td></tr>
+          <tr>
+            <td class="tile-num">3-3</td>
+            <td><span class="badge badge-r">R</span></td>
+            <td class="tile-dc" style="color:#a03030;font-size:10px;font-weight:800;">15</td>
+            <td class="tile-name" style="color:#a03030;">⚡ THE AETHER BRIDGE</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc"><strong>Only DC 15 tile on the course.</strong> Ley-line convergence — systems cut out mid-crossing. Slow down here. Ask the roller what their character does.</td></tr>
+          <tr>
+            <td class="tile-num">3-4</td>
+            <td><span class="badge badge-r">R</span></td>
+            <td class="tile-dc">13</td>
+            <td class="tile-name">Pressure Valve Row</td>
+          </tr>
+          <tr><td colspan="4" class="tile-desc">Industrial vents discharging across the road. High chaos. R absorbs. Others pray.</td></tr>
+          <tr class="finish-row">
+            <td class="tile-num">3-5</td>
+            <td><span class="badge badge-v">V</span></td>
+            <td class="tile-dc">10</td>
+            <td class="tile-name">🏁 THE FINISH STRAIGHT</td>
+          </tr>
+          <tr class="finish-row"><td colspan="4" class="tile-desc">400 yards. White line. V builds get one last Blazing Run. The crowd is standing.</td></tr>
+        </tbody>
+      </table>
+      <div class="gm-note" style="margin-top:4px;"><strong>Aether Bridge is the dramatic centrepiece.</strong> A Blazing Run here stops the room. Start building atmosphere from tile 3-4 onward. Finish Straight is DC 10 — V builds get a final surge moment.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- PAGE 3: Round Structure, Battles, Boost, Sponsors, Winning -->
+<div class="page">
+  <div class="page-header">
+    <span class="gear">⚙</span>
+    <span class="title">PHASE 3 — ROUND STRUCTURE &amp; MECHANICS</span>
+    <span class="subtitle">Round Steps · Battles · Boost · Sponsors · Winning</span>
+    <span class="gear">⚙</span>
+  </div>
+  <div class="body-grid two-col">
+
+    <!-- LEFT COL -->
+    <div class="col">
+
+      <div class="section-title">Round Structure — 6 Steps Per Round</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Open Round</strong>
+            <span>MC opens the round. Resolve any battle markers from the prior round before anything else.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Boost Check</strong>
+            <span>Last-place table 3+ tiles behind next car ahead? Boost fires. Boost recipient rolls foam d6, selects result aloud. Natural 1 crews always top priority regardless of gap.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Sponsor Window</strong>
+            <span>All sponsor uses declared before any dice are touched. Positive or negative. Out loud. MC acknowledges each. Uses expended on declaration regardless of outcome.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>All Tables Roll</strong>
+            <span>All 8 tables roll simultaneously. GMs calculate effective modifier for current tile type. All tables hold results — no movement yet.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <strong>MC Calls Results</strong>
+            <span>Last-to-first (reverse grid). GM confirms modified total. MC resolves and narrates. 30 sec per table max. Move tokens after each call.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-content">
+            <strong>Open Next Round</strong>
+            <span>MC updates tracker. Re-orders by new grid position. Battle markers appear for shared tiles. Open Round N+1.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:5px;">Battles</div>
+      <table>
+        <tbody>
+          <tr><td style="width:30%"><strong>Trigger</strong></td><td>Two or more tables on the same tile at end of round. Automatic.</td></tr>
+          <tr><td><strong>No-Battle Zone</strong></td><td>Tiles 1-1 through 1-4. First legal battle: tile 1-5 (Exit Hairpin).</td></tr>
+          <tr><td><strong>The Roll</strong></td><td>Each table's roller: 1d20 + effective modifier for tile type. All roll simultaneously. Highest modified result wins. Ties re-roll once.</td></tr>
+          <tr><td><strong>Winner</strong></td><td>Advance 1 additional tile immediately. MC calls the overtake to the room.</td></tr>
+          <tr><td><strong>Loser</strong></td><td>Stay on tile. Falling behind is the penalty.</td></tr>
+          <tr><td><strong>3+ Tables</strong></td><td>All roll simultaneously. Highest wins the advance. All others stay.</td></tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- RIGHT COL -->
+    <div class="col">
+
+      <div class="section-title">Trailing Table Boost — 5 Options</div>
+      <p class="intro" style="margin-bottom:4px;">Fires when last-place is 3+ tiles behind next car. One table max. Resolved before Sponsor Window. Natural 1 crews always jump to top of priority.</p>
+      <div class="boost-list">
+        <div class="boost-item">
+          <strong>Slipstream</strong>
+          <span>Choose one attribute. Effective modifier for that attribute is doubled this turn. Declare before rolling.</span>
+        </div>
+        <div class="boost-item">
+          <strong>Crowd Surge</strong>
+          <span>+3 added to d20 result after the roll. MC announces before dice are picked up.</span>
+        </div>
+        <div class="boost-item">
+          <strong>Arcane Repair</strong>
+          <span>Treat tile as neutral — no modifier applies (positive or negative). Raw dice only. Useful on brutal off-attribute tiles.</span>
+        </div>
+        <div class="boost-item">
+          <strong>Wild Fuel Cell</strong>
+          <span>No roll required. Move 2 tiles immediately. Takes the place of normal roll. MC announces dramatically.</span>
+        </div>
+        <div class="boost-item">
+          <strong>Ghost Draft</strong>
+          <span>Use the highest d20 already rolled this round (any table) as your result, then add your own effective modifier. The leader's momentum becomes yours.</span>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:5px;">Boost Rules — Pacing Tool</div>
+      <div class="rule-box">MC discretion — <strong>do not consider before Round 16.</strong> All tile DCs drop by 2 for the remainder of the current segment. Announce publicly before the round begins. Fires in roughly 1-in-4 races. Can be lifted at next segment boundary — MC's call.</div>
+
+      <div class="section-title" style="margin-top:5px;">Sponsor Uses</div>
+      <table>
+        <thead>
+          <tr><th>Tier</th><th>Uses</th><th>Mod</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>GM Sponsor</td><td>3</td><td>±1</td><td>Any roll, any time. Unrestricted.</td></tr>
+          <tr><td>Standard</td><td>2</td><td>±2</td><td>Positive: own table. Negative: any team.</td></tr>
+          <tr><td>Elite</td><td>2</td><td>±3</td><td>Two powerful swings. Declared publicly.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title" style="margin-top:5px;">Winning the Race</div>
+      <div class="win-box">
+        <strong>🏁 Race ends when first table clears tile 3-5 (The Finish Straight)</strong>
+        The round completes — every remaining table rolls their turn. Final placement by grid position at end of the round. <strong>Photo Finish:</strong> two or more tables clear in the same round → raw d20 roll-off per tied table, no modifiers, simultaneous. Ties re-roll until broken.
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

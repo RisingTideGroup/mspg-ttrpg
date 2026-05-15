@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Phase 1 — Carnival Mini-Encounters</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    background: #e8e5df;
+    margin: 0;
+    padding: 20px 0;
+    transform: none;
+  }
+
+  @page { size: 11in 8.5in landscape; margin: 0; }
+  @media print {
+    body { background: #fff; padding: 0; margin: 0; }
+    .page { margin: 0; border-radius: 0; box-shadow: none; page-break-after: always; }
+  }
+
+  .page {
+    width: 279.4mm;
+    height: 215.9mm;
+    margin: 10mm auto 8mm;
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-header {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 7px 14px 6px;
+    flex-shrink: 0;
+  }
+  .page-title {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: #fff;
+  }
+  .page-sub {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-top: 2px;
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    flex: 1;
+    min-height: 0;
+    padding: 10px 12px 24px;
+    overflow: hidden;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow: hidden;
+    min-height: 0;
+    padding: 0 11px;
+  }
+  .col:first-child { padding-left: 0; }
+  .col:last-child { padding-right: 0; }
+  .col:not(:last-child) { border-right: 1px solid #e4e0d8; }
+
+  .section-heading {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1a1a1a;
+    letter-spacing: -0.01em;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid #1a1a1a;
+    flex-shrink: 0;
+  }
+  .encounter-sub {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #555;
+    margin-top: -2px;
+    flex-shrink: 0;
+  }
+
+  .script-block {
+    background: #f9f8f5;
+    border: 1px solid #e4e0d8;
+    border-left: 3px solid #1a1a1a;
+    border-radius: 2px;
+    padding: 5px 8px;
+    font-size: 10.5px;
+    color: #333;
+    line-height: 1.5;
+    font-style: italic;
+    flex-shrink: 0;
+  }
+  .script-block .sensory {
+    font-size: 9px;
+    color: #666;
+    font-style: italic;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
+  .mc-note {
+    background: #f9f8f5;
+    border: 1px solid #e4e0d8;
+    border-left: 3px solid #1a1a2e;
+    border-radius: 2px;
+    padding: 5px 8px;
+    font-size: 10.5px;
+    color: #333;
+    line-height: 1.45;
+    flex-shrink: 0;
+  }
+  .mc-note .note-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+  }
+
+  .mechanic-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #1a1a2e;
+    border-bottom: 1px solid #d0ccc4;
+    padding-bottom: 2px;
+    flex-shrink: 0;
+  }
+
+  .outcome-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5px;
+    flex-shrink: 0;
+  }
+  .outcome-table thead th {
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 3px 6px;
+    text-align: left;
+  }
+  .outcome-table thead th:first-child { width: 36%; }
+  .outcome-table tbody tr { border-bottom: 1px solid #e8e4de; }
+  .outcome-table tbody td {
+    padding: 3px 6px;
+    color: #1a1a1a;
+    line-height: 1.35;
+    vertical-align: top;
+  }
+  .outcome-table tbody td:first-child { font-weight: 700; white-space: nowrap; }
+  .outcome-table tbody tr:nth-child(odd) { background: #f9f8f5; }
+  .outcome-table tbody tr:nth-child(even) { background: #fff; }
+
+  .footer-text {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #555;
+    text-transform: uppercase;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="page-header">
+    <div class="page-title">PHASE 1 — CARNIVAL MINI-ENCOUNTERS</div>
+    <div class="page-sub">GM Reference &nbsp;·&nbsp; Three Optional Encounters &nbsp;·&nbsp; No Mechanical Reward &nbsp;·&nbsp; RP &amp; Atmosphere Only</div>
+  </div>
+
+  <div class="three-col">
+
+      <!-- COL 1: ENCOUNTER A -->
+      <div class="col">
+        <div class="section-heading">ENCOUNTER A — THE IRON HANDSHAKE</div>
+        <div class="encounter-sub">Arm Wrestling &nbsp;·&nbsp; STR &nbsp;·&nbsp; ~3 minutes</div>
+
+        <div class="script-block">
+          <strong>Orvyn Theck</strong> has dragged a plank table to one of the district thoroughfares. Tin cup. Handwritten sign: <em>BEAT THECK — WIN RESPECT.</em> A small crowd has formed. It always does with Theck. He finds this appropriate.
+          <div class="sensory">Sound: crowd murmur, forearms on wood, Theck's short laugh &nbsp;·&nbsp; Smell: sawdust and spilled ale</div>
+        </div>
+
+        <div class="mechanic-label">Mechanic — d20 + STR vs. DC 14</div>
+        <table class="outcome-table">
+          <thead><tr><th>Result</th><th>Call</th></tr></thead>
+          <tbody>
+            <tr><td>Beat 14</td><td>Theck nods slowly, shakes the hand, releases. Crowd reacts.</td></tr>
+            <tr><td>Tie (14)</td><td><em>"Rematch. No charge."</em> One more roll, same DC. Draw on second tie — full honours.</td></tr>
+            <tr><td>Miss 14</td><td>Pins, releases immediately, pats the hand. No mockery.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="mc-note">
+          <div class="note-label">GM Notes</div>
+          Play Theck as <strong>genuinely respectful</strong> — he likes competition, never trash-talks. If a player has −3 or worse STR and insists, Theck says <em>"Alright. I'll use my left"</em> and adjusts to DC 10. He means it.<br><br>
+          <strong>Nat 20:</strong> crowd reacts, Theck stands briefly — <em>"There it is."</em> &nbsp; <strong>Nat 1:</strong> quiet <em>"Good try"</em> and nothing else.<br><br>
+          If multiple players compete, run them one at a time and let the table commentate. The crowd is half the entertainment.
+        </div>
+      </div>
+
+      <!-- COL 2: ENCOUNTER B -->
+      <div class="col">
+        <div class="section-heading">ENCOUNTER B — FIND THE GEAR</div>
+        <div class="encounter-sub">Shell Game &nbsp;·&nbsp; WIS &nbsp;·&nbsp; ~3 minutes</div>
+
+        <div class="script-block">
+          Three dented brass cups on an upturned crate. Under one: a small iron cog, tarnished green. Operator: <strong>Sable</strong> — no last name — moving cups with the rhythm of someone who's done this since she was nine. She narrates in a low, pleasant voice that never quite matches her hands.
+          <div class="sensory">Sound: soft scrape of brass on wood, Sable's quiet patter &nbsp;·&nbsp; Sight: cog glimpsed one second, three moves, then stillness</div>
+        </div>
+
+        <div class="mechanic-label">Mechanic — d20 + WIS vs. DC 13</div>
+        <table class="outcome-table">
+          <thead><tr><th>Result</th><th>Call</th></tr></thead>
+          <tbody>
+            <tr><td>Beat 13</td><td>Right cup. Sable lifts it without drama — <em>"Sharp eyes."</em></td></tr>
+            <tr><td>Miss 13</td><td>Wrong cup, then correct one revealed. <em>"So close."</em> She means it.</td></tr>
+            <tr><td>Nat 20</td><td>They spotted the tell. Sable tilts her head. <em>"Hm."</em> Doesn't say what it was.</td></tr>
+            <tr><td>Nat 1</td><td>Picked confidently and wrong. Sable glances at the cup with an expression suggesting she's thinking about something else.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="mc-note">
+          <div class="note-label">GM Notes</div>
+          WIS framing: <em>don't get fooled</em> — the winner isn't faster, they're harder to misdirect. Reward players who describe watching her hands: <em>"Most people watch my face. You're smarter than that."</em><br><br>
+          Sable doesn't cheat. Fast and misdirecting, but if someone beats her, she lost fair. She finds good observers interesting. Multiple players: she re-shuffles every attempt.<br><br>
+          If someone wins, she hands them the cog. <em>"Souvenir."</em> It's worthless. It's a perfect trophy.
+        </div>
+      </div>
+
+      <!-- COL 3: ENCOUNTER C -->
+      <div class="col">
+        <div class="section-heading">ENCOUNTER C — THE LONG POUR</div>
+        <div class="encounter-sub">Drinking Contest &nbsp;·&nbsp; CON &nbsp;·&nbsp; Last Player Standing &nbsp;·&nbsp; ~5 minutes</div>
+
+        <div class="script-block">
+          A longer table near the festival edge. A barrel of <strong>Cogsworth Blackpipe</strong> — smells like burnt caramel and gear oil. The man running it is enormous, cheerful, goes by <strong>"Barley."</strong> Same careful pour every time. Peaceful expression of someone who has watched a great many people make this mistake before.
+          <div class="sensory">Sound: table getting louder each round, then quieter, then one voice &nbsp;·&nbsp; Smell: Blackpipe — sweet and wrong in equal measure</div>
+        </div>
+
+        <div class="mechanic-label">Mechanic — d20 + CON each round · Out on 8 or below</div>
+        <table class="outcome-table">
+          <thead><tr><th>Structure</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Each round</td><td>All remaining players roll d20 + CON. Anyone rolling 8 or below is out. Barley removes their cup without ceremony.</td></tr>
+            <tr><td>No eliminations</td><td>Round repeats — the Blackpipe keeps coming.</td></tr>
+            <tr><td>Final two</td><td>Head to head — single roll each, lowest is out, ties re-roll.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="mc-note">
+          <div class="note-label">GM Notes</div>
+          Real in-world countdown — <em>"Round one. Bottoms up."</em> Let the table narrate reactions between rolls. High-CON smug players will get heat from others — let that happen.<br><br>
+          <strong>Nat 1:</strong> not just out — a moment: a slow slide sideways, a confident declaration about aerodynamics, a firm friendship with a lamppost. Light and fast.<br><br>
+          <strong>Nat 20:</strong> Barley — <em>"You've done this before."</em> Not sure if it's a compliment. Winner gets his acknowledgement and a refilled cup.<br><br>
+          <strong>Small table (2–3 players):</strong> reduce threshold to 6 or below so it doesn't end in one round.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+</div>
+
+</body>
+</html>

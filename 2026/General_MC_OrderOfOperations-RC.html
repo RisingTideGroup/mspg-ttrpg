@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MC Order of Operations — Golden Goots Grand Prix</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  background: #e8e5df;
+  margin: 0;
+  padding: 20px 0;
+  transform: none;
+}
+
+@page { size: 11in 8.5in landscape; margin: 0; }
+@media print {
+  body { background: #fff; padding: 0; margin: 0; }
+  .page { margin: 0; border-radius: 0; box-shadow: none; page-break-after: always; }
+}
+
+.page {
+  width: 279.4mm;
+  height: 215.9mm;
+  margin: 10mm auto 8mm;
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.page-header {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 2.5px solid #1a1a1a;
+  flex-shrink: 0;
+}
+.seg-accent { width: 11px; flex-shrink: 0; background: #B87333; }
+.header-inner {
+  flex: 1;
+  padding: 7px 16px 6px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.event-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; margin-bottom: 1px; }
+.page-title { font-size: 21px; font-weight: 800; color: #1a1a1a; letter-spacing: -0.02em; line-height: 1; margin-top: 1px; }
+.page-subtitle { font-size: 11px; color: #666; font-style: italic; margin-top: 2px; }
+.header-tag { flex-shrink: 0; padding-top: 3px; font-size: 9px; font-weight: 700; color: #aaa; text-align: right; white-space: nowrap; }
+
+/* BODY GRID */
+.body-grid {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  padding: 9px 12px 10px;
+  overflow: hidden;
+}
+.three-col { grid-template-columns: 1fr 1fr 1fr; }
+.two-col   { grid-template-columns: 1fr 1fr; }
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 10px;
+}
+.col:first-child { padding-left: 0; }
+.col:last-child  { padding-right: 0; }
+.col + .col { border-left: 1px solid #e4e0d8; }
+
+/* PHASE BANNER */
+.phase-banner {
+  background: #B87333;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* SECTION HEADING */
+.section-heading {
+  font-size: 14px;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.01em;
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid #1a1a1a;
+  flex-shrink: 0;
+}
+.sub-heading {
+  font-size: 11px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* MC NOTE */
+.mc-note {
+  background: #f9f8f5;
+  border: 1px solid #e4e0d8;
+  border-left: 3px solid #B87333;
+  border-radius: 2px;
+  padding: 4px 8px;
+  font-size: 10.5px;
+  color: #333;
+  line-height: 1.45;
+  flex-shrink: 0;
+}
+.note-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #B87333;
+  margin-bottom: 2px;
+}
+
+/* RULE TEXT */
+.rule-text { font-size: 11px; color: #222; line-height: 1.5; flex-shrink: 0; }
+
+/* BULLET LIST */
+.bullet-list { display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
+.bullet-list li {
+  display: flex;
+  gap: 6px;
+  font-size: 10.5px;
+  color: #222;
+  line-height: 1.4;
+  align-items: flex-start;
+}
+.bullet-list li::before {
+  content: '·';
+  color: #B87333;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+/* CHECKLIST */
+.check-list { display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
+.check-item { display: flex; gap: 6px; font-size: 10.5px; color: #222; line-height: 1.4; align-items: flex-start; }
+.check-box  { width: 12px; height: 12px; border: 1.5px solid #999; border-radius: 2px; flex-shrink: 0; margin-top: 1px; }
+
+/* NUMBERED STEPS */
+.step-row { display: flex; gap: 7px; align-items: flex-start; flex-shrink: 0; }
+.step-num {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #1a1a1a; color: #fff;
+  font-size: 9px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.step-body { display: flex; flex-direction: column; gap: 3px; }
+.step-label { font-size: 11px; font-weight: 800; color: #1a1a1a; line-height: 1.2; }
+.step-note  { font-size: 10.5px; color: #555; line-height: 1.4; }
+
+/* TIMELINE TABLE */
+.timeline-table { width: 100%; border-collapse: collapse; font-size: 10.5px; flex-shrink: 0; }
+.timeline-table th {
+  background: #f5f4f0; font-size: 9px; font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; color: #888; padding: 3px 7px; text-align: left;
+  border-bottom: 1px solid #e4e0d8;
+}
+.timeline-table td { padding: 3px 7px; border-bottom: 1px solid #edeae4; vertical-align: top; line-height: 1.35; }
+.timeline-table tr:last-child td { border-bottom: none; }
+.timeline-table .t-time { font-weight: 700; white-space: nowrap; color: #B87333; width: 70px; }
+
+/* ROLL TABLE */
+.roll-table { width: 100%; border-collapse: collapse; font-size: 10.5px; flex-shrink: 0; }
+.roll-table thead th {
+  background: #1a1a1a; color: #fff; font-size: 9px; font-weight: 700;
+  letter-spacing: 0.07em; text-transform: uppercase; padding: 4px 7px; text-align: left;
+}
+.roll-table tbody td { padding: 4px 7px; border-bottom: 1px solid #edeae4; vertical-align: middle; line-height: 1.3; }
+.roll-table tbody tr:last-child td { border-bottom: none; }
+.roll-table .r-roll { font-weight: 900; font-size: 12px; white-space: nowrap; }
+.roll-table .r-tier { font-weight: 700; }
+.roll-table .r-uses, .roll-table .r-mod { font-weight: 800; text-align: center; }
+.tr-nat20 { background: #E8F0FF; }
+.tr-elite { background: #EEF5FF; }
+.tr-std   { background: #f9f8f5; }
+.tr-gm    { background: #E8F5EC; }
+.tr-nat1  { background: #FFF3E0; }
+
+/* RESULT TABLE */
+.result-table { width: 100%; border-collapse: collapse; font-size: 10.5px; flex-shrink: 0; }
+.result-table thead th {
+  background: #f5f4f0; font-size: 9px; font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; color: #888; padding: 3px 7px; text-align: left;
+  border-bottom: 1px solid #e4e0d8;
+}
+.result-table tbody td { padding: 3px 7px; border-bottom: 1px solid #edeae4; vertical-align: top; line-height: 1.35; }
+.result-table tbody tr:last-child td { border-bottom: none; }
+.tr-blaze { background: #E8F0FF; }
+.tr-clean { background: #E8F5EC; }
+.tr-miss  { background: #F5F0E8; }
+
+/* ACTION TABLE */
+.action-table { width: 100%; border-collapse: collapse; font-size: 10px; flex-shrink: 0; }
+.action-table thead th {
+  background: #FFF3E0; font-size: 9px; font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; color: #7a4500; padding: 3px 7px; text-align: left;
+  border-bottom: 1px solid #f0d8b0;
+}
+.action-table tbody td { padding: 3px 7px; border-bottom: 1px solid #f0ebe0; vertical-align: top; line-height: 1.35; }
+.action-table tbody tr:last-child td { border-bottom: none; }
+.action-table tbody td:first-child { font-weight: 700; color: #B87333; width: 24px; }
+.action-table tbody td:last-child { font-weight: 700; color: #888; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ PAGE 1 — SETUP & OPENING ═══════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="seg-accent"></div>
+    <div class="header-inner">
+      <div>
+        <div class="event-label">⚙ &nbsp; Golden Goots Grand Prix — MC Reference</div>
+        <div class="page-title">MC Order of Operations</div>
+        <div class="page-subtitle">Event run-of-show &nbsp;·&nbsp; Setup &nbsp;·&nbsp; Phase 0 &amp; Opening &nbsp;·&nbsp; Phase 1</div>
+      </div>
+      <div class="header-tag">Page 1 of 3</div>
+    </div>
+  </div>
+
+  <div class="body-grid three-col">
+
+    <!-- COL 1: SETUP -->
+    <div class="col">
+      <div class="phase-banner">Phase Setup — Before Doors Open</div>
+      <div class="mc-note"><div class="note-label">Timing</div>Complete all setup before 6:15. MCs and key crew in room no later than 6:00.</div>
+
+      <div class="section-heading">1 — AV &amp; PROJECTION</div>
+      <ul class="check-list">
+        <li class="check-item"><span class="check-box"></span><span>Projector on — confirm aspect ratio and brightness</span></li>
+        <li class="check-item"><span class="check-box"></span><span>Room tracker HTML loaded — confirm table count matches tonight</span></li>
+        <li class="check-item"><span class="check-box"></span><span>Sponsor grid PowerPoint open and ready</span></li>
+        <li class="check-item"><span class="check-box"></span><span>Course map image loaded — ready for Phase 2 reveal</span></li>
+        <li class="check-item"><span class="check-box"></span><span>F1-style intro video cued for Phase 3 opening</span></li>
+        <li class="check-item"><span class="check-box"></span><span>Audio check — mic levels, sound cues working</span></li>
+      </ul>
+
+      <div class="section-heading">2 — PER-TABLE PHYSICAL CHECK</div>
+      <div class="rule-text" style="font-size:10.5px;">Walk every table before doors open.</div>
+      <ul class="check-list">
+        <li class="check-item"><span class="check-box"></span><span>Dice set present — at least one d20 per player, extras for group rolls</span></li>
+        <li class="check-item"><span class="check-box"></span><span>Pens / pencils — one per player minimum</span></li>
+        <li class="check-item"><span class="check-box"></span><span>Character sheets — one per player, correct version</span></li>
+        <li class="check-item"><span class="check-box"></span><span>Player whiteboard (construct drawing surface) — one per table, marker attached</span></li>
+      </ul>
+
+      <div class="section-heading">3 — GM PACKET CHECK &amp; BRIEFING</div>
+      <div class="rule-text" style="font-size:10.5px;">Each Table GM receives full packet before 6:30.</div>
+      <div class="sub-heading" style="font-size:10px; margin-top:2px;">Each GM packet contains:</div>
+      <ul class="bullet-list">
+        <li>Phase 1 GM Parts Guide</li>
+        <li>GM Advisor Brief</li>
+        <li>GM Table DM Brief</li>
+        <li>GM Sensory Atlas</li>
+        <li>Course layout cards without DCs — 2x (hand out in Phase 3, not before)</li>
+      </ul>
+      <div class="sub-heading" style="font-size:10px;">GM briefing points:</div>
+      <ul class="bullet-list">
+        <li>Walk GM Advisor Brief and Table DM Brief</li>
+        <li>Confirm they know the Phase 2 handoff signal</li>
+        <li>Remind: prep crew for team name, construct drawing, sponsor pitch</li>
+        <li>Confirm GM Sponsor assignment for low-roll tables</li>
+      </ul>
+    </div>
+
+    <!-- COL 2: PHASE 0 + 7:30 PROGRAM -->
+    <div class="col">
+      <div class="phase-banner">Phase 0 — Doors Open &amp; Pre-Game</div>
+      <table class="timeline-table">
+        <thead><tr><th>Time</th><th>Responsibility</th></tr></thead>
+        <tbody>
+          <tr><td class="t-time">6:15–6:30</td><td>MCs in the room. Final AV and table checks complete.</td></tr>
+          <tr><td class="t-time">6:30–6:45</td><td>GM call time. Table DMs briefed and packets confirmed.</td></tr>
+          <tr><td class="t-time">7:00</td><td>Doors open. Players find tables. General welcome atmosphere.</td></tr>
+          <tr><td class="t-time">7:00–7:30</td><td>Open room — MC floats, welcomes, answers questions. No formal program yet.</td></tr>
+          <tr><td class="t-time">7:25</td><td>MC gives 5-minute warning: <em>"We begin at 7:30."</em></td></tr>
+          <tr><td class="t-time">7:30</td><td>Program begins.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="phase-banner" style="margin-top:4px;">7:30 — Opening Program</div>
+      <div class="section-heading">WELCOME &amp; INTRO</div>
+      <ul class="bullet-list">
+        <li>Welcome and thank-yous</li>
+        <li>Welcome to the Golden Goots Grand Prix in the Kingdom of Answick</li>
+      </ul>
+
+      <div class="sub-heading">Course map — 3-segment overview only (no tile DCs):</div>
+      <ul class="bullet-list">
+        <li>Segment 1 favours Velocity, Segment 2 Handling, Segment 3 Resilience</li>
+        <li>Tile types will intermix — it's not a clean split</li>
+      </ul>
+
+      <div class="sub-heading">Phase 1 MC schpiel — hit all of these:</div>
+      <ul class="bullet-list">
+        <li>Every attribute starts at −2 — you cannot race with a −2</li>
+        <li>You can only upgrade each part once — physical limit on the construct</li>
+        <li>Opportunities and challenges may present themselves as you shop</li>
+        <li>1-hour time limit, 100 gold limit — unspent gold is gone</li>
+        <li>Prepare: team name, motto, sponsor RP pitch, draw your construct</li>
+        <li><em>"The market is open. Shop away."</em></li>
+      </ul>
+
+      <div class="mc-note" style="margin-top:2px;"><div class="note-label">Phase 1 Float</div>GMs are the primary advisory layer. MCs float — help the room, help table GMs where needed. Call 30-min and 15-min warnings. Read the room: if tables are close to done early, be ready to shift to Phase 2.</div>
+    </div>
+
+    <!-- COL 3: PHASE 1 DETAIL -->
+    <div class="col">
+      <div class="phase-banner">Phase 1 — Parts Shopping</div>
+      <div class="mc-note"><div class="note-label">Duration</div>1 hour. 100 gold per crew. GMs run this phase — MC floats and supports.</div>
+
+      <div class="section-heading">PHASE 1 MC RESPONSIBILITIES</div>
+      <ul class="bullet-list">
+        <li>Float the room — be present, welcoming, approachable</li>
+        <li>Answer player questions about structure and rules (not strategy — that's the GM)</li>
+        <li>Call 30-minute warning to room</li>
+        <li>Call 15-minute warning to room</li>
+        <li>Read the energy — if most tables are clearly done at 50 min, start checking with GMs about an early Phase 2 transition</li>
+      </ul>
+
+      <div class="section-heading">GM NOTES — DURING PHASE 1</div>
+      <ul class="bullet-list">
+        <li>GMs help crews pick parts and strategies based on Advisor Brief and Table DM Brief</li>
+        <li>GMs give baseline explanation of Phase 3 rolling during Phase 1 — what tile types mean, what the d20 roll resolves — so players aren't surprised when Phase 3 begins</li>
+        <li>Toward end of Phase 1, GMs help their table prep team name, construct drawing, and sponsor pitch</li>
+      </ul>
+
+      <div class="section-heading">ATTRIBUTE SYSTEM REMINDER</div>
+      <table class="result-table">
+        <thead><tr><th>Attribute</th><th>Colour</th><th>Start</th><th>Race-ready</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:700;color:#0C3D5E;">Velocity</td><td style="color:#0C3D5E;">Blue</td><td>−2</td><td>0 or higher</td></tr>
+          <tr><td style="font-weight:700;color:#0F4020;">Handling</td><td style="color:#0F4020;">Green</td><td>−2</td><td>0 or higher</td></tr>
+          <tr><td style="font-weight:700;color:#4A1B0C;">Resilience</td><td style="color:#4A1B0C;">Red</td><td>−2</td><td>0 or higher</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-heading">TRANSITION TO PHASE 2</div>
+      <ul class="bullet-list">
+        <li>Check with each GM — is their table done shopping?</li>
+        <li>If all tables are done before the 1-hour mark, it's acceptable to call Phase 2 early</li>
+        <li>If any tables are still finishing at 60 min, it's acceptable to start Phase 2 with finished tables while the last 1–2 wrap up</li>
+        <li>MC delivers Phase 2 cold open to full room once ready</li>
+      </ul>
+
+      <div class="mc-note"><div class="note-label">Jonathan Note</div>Phase 1 ends when MC calls Phase 2. Jonathan should have sponsor grid PowerPoint open and room tracker ready before Phase 2 begins.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════ PAGE 2 — PHASE 2 ═══════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="seg-accent"></div>
+    <div class="header-inner">
+      <div>
+        <div class="event-label">⚙ &nbsp; Golden Goots Grand Prix — MC Reference</div>
+        <div class="page-title">Phase 2 — The Sponsor Pavilion</div>
+        <div class="page-subtitle">Per-table pitch sequence &nbsp;·&nbsp; Roll table &nbsp;·&nbsp; Grid order &nbsp;·&nbsp; Break</div>
+      </div>
+      <div class="header-tag">Page 2 of 3</div>
+    </div>
+  </div>
+
+  <div class="body-grid three-col">
+
+    <!-- COL 1: OPENING + PITCH SEQUENCE -->
+    <div class="col">
+      <div class="mc-note"><div class="note-label">Duration</div>~20 min for up to 10 tables. ~90 sec per table for pitch + roll. If Phase 1 runs 65+ min, acceptable to start Phase 2 with finished tables while last 1–2 wrap up.</div>
+
+      <div class="section-heading">OPENING PHASE 2</div>
+      <ul class="bullet-list">
+        <li>Check with each GM — does any table need more time for sponsor pitch? 10–15 min max grace period. Rest of room refreshes drinks.</li>
+        <li>Remind GMs to help their table choose the sponsor pitch rep</li>
+        <li>MC delivers Phase 2 cold open to the full room (see Phase 2 MC Guide for script)</li>
+      </ul>
+
+      <div class="section-heading">PER-TABLE PITCH SEQUENCE</div>
+      <div class="rule-text" style="font-size:10px; color:#B87333; font-weight:700; margin-bottom:3px;">REPEAT FOR EVERY TABLE</div>
+      <div class="step-row"><span class="step-num">1</span><div class="step-body"><div class="step-label">Call the Table</div><div class="step-note"><em>"Table [NUMBER] — who speaks for your crew? Stand up, tell us your crew name, your construct, and make your pitch to the sponsors."</em></div></div></div>
+      <div class="step-row"><span class="step-num">2</span><div class="step-body"><div class="step-label">Persuasion Roll</div><div class="step-note">Table delivers pitch 30–60 sec. MC: <em>"Thank you. Roll your persuasion."</em> One person from crew picks up one d20.</div></div></div>
+      <div class="step-row"><span class="step-num">3</span><div class="step-body"><div class="step-label">Assign Tier</div><div class="step-note">Narrate the result and assign sponsor tier from roll table. <strong>Nat 20:</strong> announce immediately to room before anything else.</div></div></div>
+      <div class="step-row"><span class="step-num">4</span><div class="step-body"><div class="step-label">Reveal Patron</div><div class="step-note">Draw community legend patron from matching tier. Deliver as character moment.</div></div></div>
+      <div class="step-row"><span class="step-num">5</span><div class="step-body"><div class="step-label">Log &amp; Move On</div><div class="step-note">Table marks sponsor tier, uses, and modifier on card. Jonathan logs. <em>"Table [NEXT] — who speaks for your crew?"</em></div></div></div>
+
+      <div class="mc-note"><div class="note-label">Pace</div>Don't let the room idle. Call the next table before the last one finishes writing.</div>
+    </div>
+
+    <!-- COL 2: ROLL TABLE -->
+    <div class="col">
+      <div class="section-heading">SPONSOR ROLL — QUICK LOOKUP</div>
+      <table class="roll-table">
+        <thead>
+          <tr><th>Roll</th><th>Tier</th><th>Uses</th><th>Mod</th><th>MC Call</th></tr>
+        </thead>
+        <tbody>
+          <tr class="tr-nat20">
+            <td class="r-roll">Nat 20</td>
+            <td class="r-tier">Elite (Enhanced)<br><span style="font-size:9px;font-weight:400;color:#555;">Room moment</span></td>
+            <td class="r-uses">3</td>
+            <td class="r-mod">±3</td>
+            <td style="font-size:10px;">Announce immediately — before anything else. This is the room moment.</td>
+          </tr>
+          <tr class="tr-elite">
+            <td class="r-roll">15–19</td>
+            <td class="r-tier">Elite</td>
+            <td class="r-uses">2</td>
+            <td class="r-mod">±3</td>
+            <td style="font-size:10px;">Strong pitch. Sponsor impressed and commits.</td>
+          </tr>
+          <tr class="tr-std">
+            <td class="r-roll">8–14</td>
+            <td class="r-tier">Standard</td>
+            <td class="r-uses">2</td>
+            <td class="r-mod">±2</td>
+            <td style="font-size:10px;">Solid backing. Most common result.</td>
+          </tr>
+          <tr class="tr-gm">
+            <td class="r-roll">2–7</td>
+            <td class="r-tier">GM Sponsor</td>
+            <td class="r-uses">3</td>
+            <td class="r-mod">±1</td>
+            <td style="font-size:10px;">GM advocates for them. Most uses, lowest modifier.</td>
+          </tr>
+          <tr class="tr-nat1">
+            <td class="r-roll">Nat 1</td>
+            <td class="r-tier">GM Sponsor</td>
+            <td class="r-uses">2</td>
+            <td class="r-mod">±1</td>
+            <td style="font-size:10px;">Pitch stumbled. GM shows up anyway. Play warmly.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="section-heading" style="margin-top:4px;">JONATHAN — WHILE PITCHES HAPPEN</div>
+      <div class="rule-text" style="font-size:10.5px;">Log per-table as each pitch resolves:</div>
+      <ul class="bullet-list">
+        <li>Table number</li>
+        <li>Team name</li>
+        <li>Sponsor name / patron title</li>
+        <li>Sponsor roll result and tier</li>
+      </ul>
+      <div class="mc-note"><div class="note-label">PowerPoint Note</div>PowerPoint is pre-built before the event. During pitches Jonathan is NOT building slides — he is logging info to enter during the break. Each slide has the sponsor card image pre-loaded; Jonathan only fills in team name, table number, and uploads the whiteboard photo.</div>
+
+      <div class="mc-note" style="margin-top:2px;"><div class="note-label">Jonathan — Whiteboard Photo</div>After each table's pitch, take a top-down photo of their whiteboard (construct drawing) before moving to the next table.</div>
+    </div>
+
+    <!-- COL 3: GRID ROLL + BREAK -->
+    <div class="col">
+      <div class="section-heading">GRID ORDER ROLL</div>
+      <div class="rule-text" style="font-size:10.5px;">After all sponsor pitches, run initiative roll before calling the break.</div>
+      <div class="mc-note" style="margin-top:2px;"><div class="note-label">MC Line</div><em>"Before we break — we need to set the starting grid. Every player at every table picks up a d20. On my count — three, two, one — roll. GMs: add up your results and divide by player count, round down. That's your grid score. Call it out."</em></div>
+
+      <ul class="bullet-list">
+        <li>All tables roll simultaneously on MC's count</li>
+        <li>Each GM sums results ÷ player count (round down)</li>
+        <li>GMs call out their score — MC and second MC note the order</li>
+        <li>Ties: tied tables re-roll between themselves only — single die, highest wins</li>
+        <li>MC announces Round 1 grid order to the room</li>
+      </ul>
+      <div class="mc-note"><div class="note-label">Round 1 Only</div>This roll sets the starting grid and Round 1 turn order only. From Round 2 onward, turn order is always full reverse grid: last place goes first, first place goes last.</div>
+
+      <div class="section-heading" style="margin-top:4px;">BREAK — MC FINAL PREP</div>
+      <ul class="bullet-list">
+        <li>MC calls the break — players refresh, grab drinks, stretch</li>
+      </ul>
+      <div class="sub-heading" style="font-size:10px; margin-top:2px;">During the break:</div>
+      <ul class="bullet-list">
+        <li>Jonathan enters team names, table numbers, grid order into PowerPoint. Uploads whiteboard photo for each table.</li>
+        <li>Jonathan enters grid order into room tracker: team names, sponsor tier, grid position — hidden until Phase 3 reveal</li>
+        <li>PowerPoint slide order locked last to first for grid reveal</li>
+        <li>Course map queued on projector ready for Phase 3</li>
+        <li>F1-style intro video cued</li>
+        <li>Jonathan and Dan final notes before handoff</li>
+      </ul>
+      <div class="mc-note"><div class="note-label">Handoff Note</div>Phase 2 ends here. Course map reveal, race briefing, and Phase 3 launch all happen after the break at the top of Phase 3.</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════ PAGE 3 — PHASE 3 & FINISH ═══════════════ -->
+<div class="page">
+  <div class="page-header">
+    <div class="seg-accent"></div>
+    <div class="header-inner">
+      <div>
+        <div class="event-label">⚙ &nbsp; Golden Goots Grand Prix — MC Reference</div>
+        <div class="page-title">Phase 3 — The Race</div>
+        <div class="page-subtitle">Course reveal &nbsp;·&nbsp; Round-by-round OOO &nbsp;·&nbsp; Finish line &amp; standings</div>
+      </div>
+      <div class="header-tag">Page 3 of 3</div>
+    </div>
+  </div>
+
+  <div class="body-grid two-col">
+
+    <!-- COL 1: OPENING + ROUND OOO -->
+    <div class="col">
+      <div class="section-heading">PHASE 3 OPENING — COURSE REVEAL</div>
+      <ul class="bullet-list">
+        <li>Jonathan welcomes the room back from the break</li>
+        <li>Course map displayed on projector — 60–90 seconds of silent viewing time</li>
+        <li>MC gives one brief contextual comment — no rules yet. Let the room look.</li>
+        <li>GMs hand out course layout cards (no DCs) to their table now</li>
+      </ul>
+
+      <div class="section-heading">RULES BRIEFING (JONATHAN + DAN)</div>
+      <ul class="bullet-list">
+        <li>Turn order — single roller per table; last place goes first from Round 2 onward</li>
+        <li>Sponsor use declared room-wide before any dice are picked up each round</li>
+        <li>Boost — fires when last-place table is 3+ tiles behind the next car ahead; MC announces it</li>
+        <li>Battles — triggered when two or more tables share a tile at end of round</li>
+        <li>Natural 1 rules — bottom half: Boost eligible next round; top half: skip next turn</li>
+        <li>Each tile is Easy / Standard / Hard — GMs know exact DCs. All tables roll simultaneously; GMs hold results until called.</li>
+        <li>Jonathan: <em>"Any questions? GMs have all the knowledge."</em> → hand to Dan → F1 intro video → King of the Kingdom sounds the starting signal.</li>
+      </ul>
+
+      <div class="mc-note"><div class="note-label">Round Timing</div>Each round targets ~5 min. Early rounds 7–8 min as the room finds rhythm. Mid-race ~5 min. Late race ~4 min. Full Phase 3 averages ~76 minutes.</div>
+
+      <div class="section-heading">EACH ROUND — STEP BY STEP</div>
+      <div class="step-row"><span class="step-num">1</span><div class="step-body"><div class="step-label">Open the Round</div><div class="step-note">Announce Round [N]. Check Boost eligibility (3+ tile gap, last place only). Announce Boost publicly before any dice are touched.</div></div></div>
+      <div class="step-row"><span class="step-num">2</span><div class="step-body"><div class="step-label">Boost Resolution (if active)</div><div class="step-note">Boost recipient rolls big d6 and selects Boost card result out loud. MC announces to room. If Boost requires room-wide roll: call everyone to roll d20, build to the top result for maximum drama.</div></div></div>
+      <div class="step-row"><span class="step-num">3</span><div class="step-body"><div class="step-label">Resolve Battles</div><div class="step-note">If any tables share a tile from the previous round, resolve before new rolls. Back of pack to front. Each tied table's roller: one d20 simultaneously; highest advances one extra tile. Ties re-roll.</div></div></div>
+      <div class="step-row"><span class="step-num">4</span><div class="step-body"><div class="step-label">Sponsor Window</div><div class="step-note">MC: <em>"Sponsor window is open. Declare any uses now — before anyone picks up a die."</em> All declarations out loud. Uses expended on declaration regardless of outcome.</div></div></div>
+      <div class="step-row"><span class="step-num">5</span><div class="step-body"><div class="step-label">All Tables Roll</div><div class="step-note">MC: <em>"OK — GMs take it away."</em> Allow 1–2 minutes. All tables hold results — no movement yet.</div></div></div>
+      <div class="step-row"><span class="step-num">6</span><div class="step-body"><div class="step-label">MC Calls Results</div><div class="step-note">Last-to-first (reverse grid). Call the table → GM announces roll + modifiers → MC resolves outcome with flavour narration (30 sec max) → move token → call next table.</div></div></div>
+      <div class="step-row"><span class="step-num">7</span><div class="step-body"><div class="step-label">Update Tracker</div><div class="step-note">Click Next Turn on room tracker. Re-order by new grid position. Set Boost eligibility. Open Round [N+1].</div></div></div>
+
+      <div class="mc-note"><div class="note-label">Boost Rules — Late Race</div>If the leader has not crossed the finish by Round 16, MC may call Boost Rules — all DCs drop by 2. MC discretion; Round 16 is the minimum threshold, not automatic. Fires in ~23% of races.</div>
+    </div>
+
+    <!-- COL 2: FINISH LINE + STANDINGS + CLOSE -->
+    <div class="col">
+      <div class="section-heading">FINISH LINE — HOW IT WORKS</div>
+      <div class="rule-text" style="font-size:10.5px;">No stop-the-room moment. The round completes normally — every table rolls in turn order. The Finish Straight (tile 3-5, Velocity, DC 10) is called like any other tile. Standings are called after the round ends, not mid-round.</div>
+
+      <div class="section-heading" style="margin-top:4px;">FINISH STRAIGHT — RESULT CALLS</div>
+      <table class="result-table">
+        <thead><tr><th>Result</th><th>MC Call</th></tr></thead>
+        <tbody>
+          <tr class="tr-blaze"><td style="font-weight:700;">🏁 Blazing Run<br><span style="font-size:9px;font-weight:400;">(beat DC by 5+)</span></td><td>Call it to the room. Give it a line. Mark tracker. Two seconds of room reaction — then continue turn order.</td></tr>
+          <tr class="tr-clean"><td style="font-weight:700;">✓ Clean Finish<br><span style="font-size:9px;font-weight:400;">(beat DC)</span></td><td>Name the crew. Give it one line. Move on.</td></tr>
+          <tr class="tr-miss"><td style="font-weight:700;">✗ Miss<br><span style="font-size:9px;font-weight:400;">(fail DC)</span></td><td>One line — they roll again next round. DC 10; won't last long.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-heading" style="margin-top:4px;">PHOTO FINISH — TWO OR MORE CLEAR THE SAME ROUND</div>
+      <ul class="bullet-list">
+        <li>Finish the round — all remaining tables complete their turns</li>
+        <li>MC announces the dead heat to the room</li>
+        <li>Each tied table's chosen roller picks up one d20 — roll simultaneously — highest result wins — re-roll ties until broken — no modifiers, raw dice only</li>
+        <li>If a tied table had a Blazing Run, call that out when announcing the tie — not during the roll-off</li>
+        <li>Proceed to standings</li>
+      </ul>
+
+      <div class="section-heading">CALLING STANDINGS</div>
+      <table class="result-table">
+        <thead><tr><th>Position</th><th>How to Call It</th></tr></thead>
+        <tbody>
+          <tr style="background:#E8F0FF;"><td style="font-weight:800;color:#0C2566;">1st Place</td><td>Call it with weight. Name the crew, name the construct. One specific line on their race if you have it.</td></tr>
+          <tr><td style="font-weight:700;">2nd / 3rd</td><td>Name and position. One line if warranted.</td></tr>
+          <tr><td style="font-weight:700;">4th – last</td><td>Name and position. Keep pace. Don't skip anyone.</td></tr>
+          <tr style="background:#F5F0E8;"><td style="font-weight:700;">Last place</td><td>Give it a line. Never a joke at their expense.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-heading" style="margin-top:4px;">POST-RACE CLOSE</div>
+      <ul class="bullet-list">
+        <li>Prize ceremony format — <em>[TO BE FILLED IN]</em></li>
+        <li>GMs and crew thank-you moment — <em>[TO BE FILLED IN]</em></li>
+        <li>Closing MC line — send the room off in the world of Answick — <em>[TO BE FILLED IN]</em></li>
+      </ul>
+
+      <div class="section-heading" style="margin-top:4px;">OPEN ACTION ITEMS</div>
+      <table class="action-table">
+        <thead><tr><th>#</th><th>Item</th><th>Owner</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>3</td><td>Post-race section: prize ceremony, thank-you sequence, closing MC line</td><td>Jonathan / Dan</td><td>FILL ON SITE</td></tr>
+          <tr><td>7</td><td>Phase 3 opening — F1-style intro, race briefing delivery with Dan</td><td>Jonathan / Dan</td><td>IN PROGRESS</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

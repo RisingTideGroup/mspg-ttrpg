@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GM Table DM Brief · Golden Goots Grand Prix</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  background: #e8e5df;
+  margin: 0;
+  padding: 20px 0;
+  transform: none;
+}
+@page { size: 11in 8.5in landscape; margin: 0; }
+@media print {
+  body { background: #fff; padding: 0; margin: 0; }
+  .page { margin: 0; border-radius: 0; box-shadow: none; page-break-after: always; }
+}
+.page {
+  width: 279.4mm;
+  height: 215.9mm;
+  margin: 10mm auto 8mm;
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.13);
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+  flex-shrink: 0;
+  background: #1a1a2e;
+  color: #fff;
+  padding: 8px 16px 7px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.page-header .title    { font-size: 15px; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
+.page-header .subtitle { font-size: 10px; color: #b0b8d0; letter-spacing: 0.06em; text-transform: uppercase; }
+.page-header .gear     { color: #B87333; font-size: 13px; }
+
+.body-grid {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  padding: 10px 12px 24px;
+  overflow: hidden;
+}
+.two-col { grid-template-columns: 1fr 1fr; }
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 10px;
+}
+.col:first-child { padding-left: 0; }
+.col:last-child  { padding-right: 0; }
+.col + .col { border-left: 1px solid #e4e0d8; }
+
+/* Phase banner */
+.phase-banner {
+  flex-shrink: 0;
+  background: #1a1a2e;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 3px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.phase-banner .phase-name  { font-size: 10px; font-weight: 700; color: #fff; letter-spacing: 0.03em; }
+.phase-banner .phase-meta  { font-size: 8.5px; color: #b0b8d0; }
+.phase-banner .phase-inv   { font-size: 8px; font-weight: 700; color: #B87333; margin-left: auto; text-transform: uppercase; letter-spacing: 0.06em; }
+
+.section-title {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #1a1a2e;
+  border-bottom: 1.5px solid #1a1a2e;
+  padding-bottom: 2px;
+  flex-shrink: 0;
+}
+
+.body-text {
+  font-size: 9px;
+  color: #333;
+  line-height: 1.45;
+  flex-shrink: 0;
+}
+
+.body-list {
+  margin: 0;
+  padding-left: 13px;
+  font-size: 9px;
+  color: #333;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+.body-list li { margin-bottom: 1px; }
+
+table { width: 100%; border-collapse: collapse; flex-shrink: 0; }
+th {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 3px 5px;
+  text-align: left;
+  font-size: 7.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+td {
+  padding: 2px 5px;
+  border-bottom: 1px solid #e8e5df;
+  vertical-align: top;
+  font-size: 8.5px;
+  line-height: 1.35;
+  color: #222;
+}
+tr:nth-child(even) td { background: #f5f4f1; }
+td strong { font-weight: 700; color: #1a1a2e; }
+td em { font-style: italic; color: #555; }
+
+/* Checklist */
+.checklist { display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 9px;
+  line-height: 1.35;
+  color: #333;
+}
+.check-box {
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid #1a1a2e;
+  border-radius: 2px;
+  margin-top: 0px;
+}
+
+/* Numbered steps */
+.steps { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+.step  { display: flex; gap: 6px; align-items: flex-start; font-size: 9px; line-height: 1.35; }
+.step-num {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  background: #1a1a2e;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 700;
+}
+.step-content strong { color: #1a1a2e; display: inline; }
+.step-content span   { color: #444; }
+
+/* Rule / note box */
+.rule-box {
+  background: #f5f4f1;
+  border: 1px solid #e4e0d8;
+  border-radius: 3px;
+  padding: 4px 7px;
+  font-size: 8.5px;
+  line-height: 1.4;
+  color: #333;
+  flex-shrink: 0;
+}
+.rule-box strong { color: #1a1a2e; }
+
+.gm-note {
+  font-size: 8px;
+  color: #555;
+  font-style: italic;
+  border-left: 2px solid #1a1a2e;
+  padding: 3px 0 3px 6px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+.gm-note strong { color: #1a1a2e; font-style: normal; }
+
+/* Sponsor tier row tints */
+.tier-elite-plus td { background: #fff9e0 !important; }
+.tier-elite td      { background: #fff4d0 !important; }
+.tier-standard td   { background: #f5f4f1 !important; }
+.tier-gm td         { background: #eef3ee !important; }
+
+/* Narration pacing strip */
+.pacing-strip {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.pacing-item {
+  flex: 1;
+  background: #1a1a2e;
+  color: #fff;
+  border-radius: 3px;
+  padding: 3px 5px;
+  text-align: center;
+  font-size: 7.5px;
+  line-height: 1.4;
+}
+.pacing-item .seg-label { font-weight: 700; color: #B87333; display: block; }
+.pacing-item .seg-note  { color: #b0b8d0; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: Phase 1 + Phase 2 -->
+<div class="page">
+  <div class="page-header">
+    <span class="gear">⚙</span>
+    <span class="title">GM TABLE DM BRIEF</span>
+    <span class="subtitle">Phase-by-Phase Responsibilities · Phase 1 &amp; 2</span>
+    <span class="gear">⚙</span>
+  </div>
+  <div class="body-grid two-col">
+
+    <!-- LEFT COL: Phase 1 -->
+    <div class="col">
+
+      <div class="phase-banner">
+        <span class="phase-name">PHASE 1 — Parts Buying</span>
+        <span class="phase-meta">~60 min</span>
+        <span class="phase-inv">Involvement: Maximum</span>
+      </div>
+
+      <p class="body-text">You are the busiest person in the room during Phase 1. Play NPC vendors, take gold, run challenge rolls, notate final VEL / HAN / RES modifiers on the build sheet, and get the crew ready for Phase 2.</p>
+
+      <div class="section-title">Setup</div>
+      <ul class="body-list">
+        <li>Two sensory details per district from the Sensory Atlas, then stop. Let players ask questions.</li>
+        <li>100g budget. Unspent gold is lost — no bank. All attributes <strong>start at −2</strong>. Impossible to max all three.</li>
+        <li>Vendor Route Planner — 5-stop grid on the player card. Encourage crews to complete it before spending their first gold.</li>
+      </ul>
+
+      <div class="section-title">Vendor Mechanics</div>
+      <table>
+        <thead>
+          <tr><th>Type</th><th>Gold</th><th>Roll</th><th>DC</th><th>Result</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Standard Part</strong></td><td>Pay now</td><td>None</td><td>—</td><td>Record modifier on build sheet immediately.</td></tr>
+          <tr><td><strong>Upgrade Challenge</strong></td><td>Pay after win</td><td>Group d20 avg</td><td>12</td><td>Win = unlock +1 purchase. ~60–65% success.</td></tr>
+          <tr><td><strong>Champ Spec Challenge</strong></td><td>Pay after win</td><td>Group d20 avg</td><td>14</td><td>Win = unlock +2 purchase. ~35–40% — should feel risky.</td></tr>
+          <tr><td><strong>HAG Boost</strong></td><td>—</td><td>Declare before roll</td><td>—</td><td>+1 to group average. 2 uses per game. Phase 1 only.</td></tr>
+          <tr><td><strong>Maestro Anyx</strong></td><td>40g</td><td>None</td><td>All attrs ≥−1</td><td>+1 all attributes + Natural 1 breakdown immunity.</td></tr>
+        </tbody>
+      </table>
+      <div class="gm-note"><strong>Group d20 roll:</strong> all players roll simultaneously, GM sums ÷ player count (round down). No money changes hands until after the challenge resolves — the challenge is an audition.</div>
+
+      <div class="section-title">End of Phase 1 Checklist</div>
+      <div class="checklist">
+        <div class="check-item"><div class="check-box"></div><span>Total gold spent ≤ 100g. Remind table of any remaining gold — it will be lost.</span></div>
+        <div class="check-item"><div class="check-box"></div><span>All three modifiers (VEL / HAN / RES) confirmed and circled on every character sheet and the build sheet.</span></div>
+        <div class="check-item"><div class="check-box"></div><span>Crew has team name, construct drawn on the whiteboard, and sponsor pitch prepared.</span></div>
+        <div class="check-item"><div class="check-box"></div><span>Signal the MC when done. MC may start Phase 2 at 65+ min without waiting for the full room.</span></div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COL: Phase 2 -->
+    <div class="col">
+
+      <div class="phase-banner">
+        <span class="phase-name">PHASE 2 — Sponsor Pavilion</span>
+        <span class="phase-meta">~20 min</span>
+        <span class="phase-inv">Involvement: Low</span>
+      </div>
+
+      <p class="body-text">The MC runs the room. The prep you drove at end of Phase 1 now plays out. One designated crew rep delivers an RP pitch; your job was to help them prepare it. Once your table has presented, your involvement is minimal — use this window to review Phase 3 mechanics.</p>
+
+      <div class="section-title">Sponsor Roll Results</div>
+      <table>
+        <thead>
+          <tr><th>Roll</th><th>Tier</th><th>Uses</th><th>Mod</th><th>GM Note</th></tr>
+        </thead>
+        <tbody>
+          <tr class="tier-elite-plus"><td>Nat 20</td><td><strong>Elite Enhanced</strong></td><td>3</td><td>±3</td><td>Room eruption — MC announces before anything else.</td></tr>
+          <tr class="tier-elite"><td>15–19</td><td><strong>Elite</strong></td><td>2</td><td>±3</td><td>Strong showing. Sponsor commits.</td></tr>
+          <tr class="tier-standard"><td>8–14</td><td><strong>Standard</strong></td><td>2</td><td>±2</td><td>Solid backing. Most common result.</td></tr>
+          <tr class="tier-gm"><td>2–7</td><td><strong>GM Sponsor</strong></td><td>3</td><td>±1</td><td>You advocate for them. 3 uses compensates. Play warmly.</td></tr>
+          <tr class="tier-gm"><td>Nat 1</td><td><strong>GM Sponsor</strong></td><td>2</td><td>±1</td><td>Pitch stumbled — you showed up anyway. Play it with loyalty.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title">Presentation Logistics</div>
+      <ul class="body-list">
+        <li>Confirm crew name, construct name, and 30–60 sec pitch are ready before the table is called.</li>
+        <li>Record sponsor tier / uses / modifier / patron name on every player card immediately after MC assigns.</li>
+        <li>Natural 1 result: be ready to be named in-character as their backer. Two uses of ±1 is still real value. Play warmly, not apologetically.</li>
+      </ul>
+
+      <div class="section-title">Initiative Roll — End of Phase 2</div>
+      <div class="rule-box">All players roll d20 simultaneously on MC's count. Sum ÷ player count (round down). Call score to MC. Ties: re-roll between tied tables only. This sets Round 1 turn order. <strong>From Round 2 onward: reverse grid always</strong> — last place rolls first, first place rolls last.</div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- PAGE 2: Phase 3 -->
+<div class="page">
+  <div class="page-header">
+    <span class="gear">⚙</span>
+    <span class="title">GM TABLE DM BRIEF</span>
+    <span class="subtitle">Phase 3 — The Race · Core Loop · Boost · Narration</span>
+    <span class="gear">⚙</span>
+  </div>
+  <div class="body-grid two-col">
+
+    <!-- LEFT COL -->
+    <div class="col">
+
+      <div class="phase-banner">
+        <span class="phase-name">PHASE 3 — The Race</span>
+        <span class="phase-meta">~76 min</span>
+        <span class="phase-inv">Involvement: Moderate</span>
+      </div>
+
+      <p class="body-text">You narrate and support your table. The MC owns the room tracker, battles, and Boost decisions.</p>
+
+      <div class="section-title">Character Boosts — Phase 3 Only</div>
+      <table>
+        <thead>
+          <tr><th>Sheets</th><th>Boost</th><th>Active On</th><th>Effect</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>VEL-1/2/3</td><td><strong>Velocity Boost</strong></td><td>Velocity tiles only</td><td>Declare before rolling. +1 to d20. 2 uses per game.</td></tr>
+          <tr><td>HAN-1/2/3</td><td><strong>Handling Boost</strong></td><td>Handling tiles only</td><td>Declare before rolling. +1 to d20. 2 uses per game.</td></tr>
+          <tr><td>RES-1/2/3</td><td><strong>Resilience Boost</strong></td><td>Resilience tiles only</td><td>Declare before rolling. +1 to d20. 2 uses per game.</td></tr>
+          <tr><td>HAG-1/2/3</td><td><strong>Haggling Boost</strong></td><td>Phase 1 only</td><td>No effect in Phase 3.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title">Core Loop — Each Round</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content"><strong>Sponsor window</strong> <span>— MC opens before any dice. Help your table decide: boost own roll or penalise another team. Remind uncertain players of remaining uses. Uses expended on declaration regardless of outcome.</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content"><strong>Choose your roller</strong> <span>— MC calls for it. Encourage players who match the current tile type's attribute or haven't rolled recently. Remind roller they can declare a personal boost now if it applies.</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content"><strong>All tables roll simultaneously</strong> <span>on MC's prompt. Hold your result — do not announce until the MC calls your table.</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content"><strong>When called</strong> <span>— report d20 + effective modifier + tile type. Cross off any sponsor use or character boost and confirm with MC. Narrate to your table (30 sec max) — MC assists if needed.</span></div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content"><strong>MC resolves battles and Boost.</strong> <span>Have your roller ready and know your next tile type.</span></div>
+        </div>
+      </div>
+
+      <div class="gm-note"><strong>Master loop:</strong> MC opens sponsor window → MC calls for roller (you encourage right player) → all tables roll → MC calls last-to-first → you report + tally uses → narrate → MC moves token → MC resolves battles / Boost.</div>
+
+    </div>
+
+    <!-- RIGHT COL -->
+    <div class="col">
+
+      <div class="section-title">Boost — Giant Foam d6</div>
+      <p class="body-text" style="margin-bottom:3px;">Triggered when last place is 3+ tiles behind next car, or following a Natural 1. MC announces. Your table rolls the foam d6.</p>
+      <table>
+        <thead>
+          <tr><th>d6</th><th>Boost</th><th>Effect</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>1</strong></td><td>Slipstream</td><td>Choose one attribute — effective modifier doubled. Declare before rolling d20.</td></tr>
+          <tr><td><strong>2</strong></td><td>Crowd Surge</td><td>+3 to d20 result after rolling. MC announces as room moment first.</td></tr>
+          <tr><td><strong>3</strong></td><td>Arcane Repair</td><td>Treat tile as neutral — no modifier applies. Raw d20 only.</td></tr>
+          <tr><td><strong>4</strong></td><td>Wild Fuel Cell</td><td>No roll — move 2 tiles immediately. MC announces dramatically.</td></tr>
+          <tr><td><strong>5</strong></td><td>Ghost Draft</td><td>Use highest d20 rolled this round (any table) + your effective modifier.</td></tr>
+          <tr><td><strong>6</strong></td><td>Table Chooses</td><td>Pick any of the five. Table huddle — MC gives you a beat for it.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title" style="margin-top:4px;">Narration</div>
+      <ul class="body-list">
+        <li>Two sensory details per tile from the Atlas, delivered crisply. Stop. Answer player questions specifically.</li>
+        <li><strong>Blazing Run:</strong> back the MC's room announcement with a strong table moment.</li>
+        <li><strong>Natural 1, bottom 50%:</strong> Boost next round (★). Narrate a construct hiccup.</li>
+        <li><strong>Natural 1, top 50%:</strong> Lose next turn (SKIP). Same narration — different stakes.</li>
+        <li><strong>Aether Bridge (3-3, DC 15 only):</strong> slow down. Describe the 1.7-second engine silence first.</li>
+        <li><strong>After the finish:</strong> one breath of quiet. Ask each player what their character does in the 30 seconds after crossing the line.</li>
+      </ul>
+
+      <div class="section-title" style="margin-top:4px;">Narration Pacing by Segment</div>
+      <div class="pacing-strip">
+        <div class="pacing-item"><span class="seg-label">SEG 1</span><span class="seg-note">Loud and punchy. Energy from the start.</span></div>
+        <div class="pacing-item"><span class="seg-label">SEG 2</span><span class="seg-note">Drop your voice at Undercroft Tunnel (2-3).</span></div>
+        <div class="pacing-item"><span class="seg-label">SEG 3</span><span class="seg-note">Dramatic pause before Aether Bridge. Pure energy at Finish.</span></div>
+      </div>
+
+      <div class="section-title" style="margin-top:4px;">Other Mechanics — MC Handles, You Support</div>
+      <ul class="body-list">
+        <li><strong>Battles:</strong> 2+ tables on same tile at end of round. MC calls it. Each table's roller: d20 + modifier. Highest wins, advances 1 extra tile. No battles on tiles 1-1 through 1-4.</li>
+        <li><strong>SKIP tokens:</strong> Natural 1, top-50% field. Lose next turn. Confirm with MC, clear token after skipped round.</li>
+        <li><strong>Boost Rules</strong> (MC discretion, Round 16 minimum): all tile DCs drop by 2. MC announces. No GM action needed.</li>
+      </ul>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
