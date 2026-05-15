@@ -1,0 +1,1402 @@
+/* =============================================================
+   Ironclad Grand Prix — Shared Stylesheet
+   Used by both character_sheets.html and table_dm_packet.html
+   ============================================================= */
+
+/* ─── DM PACKET STYLES ─── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #ccc;
+  font-family: 'Crimson Text', Georgia, serif;
+  color: #000;
+  font-size: 10pt;
+  line-height: 1.45;
+}
+
+/* ── PAGE ── */
+.page {
+  width: 8.5in;
+  min-height: 11in;
+  background: #fff;
+  margin: 0 auto 0.5in;
+  padding: 0.42in 0.5in 0.42in;
+  position: relative;
+  overflow: hidden;
+}
+
+.page > * { position: relative; z-index: 1; }
+
+/* ── MASTHEAD ── */
+.masthead {
+  text-align: center;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #000;
+}
+.game-title {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 7pt;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 3px;
+}
+.doc-title {
+  font-family: 'Cinzel', serif;
+  font-size: 22pt;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: #000;
+}
+.doc-sub {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5pt;
+  letter-spacing: 0.2em;
+  color: #444;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── ACT BANNER ── */
+.act-banner {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin: 10px 0 8px;
+  border: 1.5px solid #000;
+}
+.act-number {
+  font-family: 'Cinzel', serif;
+  font-size: 22pt;
+  font-weight: 900;
+  background: #000;
+  color: #fff;
+  padding: 5px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0.55in;
+  line-height: 1;
+}
+.act-body {
+  flex: 1;
+  padding: 5px 10px;
+  background: #f5f5f5;
+}
+.act-eyebrow {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6.5pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 2px;
+}
+.act-title {
+  font-family: 'Cinzel', serif;
+  font-size: 12pt;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #000;
+  line-height: 1;
+}
+.act-sub {
+  font-size: 8pt;
+  font-style: italic;
+  color: #444;
+  margin-top: 2px;
+}
+.act-time {
+  padding: 5px 10px;
+  background: #eee;
+  border-left: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0.65in;
+  text-align: center;
+}
+.act-time-val {
+  font-family: 'Cinzel', serif;
+  font-size: 13pt;
+  font-weight: 700;
+  line-height: 1;
+}
+.act-time-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 5.5pt;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #666;
+  margin-top: 1px;
+}
+.act-role {
+  padding: 5px 10px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0.8in;
+  border-left: none;
+}
+.act-role-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #000;
+  border-bottom: 1px solid #000;
+  padding-bottom: 2px;
+  margin-bottom: 6px;
+  margin-top: 10px;
+}
+.section-title:first-child { margin-top: 0; }
+
+/* ── RULES BOX ── */
+.rules-box {
+  border: 1px solid #000;
+  padding: 6px 8px;
+  margin-bottom: 8px;
+  background: #fafafa;
+}
+.rules-box-title {
+  font-family: 'Cinzel', serif;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-bottom: 0.75px solid #ccc;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+}
+.inline-row {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 4px;
+  font-size: 8pt;
+  line-height: 1.4;
+  margin-bottom: 3px;
+  align-items: start;
+}
+.inline-row .lbl {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 7pt;
+  font-weight: bold;
+  color: #333;
+}
+
+/* ── TWO / THREE COL ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.15in; margin-bottom: 8px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.12in; margin-bottom: 8px; }
+
+/* ── CHARACTER ROSTER ── */
+.char-roster {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8pt;
+  margin-bottom: 8px;
+}
+.char-roster th {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: #000;
+  color: #fff;
+  padding: 3px 5px;
+  font-weight: normal;
+  text-align: left;
+}
+.char-roster td {
+  padding: 3.5px 5px;
+  border-bottom: 0.5px solid #ddd;
+  vertical-align: top;
+  line-height: 1.35;
+}
+.char-roster tr:last-child td { border-bottom: 1px solid #000; }
+.cr-id { font-family: 'Share Tech Mono', monospace; font-size: 7pt; font-weight: bold; color: #333; width: 40px; }
+.cr-name { font-family: 'Cinzel', serif; font-size: 8pt; font-weight: 700; width: 1.1in; }
+.cr-hp { font-family: 'Share Tech Mono', monospace; font-size: 7.5pt; text-align: center; width: 30px; font-weight: bold; }
+.cr-boost { font-family: 'Share Tech Mono', monospace; font-size: 7pt; font-weight: bold; width: 1.1in; }
+.cr-stats { font-family: 'Share Tech Mono', monospace; font-size: 6.5pt; color: #222; width: 1.1in; letter-spacing: 0.02em; line-height: 1.35; }
+.cr-ac { font-family: 'Share Tech Mono', monospace; font-size: 7.5pt; text-align: center; width: 28px; font-weight: bold; color: #000; }
+.cr-skill { font-family: 'Share Tech Mono', monospace; font-size: 7pt; font-weight: bold; width: 0.95in; color: #000; }
+
+.roster-group-header td {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: #eee;
+  color: #444;
+  padding: 2px 5px;
+  font-weight: bold;
+  border-bottom: 0.5px solid #ccc;
+}
+
+/* ── VENDOR BLOCK ── */
+.vendor-block {
+  margin-bottom: 8px;
+  border: 0.75px solid #aaa;
+  border-left: 3px solid #000;
+  page-break-inside: avoid;
+}
+.vendor-header {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 4px 7px 3px;
+  border-bottom: 0.5px solid #ddd;
+  background: #f5f5f5;
+}
+.vendor-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6.5pt;
+  font-weight: bold;
+  background: #000;
+  color: #fff;
+  padding: 1px 4px;
+  flex-shrink: 0;
+}
+.vendor-name {
+  font-family: 'Cinzel', serif;
+  font-size: 9pt;
+  font-weight: 700;
+  color: #000;
+}
+.vendor-loc {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  color: #666;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.vendor-npc-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  color: #333;
+  font-style: normal;
+  font-weight: bold;
+  padding: 0 5px;
+  border: 0.5px solid #aaa;
+  flex-shrink: 0;
+}
+
+.vendor-body {
+  display: grid;
+  grid-template-columns: 1.5in 1fr 1.45in;
+  gap: 0;
+}
+
+.vendor-sensory {
+  padding: 5px 7px;
+  font-size: 7.5pt;
+  font-style: italic;
+  color: #222;
+  line-height: 1.45;
+  border-right: 0.5px solid #ddd;
+}
+.vendor-sensory .v-mood {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  font-style: normal;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #555;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.vendor-npc {
+  padding: 5px 7px;
+  font-size: 7.5pt;
+  line-height: 1.45;
+  color: #111;
+  border-right: 0.5px solid #ddd;
+}
+.vendor-npc .npc-name {
+  font-family: 'Cinzel', serif;
+  font-size: 8pt;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.vendor-parts {
+  padding: 5px 7px;
+}
+.parts-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 5.5pt;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 3px;
+  border-bottom: 0.5px solid #ddd;
+  padding-bottom: 2px;
+}
+.parts-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 7pt;
+}
+.parts-table tr { border-bottom: 0.5px solid #eee; }
+.parts-table tr:last-child { border-bottom: none; }
+.parts-table td { padding: 2px 2px; vertical-align: top; line-height: 1.3; }
+.pt-name { font-weight: 600; color: #000; }
+.pt-how {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 5.5pt;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+}
+.how-buy { color: #333; }
+.how-challenge { color: #000; font-weight: bold; }
+.pt-mod {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 7pt;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+}
+.mod-p { }
+.mod-n { }
+.pt-cost {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 7pt;
+  text-align: right;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.challenge-inline {
+  font-size: 6.5pt;
+  line-height: 1.35;
+  color: #333;
+  background: #f0f0f0;
+  border: 0.5px solid #ccc;
+  padding: 2px 4px;
+  margin-top: 3px;
+}
+.challenge-inline .ch-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 5.5pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 1px;
+}
+
+.dm-note {
+  font-size: 7pt;
+  color: #333;
+  background: #f5f5f5;
+  border-left: 2px solid #aaa;
+  padding: 2px 5px;
+  margin-top: 3px;
+  font-style: italic;
+  line-height: 1.35;
+}
+.dm-note strong { font-style: normal; }
+
+/* ── DISTRICT HEADER ── */
+.district-header {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: #000;
+  color: #fff;
+  padding: 4px 8px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.district-header:first-of-type { margin-top: 0; }
+.district-tag-right {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  opacity: 0.7;
+  margin-left: auto;
+  letter-spacing: 0.08em;
+}
+.district-atmo {
+  font-size: 8pt;
+  font-style: italic;
+  color: #333;
+  border-left: 2px solid #000;
+  padding: 3px 7px;
+  margin-bottom: 6px;
+  line-height: 1.45;
+}
+
+/* ── ENCOUNTER BLOCK ── */
+.encounter-block {
+  border: 1.5px solid #000;
+  margin-bottom: 10px;
+  page-break-inside: avoid;
+}
+.encounter-header {
+  background: #000;
+  color: #fff;
+  padding: 4px 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.enc-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 7pt;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+.enc-name {
+  font-family: 'Cinzel', serif;
+  font-size: 10pt;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.enc-trigger {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  opacity: 0.7;
+  margin-left: auto;
+  letter-spacing: 0.08em;
+}
+.encounter-body {
+  display: grid;
+  grid-template-columns: 1.8in 1fr 1.6in;
+  gap: 0;
+}
+.enc-setup {
+  padding: 6px 8px;
+  font-size: 8pt;
+  line-height: 1.5;
+  color: #111;
+  border-right: 0.5px solid #ccc;
+}
+.enc-setup .trigger-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #555;
+  display: block;
+  margin-bottom: 3px;
+}
+.enc-stat-block {
+  padding: 5px 8px;
+  border-right: 0.5px solid #ccc;
+}
+.stat-block-inner {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 7.5pt;
+}
+.stat-block-inner th {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 5.5pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: #eee;
+  padding: 2px 4px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+}
+.stat-block-inner td {
+  padding: 2px 4px;
+  border-bottom: 0.5px solid #eee;
+  line-height: 1.3;
+  vertical-align: top;
+}
+.stat-block-inner tr:last-child td { border-bottom: none; }
+.sb-label { font-family: 'Share Tech Mono', monospace; font-size: 6.5pt; font-weight: bold; width: 55px; }
+.sb-val { font-size: 7.5pt; }
+.enc-resolution {
+  padding: 6px 8px;
+  font-size: 7.5pt;
+  line-height: 1.45;
+}
+.res-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #555;
+  display: block;
+  margin-bottom: 3px;
+}
+.res-option {
+  margin-bottom: 4px;
+  padding-left: 8px;
+  border-left: 1.5px solid #aaa;
+  font-size: 7.5pt;
+  line-height: 1.35;
+}
+.res-option strong { font-size: 7pt; font-family: 'Share Tech Mono', monospace; text-transform: uppercase; }
+
+/* ── TILE SUMMARY ── */
+.tile-summary {
+  margin-bottom: 6px;
+  border: 0.75px solid #aaa;
+  border-left: 2px solid #000;
+  page-break-inside: avoid;
+}
+.tile-sum-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 7px;
+  background: #f5f5f5;
+  border-bottom: 0.5px solid #ddd;
+}
+.tile-id {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 7pt;
+  font-weight: bold;
+  color: #333;
+  width: 40px;
+}
+.tile-name {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #000;
+}
+.tile-attr-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9pt;
+  font-weight: bold;
+  padding: 2px 7px;
+  border: 1px solid #000;
+  letter-spacing: 0.08em;
+  background: #000;
+  color: #fff;
+}
+.tile-dc-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9pt;
+  font-weight: bold;
+  padding: 2px 7px;
+  border: 1px solid #000;
+  margin-left: auto;
+  letter-spacing: 0.08em;
+  background: #fff;
+  color: #000;
+}
+.tile-desc {
+  padding: 4px 7px 2px;
+  font-size: 7.5pt;
+  line-height: 1.45;
+  color: #111;
+}
+.tile-special-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  padding: 1px 4px;
+  border: 0.5px solid #888;
+  color: #555;
+  letter-spacing: 0.05em;
+}
+.tile-sum-body {
+  padding: 4px 7px;
+  font-size: 8pt;
+  line-height: 1.45;
+  font-style: italic;
+  color: #222;
+}
+
+.seg-label {
+  font-family: 'Cinzel', serif;
+  font-size: 7.5pt;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: #333;
+  color: #fff;
+  padding: 3px 8px;
+  margin: 8px 0 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── OUTCOME REFERENCE ── */
+.outcome-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 7.5pt;
+  margin-bottom: 8px;
+}
+.outcome-table th {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: #000;
+  color: #fff;
+  padding: 3px 5px;
+  text-align: left;
+  font-weight: normal;
+}
+.outcome-table td {
+  padding: 3px 5px;
+  border-bottom: 0.5px solid #ddd;
+  vertical-align: top;
+  line-height: 1.35;
+}
+.outcome-table tr:last-child td { border-bottom: 1px solid #000; }
+.ot-result { font-family: 'Share Tech Mono', monospace; font-size: 7pt; font-weight: bold; width: 90px; }
+.ot-name { font-weight: 600; width: 90px; }
+.ot-desc { font-size: 7.5pt; color: #222; }
+
+/* ── PAGE FOOTER ── */
+.page-footer {
+  position: absolute;
+  bottom: 0.32in;
+  left: 0.5in; right: 0.5in;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  padding-top: 4px;
+}
+.footer-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 6pt;
+  color: #888;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── MISC ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+.divider hr { flex: 1; border: none; border-top: 0.75px solid #bbb; }
+.divider span { color: #888; font-size: 10pt; }
+
+.callout {
+  border: 1.5px solid #000;
+  padding: 6px 9px;
+  margin-bottom: 8px;
+  background: #f5f5f5;
+}
+.callout-title {
+  font-family: 'Cinzel', serif;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-bottom: 0.75px solid #ccc;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+}
+.callout p { font-size: 8.5pt; line-height: 1.5; margin-bottom: 3px; }
+.callout p:last-child { margin-bottom: 0; }
+
+/* ── PRINT ── */
+@media print {
+  body { background: none; }
+  .page { margin: 0; page-break-after: always; box-shadow: none; }
+  @page { size: 8.5in 11in; margin: 0; }
+}
+@media screen {
+  body { padding: 0.4in 0; }
+  .page { box-shadow: 0 3px 20px rgba(0,0,0,0.25); }
+}
+
+/* ─── CHARACTER SHEETS STYLES ─── */
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #ccc;
+        font-family: "Crimson Text", Georgia, serif;
+        color: #000;
+        font-size: 10pt;
+      }
+
+      .sheet {
+        width: 8.5in;
+        height: 11in;
+        background: #fff;
+        margin: 0 auto 0.5in;
+        padding: 0.35in 0.5in 0.32in;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ── BORDER ── */
+      .sheet-border {
+        position: absolute;
+        inset: 0.25in;
+        border: 1.5px solid #000;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .sheet-border::after {
+        content: "";
+        position: absolute;
+        inset: 4px;
+        border: 0.5px solid #999;
+      }
+
+      /* ── HEADER ── */
+      .sheet-header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        padding-bottom: 6px;
+        border-bottom: 2px solid #000;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+      .game-title {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 7pt;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: #666;
+        margin-bottom: 2px;
+      }
+      .char-class {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 8pt;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #222;
+        margin-bottom: 3px;
+      }
+      .char-name {
+        font-family: "Cinzel", serif;
+        font-size: 22pt;
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: 0.02em;
+        color: #000;
+      }
+      .char-title-line {
+        font-family: "Crimson Text", Georgia, serif;
+        font-size: 8.5pt;
+        font-style: italic;
+        color: #555;
+        margin-top: 2px;
+        letter-spacing: 0.02em;
+      }
+      .header-right {
+        text-align: right;
+        padding-bottom: 2px;
+      }
+      .sheet-id {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 9pt;
+        color: #333;
+        letter-spacing: 0.1em;
+        display: block;
+        margin-bottom: 2px;
+      }
+      .class-label {
+        font-family: "Cinzel", serif;
+        font-size: 8pt;
+        letter-spacing: 0.1em;
+        color: #666;
+        font-style: italic;
+      }
+
+      /* ── FILL FIELDS ── */
+      .fill-fields-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 0.6fr;
+        gap: 8px;
+        margin-top: 14px;
+        margin-bottom: 14px;
+        position: relative;
+        z-index: 1;
+      }
+      .fill-field {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .fill-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 6pt;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #666;
+      }
+      .fill-line {
+        border-bottom: 1.5px solid #000;
+        height: 14px;
+        width: 100%;
+      }
+
+      /* ── SECTION TITLE ── */
+      .section-title {
+        font-family: "Cinzel", serif;
+        font-size: 7pt;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: #000;
+        border-bottom: 1px solid #000;
+        padding-bottom: 2px;
+        margin-bottom: 7px;
+      }
+
+      /* ── MAIN BODY GRID ── */
+      .body-grid {
+        display: grid;
+        grid-template-columns: 2.4in 1fr;
+        gap: 0.14in;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ── STAT TABLE ── */
+      .stat-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 8pt;
+      }
+      .stat-table thead tr {
+        border-bottom: 1.5px solid #000;
+      }
+      .stat-table th {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 5.5pt;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #444;
+        padding: 2px 4px 3px;
+        text-align: left;
+        font-weight: normal;
+      }
+      .stat-table th.center,
+      .stat-table td.center {
+        text-align: center;
+      }
+      .stat-table tbody tr {
+        border-bottom: 0.75px solid #ddd;
+      }
+      .stat-table tbody tr:last-child {
+        border-bottom: 1.5px solid #000;
+      }
+      .stat-table td {
+        padding: 2.5px 4px;
+        vertical-align: middle;
+        line-height: 1.2;
+      }
+      .td-skill {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 7pt;
+        font-weight: bold;
+        letter-spacing: 0.04em;
+      }
+      .td-stat {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 8pt;
+        text-align: center;
+        font-weight: bold;
+      }
+      .td-mod {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 9pt;
+        text-align: center;
+        font-weight: bold;
+      }
+      .td-governs {
+        font-size: 7.5pt;
+        color: #333;
+        font-style: italic;
+        line-height: 1.25;
+      }
+
+      /* ── RIGHT COLUMN ── */
+      .right-col {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      /* ── COMBAT STATS ROW ── */
+      .combat-stats-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0;
+        border: 1px solid #000;
+        margin-bottom: 4px;
+      }
+      .combat-stat {
+        text-align: center;
+        padding: 3px 5px 4px;
+        border-right: 1px solid #ccc;
+      }
+      .combat-stat:last-child {
+        border-right: none;
+      }
+      .cs-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 5.5pt;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #666;
+        display: block;
+        margin-bottom: 2px;
+      }
+      .cs-value {
+        font-family: "Cinzel", serif;
+        font-size: 11pt;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+      }
+
+      /* ── BACKGROUND ── */
+      .background-block {
+        font-size: 7.5pt;
+        line-height: 1.45;
+        color: #222;
+        font-style: italic;
+        padding: 4px 6px;
+        border: 1px solid #bbb;
+        background: #fafafa;
+      }
+
+      /* ── WEAPON BLOCK ── */
+      .weapon-block {
+        border: 1px solid #bbb;
+        padding: 3px 6px;
+      }
+      .weapon-name {
+        font-family: "Cinzel", serif;
+        font-size: 9pt;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+      .weapon-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        margin-bottom: 2px;
+      }
+      .weapon-stat-pill {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: #f5f5f5;
+        border: 0.5px solid #ccc;
+        padding: 2px 5px;
+        font-size: 7pt;
+      }
+      .wsp-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 6pt;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #666;
+        white-space: nowrap;
+      }
+      .wsp-value {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 8pt;
+        font-weight: bold;
+        color: #000;
+      }
+      .weapon-desc {
+        font-size: 7pt;
+        color: #555;
+        line-height: 1.35;
+        margin-top: 2px;
+      }
+
+      /* ── BOOST BLOCK ── */
+      .boost-block {
+        border: 1px solid #000;
+        padding: 5px 8px;
+        position: relative;
+        z-index: 1;
+      }
+      .boost-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 2px;
+        border-bottom: 0.75px solid #ccc;
+        padding-bottom: 2px;
+      }
+      .boost-sym-name {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+      .boost-sym {
+        font-size: 12pt;
+        line-height: 1;
+      }
+      .boost-name {
+        font-family: "Cinzel", serif;
+        font-size: 10.5pt;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+      .boost-phase {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 6.5pt;
+        color: #555;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .boost-desc {
+        font-size: 8pt;
+        line-height: 1.4;
+        color: #111;
+        margin-bottom: 4px;
+      }
+      .boost-desc strong {
+        font-weight: 600;
+      }
+      .boost-uses-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .uses-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 7pt;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #333;
+      }
+      .use-box {
+        width: 22px;
+        height: 22px;
+        border: 2px solid #000;
+        display: inline-block;
+        flex-shrink: 0;
+      }
+      .uses-note {
+        font-size: 6.5pt;
+        color: #666;
+        font-style: italic;
+      }
+
+      /* ── ACTION CHEAT SHEET ── */
+      .action-sheet {
+        border: 1px solid #000;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 7px;
+        margin-top: 6px;
+      }
+      .action-col {
+        padding: 4px 7px 5px;
+      }
+      .action-col:first-child {
+        border-right: 1px solid #ccc;
+      }
+      .action-col-title {
+        font-family: "Cinzel", serif;
+        font-size: 7pt;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #000;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 2px;
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .col-eyebrow {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 5.5pt;
+        letter-spacing: 0.08em;
+        color: #888;
+        text-transform: uppercase;
+        margin-left: auto;
+      }
+      .action-group {
+        margin-bottom: 4px;
+      }
+      .action-group:last-child {
+        margin-bottom: 0;
+      }
+      .action-group-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 5.5pt;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 2px;
+        border-bottom: 0.5px solid #e8e8e8;
+        padding-bottom: 1px;
+      }
+      .action-item {
+        display: grid;
+        grid-template-columns: 0.95in 1fr;
+        gap: 3px;
+        margin-bottom: 2px;
+        line-height: 1.35;
+        align-items: baseline;
+      }
+      .action-name {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 6.5pt;
+        font-weight: bold;
+        color: #000;
+      }
+      .action-desc {
+        color: #333;
+        font-size: 7pt;
+      }
+
+      /* ── INVENTORY ── */
+      .inventory-block {
+        border: 1px solid #bbb;
+        padding: 5px 7px 5px;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 10px;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      .inventory-lines {
+        flex: 1 1 auto;
+        background-image: repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent 15px,
+          #ccc 15px,
+          #ccc 16px
+        );
+        background-position: 0 0;
+        min-height: 1.5in;
+      }
+      .inv-line {
+        display: none;
+      }
+
+      /* ── FOOTER ── */
+      .sheet-footer {
+        border-top: 1px solid #ccc;
+        padding-top: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+      .footer-text {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 6pt;
+        color: #888;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .footer-motto {
+        font-size: 7.5pt;
+        font-style: italic;
+        color: #999;
+      }
+
+      /* ── LEFT COLUMN (portrait + stat block + modifiers) ── */
+      .left-col {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .portrait-box {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border: 1px solid #000;
+        background: repeating-linear-gradient(
+          45deg,
+          #fafafa 0,
+          #fafafa 6px,
+          #f0f0f0 6px,
+          #f0f0f0 12px
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .portrait-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 7pt;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: #888;
+        background: #fff;
+        padding: 1px 6px;
+        border: 0.5px solid #bbb;
+      }
+      .modifier-block {
+        border: 1px solid #bbb;
+        padding: 5px 7px 6px;
+        background: #fafafa;
+      }
+      .modifier-title {
+        font-family: "Cinzel", serif;
+        font-size: 7pt;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #000;
+        border-bottom: 1px solid #000;
+        padding-bottom: 2px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .car-icon {
+        font-size: 11pt;
+        line-height: 1;
+      }
+      .modifier-field {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        margin-bottom: 4px;
+      }
+      .modifier-field:last-child {
+        margin-bottom: 0;
+      }
+      .modifier-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 5.5pt;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #666;
+      }
+      .modifier-line {
+        border-bottom: 1px solid #000;
+        height: 12px;
+      }
+
+      /* ── WEAPON + SKILL ROW ── */
+      .weapon-skill-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+      }
+      .skill-block {
+        border: 1px solid #bbb;
+        padding: 3px 6px;
+      }
+      .skill-name {
+        font-family: "Cinzel", serif;
+        font-size: 9pt;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+      .skill-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        margin-bottom: 2px;
+      }
+      .skill-stat-pill {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: #f5f5f5;
+        border: 0.5px solid #ccc;
+        padding: 2px 5px;
+        font-size: 7pt;
+      }
+      .ssp-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 6pt;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #666;
+        white-space: nowrap;
+      }
+      .ssp-value {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 7pt;
+        font-weight: bold;
+        color: #000;
+        white-space: nowrap;
+      }
+      .skill-desc {
+        font-size: 7pt;
+        color: #555;
+        line-height: 1.35;
+        margin-top: 2px;
+      }
+
+      /* ── ACTION SHEET (single column after Battle removal) ── */
+      .action-sheet.single-col {
+        grid-template-columns: 1fr;
+      }
+      .action-sheet.single-col .action-col:first-child {
+        border-right: none;
+      }
+
+      /* ── PRINT ── */
+      @media print {
+        body {
+          background: none;
+        }
+        .sheet {
+          margin: 0;
+          page-break-after: always;
+          box-shadow: none;
+        }
+        @page {
+          size: 8.5in 11in;
+          margin: 0;
+        }
+      }
+      @media screen {
+        body {
+          padding: 0.4in 0;
+        }
+        .sheet {
+          box-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
+        }
+      }

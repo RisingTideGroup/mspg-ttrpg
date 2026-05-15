@@ -6,675 +6,7 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Share+Tech+Mono&display=swap"
       rel="stylesheet" />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        background: #ccc;
-        font-family: "Crimson Text", Georgia, serif;
-        color: #000;
-        font-size: 10pt;
-      }
-
-      .sheet {
-        width: 8.5in;
-        height: 11in;
-        background: #fff;
-        margin: 0 auto 0.5in;
-        padding: 0.35in 0.5in 0.32in;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* ── BORDER ── */
-      .sheet-border {
-        position: absolute;
-        inset: 0.25in;
-        border: 1.5px solid #000;
-        pointer-events: none;
-        z-index: 0;
-      }
-      .sheet-border::after {
-        content: "";
-        position: absolute;
-        inset: 4px;
-        border: 0.5px solid #999;
-      }
-
-      /* ── HEADER ── */
-      .sheet-header {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        align-items: end;
-        padding-bottom: 6px;
-        border-bottom: 2px solid #000;
-        margin-bottom: 10px;
-        position: relative;
-        z-index: 1;
-      }
-      .game-title {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 7pt;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: #666;
-        margin-bottom: 2px;
-      }
-      .char-class {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 8pt;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #222;
-        margin-bottom: 3px;
-      }
-      .char-name {
-        font-family: "Cinzel", serif;
-        font-size: 22pt;
-        font-weight: 900;
-        line-height: 1;
-        letter-spacing: 0.02em;
-        color: #000;
-      }
-      .char-title-line {
-        font-family: "Crimson Text", Georgia, serif;
-        font-size: 8.5pt;
-        font-style: italic;
-        color: #555;
-        margin-top: 2px;
-        letter-spacing: 0.02em;
-      }
-      .header-right {
-        text-align: right;
-        padding-bottom: 2px;
-      }
-      .sheet-id {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 9pt;
-        color: #333;
-        letter-spacing: 0.1em;
-        display: block;
-        margin-bottom: 2px;
-      }
-      .class-label {
-        font-family: "Cinzel", serif;
-        font-size: 8pt;
-        letter-spacing: 0.1em;
-        color: #666;
-        font-style: italic;
-      }
-
-      /* ── FILL FIELDS ── */
-      .fill-fields-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 0.6fr;
-        gap: 8px;
-        margin-top: 14px;
-        margin-bottom: 14px;
-        position: relative;
-        z-index: 1;
-      }
-      .fill-field {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-      }
-      .fill-label {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 6pt;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #666;
-      }
-      .fill-line {
-        border-bottom: 1.5px solid #000;
-        height: 14px;
-        width: 100%;
-      }
-
-      /* ── SECTION TITLE ── */
-      .section-title {
-        font-family: "Cinzel", serif;
-        font-size: 7pt;
-        font-weight: 700;
-        letter-spacing: 0.25em;
-        text-transform: uppercase;
-        color: #000;
-        border-bottom: 1px solid #000;
-        padding-bottom: 2px;
-        margin-bottom: 7px;
-      }
-
-      /* ── MAIN BODY GRID ── */
-      .body-grid {
-        display: grid;
-        grid-template-columns: 2.4in 1fr;
-        gap: 0.14in;
-        margin-bottom: 8px;
-        position: relative;
-        z-index: 1;
-      }
-
-      /* ── STAT TABLE ── */
-      .stat-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 8pt;
-      }
-      .stat-table thead tr {
-        border-bottom: 1.5px solid #000;
-      }
-      .stat-table th {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 5.5pt;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: #444;
-        padding: 2px 4px 3px;
-        text-align: left;
-        font-weight: normal;
-      }
-      .stat-table th.center,
-      .stat-table td.center {
-        text-align: center;
-      }
-      .stat-table tbody tr {
-        border-bottom: 0.75px solid #ddd;
-      }
-      .stat-table tbody tr:last-child {
-        border-bottom: 1.5px solid #000;
-      }
-      .stat-table td {
-        padding: 2.5px 4px;
-        vertical-align: middle;
-        line-height: 1.2;
-      }
-      .td-skill {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 7pt;
-        font-weight: bold;
-        letter-spacing: 0.04em;
-      }
-      .td-stat {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 8pt;
-        text-align: center;
-        font-weight: bold;
-      }
-      .td-mod {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 9pt;
-        text-align: center;
-        font-weight: bold;
-      }
-      .td-governs {
-        font-size: 7.5pt;
-        color: #333;
-        font-style: italic;
-        line-height: 1.25;
-      }
-
-      /* ── RIGHT COLUMN ── */
-      .right-col {
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-      }
-
-      /* ── COMBAT STATS ROW ── */
-      .combat-stats-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 0;
-        border: 1px solid #000;
-        margin-bottom: 4px;
-      }
-      .combat-stat {
-        text-align: center;
-        padding: 3px 5px 4px;
-        border-right: 1px solid #ccc;
-      }
-      .combat-stat:last-child {
-        border-right: none;
-      }
-      .cs-label {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 5.5pt;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: #666;
-        display: block;
-        margin-bottom: 2px;
-      }
-      .cs-value {
-        font-family: "Cinzel", serif;
-        font-size: 11pt;
-        font-weight: 700;
-        line-height: 1;
-        color: #000;
-      }
-
-      /* ── BACKGROUND ── */
-      .background-block {
-        font-size: 7.5pt;
-        line-height: 1.45;
-        color: #222;
-        font-style: italic;
-        padding: 4px 6px;
-        border: 1px solid #bbb;
-        background: #fafafa;
-      }
-
-      /* ── WEAPON BLOCK ── */
-      .weapon-block {
-        border: 1px solid #bbb;
-        padding: 3px 6px;
-      }
-      .weapon-name {
-        font-family: "Cinzel", serif;
-        font-size: 9pt;
-        font-weight: 700;
-        margin-bottom: 2px;
-      }
-      .weapon-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4px;
-        margin-bottom: 2px;
-      }
-      .weapon-stat-pill {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        background: #f5f5f5;
-        border: 0.5px solid #ccc;
-        padding: 2px 5px;
-        font-size: 7pt;
-      }
-      .wsp-label {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 6pt;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: #666;
-        white-space: nowrap;
-      }
-      .wsp-value {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 8pt;
-        font-weight: bold;
-        color: #000;
-      }
-      .weapon-desc {
-        font-size: 7pt;
-        color: #555;
-        line-height: 1.35;
-        margin-top: 2px;
-      }
-
-      /* ── BOOST BLOCK ── */
-      .boost-block {
-        border: 1px solid #000;
-        padding: 5px 8px;
-        position: relative;
-        z-index: 1;
-      }
-      .boost-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        margin-bottom: 2px;
-        border-bottom: 0.75px solid #ccc;
-        padding-bottom: 2px;
-      }
-      .boost-sym-name {
-        display: flex;
-        align-items: baseline;
-        gap: 6px;
-      }
-      .boost-sym {
-        font-size: 12pt;
-        line-height: 1;
-      }
-      .boost-name {
-        font-family: "Cinzel", serif;
-        font-size: 10.5pt;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-      }
-      .boost-phase {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 6.5pt;
-        color: #555;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-      }
-      .boost-desc {
-        font-size: 8pt;
-        line-height: 1.4;
-        color: #111;
-        margin-bottom: 4px;
-      }
-      .boost-desc strong {
-        font-weight: 600;
-      }
-      .boost-uses-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .uses-label {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 7pt;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: #333;
-      }
-      .use-box {
-        width: 22px;
-        height: 22px;
-        border: 2px solid #000;
-        display: inline-block;
-        flex-shrink: 0;
-      }
-      .uses-note {
-        font-size: 6.5pt;
-        color: #666;
-        font-style: italic;
-      }
-
-      /* ── ACTION CHEAT SHEET ── */
-      .action-sheet {
-        border: 1px solid #000;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0;
-        position: relative;
-        z-index: 1;
-        margin-bottom: 7px;
-        margin-top: 6px;
-      }
-      .action-col {
-        padding: 4px 7px 5px;
-      }
-      .action-col:first-child {
-        border-right: 1px solid #ccc;
-      }
-      .action-col-title {
-        font-family: "Cinzel", serif;
-        font-size: 7pt;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: #000;
-        border-bottom: 1px solid #ccc;
-        padding-bottom: 2px;
-        margin-bottom: 4px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-      .col-eyebrow {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 5.5pt;
-        letter-spacing: 0.08em;
-        color: #888;
-        text-transform: uppercase;
-        margin-left: auto;
-      }
-      .action-group {
-        margin-bottom: 4px;
-      }
-      .action-group:last-child {
-        margin-bottom: 0;
-      }
-      .action-group-label {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 5.5pt;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: #888;
-        margin-bottom: 2px;
-        border-bottom: 0.5px solid #e8e8e8;
-        padding-bottom: 1px;
-      }
-      .action-item {
-        display: grid;
-        grid-template-columns: 0.95in 1fr;
-        gap: 3px;
-        margin-bottom: 2px;
-        line-height: 1.35;
-        align-items: baseline;
-      }
-      .action-name {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 6.5pt;
-        font-weight: bold;
-        color: #000;
-      }
-      .action-desc {
-        color: #333;
-        font-size: 7pt;
-      }
-
-      /* ── INVENTORY ── */
-      .inventory-block {
-        border: 1px solid #bbb;
-        padding: 5px 7px 5px;
-        position: relative;
-        z-index: 1;
-        margin-bottom: 10px;
-        flex: 1 1 auto;
-        display: flex;
-        flex-direction: column;
-        min-height: 0;
-      }
-      .inventory-lines {
-        flex: 1 1 auto;
-        background-image: repeating-linear-gradient(
-          to bottom,
-          transparent 0,
-          transparent 15px,
-          #ccc 15px,
-          #ccc 16px
-        );
-        background-position: 0 0;
-        min-height: 1.5in;
-      }
-      .inv-line {
-        display: none;
-      }
-
-      /* ── FOOTER ── */
-      .sheet-footer {
-        border-top: 1px solid #ccc;
-        padding-top: 4px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
-        z-index: 1;
-      }
-      .footer-text {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 6pt;
-        color: #888;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-      .footer-motto {
-        font-size: 7.5pt;
-        font-style: italic;
-        color: #999;
-      }
-
-      /* ── LEFT COLUMN (portrait + stat block + modifiers) ── */
-      .left-col {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-      .portrait-box {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        border: 1px solid #000;
-        background: repeating-linear-gradient(
-          45deg,
-          #fafafa 0,
-          #fafafa 6px,
-          #f0f0f0 6px,
-          #f0f0f0 12px
-        );
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-      }
-      .portrait-label {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 7pt;
-        letter-spacing: 0.25em;
-        text-transform: uppercase;
-        color: #888;
-        background: #fff;
-        padding: 1px 6px;
-        border: 0.5px solid #bbb;
-      }
-      .modifier-block {
-        border: 1px solid #bbb;
-        padding: 5px 7px 6px;
-        background: #fafafa;
-      }
-      .modifier-title {
-        font-family: "Cinzel", serif;
-        font-size: 7pt;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: #000;
-        border-bottom: 1px solid #000;
-        padding-bottom: 2px;
-        margin-bottom: 5px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-      .car-icon {
-        font-size: 11pt;
-        line-height: 1;
-      }
-      .modifier-field {
-        display: flex;
-        flex-direction: column;
-        gap: 1px;
-        margin-bottom: 4px;
-      }
-      .modifier-field:last-child {
-        margin-bottom: 0;
-      }
-      .modifier-label {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 5.5pt;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: #666;
-      }
-      .modifier-line {
-        border-bottom: 1px solid #000;
-        height: 12px;
-      }
-
-      /* ── WEAPON + SKILL ROW ── */
-      .weapon-skill-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 6px;
-      }
-      .skill-block {
-        border: 1px solid #bbb;
-        padding: 3px 6px;
-      }
-      .skill-name {
-        font-family: "Cinzel", serif;
-        font-size: 9pt;
-        font-weight: 700;
-        margin-bottom: 2px;
-      }
-      .skill-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4px;
-        margin-bottom: 2px;
-      }
-      .skill-stat-pill {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        background: #f5f5f5;
-        border: 0.5px solid #ccc;
-        padding: 2px 5px;
-        font-size: 7pt;
-      }
-      .ssp-label {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 6pt;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: #666;
-        white-space: nowrap;
-      }
-      .ssp-value {
-        font-family: "Share Tech Mono", monospace;
-        font-size: 7pt;
-        font-weight: bold;
-        color: #000;
-        white-space: nowrap;
-      }
-      .skill-desc {
-        font-size: 7pt;
-        color: #555;
-        line-height: 1.35;
-        margin-top: 2px;
-      }
-
-      /* ── ACTION SHEET (single column after Battle removal) ── */
-      .action-sheet.single-col {
-        grid-template-columns: 1fr;
-      }
-      .action-sheet.single-col .action-col:first-child {
-        border-right: none;
-      }
-
-      /* ── PRINT ── */
-      @media print {
-        body {
-          background: none;
-        }
-        .sheet {
-          margin: 0;
-          page-break-after: always;
-          box-shadow: none;
-        }
-        @page {
-          size: 8.5in 11in;
-          margin: 0;
-        }
-      }
-      @media screen {
-        body {
-          padding: 0.4in 0;
-        }
-        .sheet {
-          box-shadow: 0 3px 20px rgba(0, 0, 0, 0.25);
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <!--
@@ -731,45 +63,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">16</td>
-                <td class="td-mod">+3</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">10</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">10</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">11</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">9</td>
-                <td class="td-mod">−1</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">16</td>
+                  <td class="td-mod">+3</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">10</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">10</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">11</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">9</td>
+                  <td class="td-mod">−1</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -826,39 +161,43 @@
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">The Forge Brand</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 3</span>
+              <div class="weapon-block">
+                <div class="weapon-name">The Forge Brand</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 3</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">1d6 + 5</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">1d6 + 5</span>
+                <div class="weapon-desc">
+                  Named after the scar. A wrench with a combustion-tap head
+                  pulled from the same valve that burned Cinder at nine. They
+                  kept it. Bludgeoning/Fire. Doubles as a fuel igniter.
                 </div>
               </div>
-              <div class="weapon-desc">
-                Named after the scar. A wrench with a combustion-tap head pulled from the same valve that burned Cinder at nine. They kept it. Bludgeoning/Fire. Doubles as a fuel igniter.
+              <div class="skill-block">
+                <div class="skill-name">Rage</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Uses</span
+                    ><span class="ssp-value">2 / Rest</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Bonus</span
+                    ><span class="ssp-value">+2 dmg</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Bonus action. Resistance to bludgeoning/piercing/slashing.
+                  Advantage on STR checks/saves. +2 melee damage. Lasts 1
+                  minute.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Rage</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Uses</span
-                  ><span class="ssp-value">2 / Rest</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Bonus</span
-                  ><span class="ssp-value">+2 dmg</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Bonus action. Resistance to bludgeoning/piercing/slashing. Advantage on STR checks/saves. +2 melee damage. Lasts 1 minute.
-              </div>
-            </div>
-          </div>
           </div>
 
           <div class="boost-block">
@@ -868,7 +207,7 @@
                 ><span class="boost-name">Road Rage!</span>
               </div>
               <span class="boost-phase"
-                >Phase 3 Only · Velocity Tiles · Declare BEFORE rolling</span
+                >Act III Only · Velocity Tiles · Declare BEFORE rolling</span
               >
             </div>
             <p class="boost-desc">
@@ -876,7 +215,7 @@
               <strong>HONK HONK!</strong> When you are the chosen roller on a
               <strong>Velocity tile</strong>, declare before picking up the die.
               Your d20 result increases by <strong>+1</strong>. Your roll only.
-              Phase 3 only.
+              Act III only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -888,99 +227,101 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls this turn. Any player. Rotate
+                    freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >If using your Boost, say so now — before dice are
+                    touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >Positive or negative uses declared out loud before the
+                    roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the tile DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc"
+                    >Miss DC by 1–4 → stay on tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss DC by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Skip next turn (SKIP).</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → each rolls d20 + tile mod. Highest
+                    wins +1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start. MC
+                    announces.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls this turn. Any player. Rotate
-                freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >If using your Boost, say so now — before dice are
-                touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >Positive or negative uses declared out loud before the
-                roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the tile DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it to the room.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss DC by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss DC by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Skip next turn (SKIP).</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → each rolls d20 + tile mod. Highest wins
-                +1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start. MC
-                announces.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
 
@@ -1051,45 +392,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">17</td>
-                <td class="td-mod">+3</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">9</td>
-                <td class="td-mod">−1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">9</td>
-                <td class="td-mod">−1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">12</td>
-                <td class="td-mod">+1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">11</td>
-                <td class="td-mod">+0</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">17</td>
+                  <td class="td-mod">+3</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">9</td>
+                  <td class="td-mod">−1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">9</td>
+                  <td class="td-mod">−1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">12</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">11</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -1143,39 +487,43 @@
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">The Severance Package</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 3</span>
+              <div class="weapon-block">
+                <div class="weapon-name">The Severance Package</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 3</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">1d8 + 3</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">1d8 + 3</span>
+                <div class="weapon-desc">
+                  The second-hand fuel cell Pip bought with the postal severance
+                  — still on the original drive chain, repurposed into something
+                  considerably less safe. Bludgeoning/Fire. Unstable on a
+                  natural 1.
                 </div>
               </div>
-              <div class="weapon-desc">
-                The second-hand fuel cell Pip bought with the postal severance — still on the original drive chain, repurposed into something considerably less safe. Bludgeoning/Fire. Unstable on a natural 1.
+              <div class="skill-block">
+                <div class="skill-name">Hunter's Mark</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Save DC</span
+                    ><span class="ssp-value">Concentration</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Bonus</span
+                    ><span class="ssp-value">+1d6</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Bonus action. Mark a creature you can see within 90ft. Deal
+                  extra 1d6 damage when you hit it. Lasts up to 1hr.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Hunter's Mark</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Save DC</span
-                  ><span class="ssp-value">Concentration</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Bonus</span
-                  ><span class="ssp-value">+1d6</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Bonus action. Mark a creature you can see within 90ft. Deal extra 1d6 damage when you hit it. Lasts up to 1hr.
-              </div>
-            </div>
-          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -1184,14 +532,14 @@
                 ><span class="boost-name">The Quickest Route!</span>
               </div>
               <span class="boost-phase"
-                >Phase 3 Only · Velocity Tiles · Declare BEFORE rolling</span
+                >Act III Only · Velocity Tiles · Declare BEFORE rolling</span
               >
             </div>
             <p class="boost-desc">
               When you are the chosen roller on a
               <strong>Velocity tile</strong>, declare before picking up the die.
               Your d20 result increases by <strong>+1</strong>. Your roll only.
-              Phase 3 only.
+              Act III only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -1203,99 +551,101 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls this turn. Any player. Rotate
+                    freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >If using your Boost, say so now — before dice are
+                    touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >Positive or negative uses declared out loud before the
+                    roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the tile DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc"
+                    >Miss DC by 1–4 → stay on tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss DC by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Skip next turn (SKIP).</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → each rolls d20 + tile mod. Highest
+                    wins +1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start. MC
+                    announces.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls this turn. Any player. Rotate
-                freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >If using your Boost, say so now — before dice are
-                touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >Positive or negative uses declared out loud before the
-                roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the tile DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it to the room.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss DC by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss DC by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Skip next turn (SKIP).</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → each rolls d20 + tile mod. Highest wins
-                +1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start. MC
-                announces.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
       <div class="inventory-block">
@@ -1362,45 +712,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">18</td>
-                <td class="td-mod">+4</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">8</td>
-                <td class="td-mod">−1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">8</td>
-                <td class="td-mod">−1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">13</td>
-                <td class="td-mod">+1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">8</td>
-                <td class="td-mod">−1</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">18</td>
+                  <td class="td-mod">+4</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">8</td>
+                  <td class="td-mod">−1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">8</td>
+                  <td class="td-mod">−1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">13</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">8</td>
+                  <td class="td-mod">−1</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -1454,39 +807,43 @@
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">The Sure Thing</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 4</span>
+              <div class="weapon-block">
+                <div class="weapon-name">The Sure Thing</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 4</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">1d10 + 4</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">1d10 + 4</span>
+                <div class="weapon-desc">
+                  Named after the bet that covered. A throttle gauntlet
+                  channeling arcane fuel through the knuckles — stripped off and
+                  worn when things get close. Lightning.
                 </div>
               </div>
-              <div class="weapon-desc">
-                Named after the bet that covered. A throttle gauntlet channeling arcane fuel through the knuckles — stripped off and worn when things get close. Lightning.
+              <div class="skill-block">
+                <div class="skill-name">Rage</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Uses</span
+                    ><span class="ssp-value">2 / Rest</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Bonus</span
+                    ><span class="ssp-value">+2 dmg</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Bonus action. Resistance to bludgeoning/piercing/slashing.
+                  Advantage on STR checks/saves. +2 melee damage. Lasts 1
+                  minute.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Rage</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Uses</span
-                  ><span class="ssp-value">2 / Rest</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Bonus</span
-                  ><span class="ssp-value">+2 dmg</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Bonus action. Resistance to bludgeoning/piercing/slashing. Advantage on STR checks/saves. +2 melee damage. Lasts 1 minute.
-              </div>
-            </div>
-          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -1495,14 +852,14 @@
                 ><span class="boost-name">Honk Honk!</span>
               </div>
               <span class="boost-phase"
-                >Phase 3 Only · Velocity Tiles · Declare BEFORE rolling</span
+                >Act III Only · Velocity Tiles · Declare BEFORE rolling</span
               >
             </div>
             <p class="boost-desc">
               When you are the chosen roller on a
               <strong>Velocity tile</strong>, declare before picking up the die.
               Your d20 result increases by <strong>+1</strong>. Your roll only.
-              Phase 3 only.
+              Act III only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -1514,93 +871,93 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls. Any player. Rotate freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >Using your Boost? Say so before dice are touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >All uses declared out loud before the roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc">Goes wrong. Skip next turn.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → roll d20 + tile mod. Highest wins +1
+                    tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls. Any player. Rotate freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >Using your Boost? Say so before dice are touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >All uses declared out loud before the roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc">Goes wrong. Skip next turn.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → roll d20 + tile mod. Highest wins +1
-                tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
       <div class="inventory-block">
@@ -1665,45 +1022,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">10</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">17</td>
-                <td class="td-mod">+3</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">10</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">11</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">14</td>
-                <td class="td-mod">+2</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">10</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">17</td>
+                  <td class="td-mod">+3</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">10</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">11</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">14</td>
+                  <td class="td-mod">+2</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -1757,39 +1117,43 @@
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">The Annotator</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 3</span>
+              <div class="weapon-block">
+                <div class="weapon-name">The Annotator</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 3</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">1d6 + 3</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">1d6 + 3</span>
+                <div class="weapon-desc">
+                  Her cartography tool — a calibration spike used to mark
+                  distances on maps, now sharpened to a point and thrown with
+                  the same precision she applies to everything else. Piercing.
+                  Melee or thrown (20ft). Carries three.
                 </div>
               </div>
-              <div class="weapon-desc">
-                Her cartography tool — a calibration spike used to mark distances on maps, now sharpened to a point and thrown with the same precision she applies to everything else. Piercing. Melee or thrown (20ft). Carries three.
+              <div class="skill-block">
+                <div class="skill-name">Martial Arts</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Unarmed</span
+                    ><span class="ssp-value">1d4 + DEX</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Bonus</span
+                    ><span class="ssp-value">Extra Strike</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Use DEX for unarmed attacks. After Attack action, make one
+                  unarmed strike as a bonus action. Unarmed dmg = 1d4.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Martial Arts</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Unarmed</span
-                  ><span class="ssp-value">1d4 + DEX</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Bonus</span
-                  ><span class="ssp-value">Extra Strike</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Use DEX for unarmed attacks. After Attack action, make one unarmed strike as a bonus action. Unarmed dmg = 1d4.
-              </div>
-            </div>
-          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -1798,7 +1162,7 @@
                 ><span class="boost-name">The Line!</span>
               </div>
               <span class="boost-phase"
-                >Phase 3 Only · Handling Tiles · Declare BEFORE rolling</span
+                >Act III Only · Handling Tiles · Declare BEFORE rolling</span
               >
             </div>
             <p class="boost-desc">
@@ -1806,7 +1170,7 @@
               <strong>ALREADY KNEW THAT.</strong> When you are the chosen roller
               on a <strong>Handling tile</strong>, declare before picking up the
               die. Your d20 result increases by <strong>+1</strong>. Your roll
-              only. Phase 3 only.
+              only. Act III only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -1818,93 +1182,93 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls. Any player. Rotate freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >Using your Boost? Say so before dice are touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >All uses declared out loud before the roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc">Goes wrong. Skip next turn.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → roll d20 + tile mod. Highest wins +1
+                    tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls. Any player. Rotate freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >Using your Boost? Say so before dice are touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >All uses declared out loud before the roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc">Goes wrong. Skip next turn.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → roll d20 + tile mod. Highest wins +1
-                tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
       <div class="inventory-block">
@@ -1972,45 +1336,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">10</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">16</td>
-                <td class="td-mod">+3</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">11</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">12</td>
-                <td class="td-mod">+1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">15</td>
-                <td class="td-mod">+2</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">10</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">16</td>
+                  <td class="td-mod">+3</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">11</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">12</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">15</td>
+                  <td class="td-mod">+2</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -2063,39 +1430,42 @@
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">The Barge Needle</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 3</span>
+              <div class="weapon-block">
+                <div class="weapon-name">The Barge Needle</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 3</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">1d4 + 6</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">1d4 + 6</span>
+                <div class="weapon-desc">
+                  The navigation compass from the canal barge — brass needle,
+                  weighted handle, sharpened to a point once the barge was sold.
+                  They've carried it ever since. Piercing.
                 </div>
               </div>
-              <div class="weapon-desc">
-                The navigation compass from the canal barge — brass needle, weighted handle, sharpened to a point once the barge was sold. They've carried it ever since. Piercing.
+              <div class="skill-block">
+                <div class="skill-name">Favored Enemy</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Trained</span
+                    ><span class="ssp-value">Beasts</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Bonus</span
+                    ><span class="ssp-value">Advantage</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Advantage on Survival checks to track favored enemies, and on
+                  INT checks to recall info about them. Bonus languages.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Favored Enemy</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Trained</span
-                  ><span class="ssp-value">Beasts</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Bonus</span
-                  ><span class="ssp-value">Advantage</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Advantage on Survival checks to track favored enemies, and on INT checks to recall info about them. Bonus languages.
-              </div>
-            </div>
-          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -2104,14 +1474,14 @@
                 ><span class="boost-name">Tight Lines!</span>
               </div>
               <span class="boost-phase"
-                >Phase 3 Only · Handling Tiles · Declare BEFORE rolling</span
+                >Act III Only · Handling Tiles · Declare BEFORE rolling</span
               >
             </div>
             <p class="boost-desc">
               When you are the chosen roller on a
               <strong>Handling tile</strong>, declare before picking up the die.
               Your d20 result increases by <strong>+1</strong>. Your roll only.
-              Phase 3 only.
+              Act III only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -2123,93 +1493,93 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls. Any player. Rotate freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >Using your Boost? Say so before dice are touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >All uses declared out loud before the roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc">Goes wrong. Skip next turn.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → roll d20 + tile mod. Highest wins +1
+                    tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls. Any player. Rotate freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >Using your Boost? Say so before dice are touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >All uses declared out loud before the roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc">Goes wrong. Skip next turn.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → roll d20 + tile mod. Highest wins +1
-                tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
       <div class="inventory-block">
@@ -2277,45 +1647,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">10</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">17</td>
-                <td class="td-mod">+3</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">11</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">13</td>
-                <td class="td-mod">+1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">14</td>
-                <td class="td-mod">+2</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">10</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">17</td>
+                  <td class="td-mod">+3</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">11</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">13</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">14</td>
+                  <td class="td-mod">+2</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -2368,39 +1741,42 @@
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">The Calibration Blade</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 3</span>
+              <div class="weapon-block">
+                <div class="weapon-name">The Calibration Blade</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 3</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">1d8 + 3</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">1d8 + 3</span>
+                <div class="weapon-desc">
+                  A clock-tower calibration tool — a thin, precise blade used to
+                  align gear faces to the thousandth of an inch, repurposed.
+                  They keep the tolerances. Slashing. Finesse.
                 </div>
               </div>
-              <div class="weapon-desc">
-                A clock-tower calibration tool — a thin, precise blade used to align gear faces to the thousandth of an inch, repurposed. They keep the tolerances. Slashing. Finesse.
+              <div class="skill-block">
+                <div class="skill-name">Sneak Attack</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Trigger</span
+                    ><span class="ssp-value">Advantage</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Bonus</span
+                    ><span class="ssp-value">+1d6</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Once per turn, deal extra 1d6 damage when you have advantage,
+                  or an ally is within 5ft of the target. Finesse/ranged.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Sneak Attack</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Trigger</span
-                  ><span class="ssp-value">Advantage</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Bonus</span
-                  ><span class="ssp-value">+1d6</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Once per turn, deal extra 1d6 damage when you have advantage, or an ally is within 5ft of the target. Finesse/ranged.
-              </div>
-            </div>
-          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -2409,14 +1785,14 @@
                 ><span class="boost-name">Already Knew That.</span>
               </div>
               <span class="boost-phase"
-                >Phase 3 Only · Handling Tiles · Declare BEFORE rolling</span
+                >Act III Only · Handling Tiles · Declare BEFORE rolling</span
               >
             </div>
             <p class="boost-desc">
               When you are the chosen roller on a
               <strong>Handling tile</strong>, declare before picking up the die.
               Your d20 result increases by <strong>+1</strong>. Your roll only.
-              Phase 3 only.
+              Act III only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -2428,93 +1804,93 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls. Any player. Rotate freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >Using your Boost? Say so before dice are touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >All uses declared out loud before the roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc">Goes wrong. Skip next turn.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → roll d20 + tile mod. Highest wins +1
+                    tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls. Any player. Rotate freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >Using your Boost? Say so before dice are touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >All uses declared out loud before the roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc">Goes wrong. Skip next turn.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → roll d20 + tile mod. Highest wins +1
-                tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
       <div class="inventory-block">
@@ -2582,45 +1958,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">12</td>
-                <td class="td-mod">+1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">10</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">18</td>
-                <td class="td-mod">+4</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">12</td>
-                <td class="td-mod">+1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">12</td>
-                <td class="td-mod">+1</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">12</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">10</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">18</td>
+                  <td class="td-mod">+4</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">12</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">12</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -2673,39 +2052,43 @@
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">Old Reliable</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 1</span>
+              <div class="weapon-block">
+                <div class="weapon-name">Old Reliable</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 1</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">1d10 + 3</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">1d10 + 3</span>
+                <div class="weapon-desc">
+                  The first hull plate Brick ever salvaged — too cracked for a
+                  frame, sharpened and handled instead. Has been used in every
+                  race since. Bludgeoning. Heaviest weapon in the compendium.
+                  Carried one-handed.
                 </div>
               </div>
-              <div class="weapon-desc">
-                The first hull plate Brick ever salvaged — too cracked for a frame, sharpened and handled instead. Has been used in every race since. Bludgeoning. Heaviest weapon in the compendium. Carried one-handed.
+              <div class="skill-block">
+                <div class="skill-name">Lay on Hands</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Pool</span
+                    ><span class="ssp-value">5 HP</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Action</span
+                    ><span class="ssp-value">Heal Touch</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Action. Touch a creature, restore HP from a pool of 5 (=
+                  Paladin level x5). Or expend 5 HP to cure a disease/poison.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Lay on Hands</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Pool</span
-                  ><span class="ssp-value">5 HP</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Action</span
-                  ><span class="ssp-value">Heal Touch</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Action. Touch a creature, restore HP from a pool of 5 (= Paladin level x5). Or expend 5 HP to cure a disease/poison.
-              </div>
-            </div>
-          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -2714,7 +2097,7 @@
                 ><span class="boost-name">The Spine Holds.</span>
               </div>
               <span class="boost-phase"
-                >Phase 3 Only · Resilience Tiles · Declare BEFORE rolling</span
+                >Act III Only · Resilience Tiles · Declare BEFORE rolling</span
               >
             </div>
             <p class="boost-desc">
@@ -2722,7 +2105,7 @@
               <strong>UNBROKEN.</strong> When you are the chosen roller on a
               <strong>Resilience tile</strong>, declare before picking up the
               die. Your d20 result increases by <strong>+1</strong>. Your roll
-              only. Phase 3 only.
+              only. Act III only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -2734,93 +2117,93 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls. Any player. Rotate freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >Using your Boost? Say so before dice are touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >All uses declared out loud before the roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.
+                  </span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc">Goes wrong. Skip next turn.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → roll d20 + tile mod. Highest wins +1
+                    tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls. Any player. Rotate freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >Using your Boost? Say so before dice are touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >All uses declared out loud before the roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc">Goes wrong. Skip next turn.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → roll d20 + tile mod. Highest wins +1
-                tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
       <div class="inventory-block">
@@ -2888,45 +2271,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">12</td>
-                <td class="td-mod">+1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">10</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">17</td>
-                <td class="td-mod">+3</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">11</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">13</td>
-                <td class="td-mod">+1</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">12</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">10</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">17</td>
+                  <td class="td-mod">+3</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">11</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">13</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -2978,39 +2364,42 @@
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">The Borrowing</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 1</span>
+              <div class="weapon-block">
+                <div class="weapon-name">The Borrowing</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 1</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">1d6 + 2</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">1d6 + 2</span>
+                <div class="weapon-desc">
+                  Mosswick's industrial seal compound in a pressurised injector
+                  — parts he doesn't officially know she took. Hardens on
+                  contact. Piercing/Force.
                 </div>
               </div>
-              <div class="weapon-desc">
-                Mosswick's industrial seal compound in a pressurised injector — parts he doesn't officially know she took. Hardens on contact. Piercing/Force.
+              <div class="skill-block">
+                <div class="skill-name">Second Wind</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Uses</span
+                    ><span class="ssp-value">1 / Rest</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Heal</span
+                    ><span class="ssp-value">1d10 + 1</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Bonus action. Regain 1d10 + Fighter level HP. Recovers on a
+                  short or long rest.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Second Wind</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Uses</span
-                  ><span class="ssp-value">1 / Rest</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Heal</span
-                  ><span class="ssp-value">1d10 + 1</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Bonus action. Regain 1d10 + Fighter level HP. Recovers on a short or long rest.
-              </div>
-            </div>
-          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -3019,14 +2408,14 @@
                 ><span class="boost-name">Still Moving.</span>
               </div>
               <span class="boost-phase"
-                >Phase 3 Only · Resilience Tiles · Declare BEFORE rolling</span
+                >Act III Only · Resilience Tiles · Declare BEFORE rolling</span
               >
             </div>
             <p class="boost-desc">
               When you are the chosen roller on a
               <strong>Resilience tile</strong>, declare before picking up the
               die. Your d20 result increases by <strong>+1</strong>. Your roll
-              only. Phase 3 only.
+              only. Act III only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -3038,93 +2427,93 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls. Any player. Rotate freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >Using your Boost? Say so before dice are touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >All uses declared out loud before the roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc">Goes wrong. Skip next turn.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → roll d20 + tile mod. Highest wins +1
+                    tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls. Any player. Rotate freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >Using your Boost? Say so before dice are touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >All uses declared out loud before the roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc">Goes wrong. Skip next turn.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → roll d20 + tile mod. Highest wins +1
-                tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
       <div class="inventory-block">
@@ -3193,45 +2582,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">14</td>
-                <td class="td-mod">+2</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">9</td>
-                <td class="td-mod">−1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">18</td>
-                <td class="td-mod">+4</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">10</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">11</td>
-                <td class="td-mod">+0</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">14</td>
+                  <td class="td-mod">+2</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">9</td>
+                  <td class="td-mod">−1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">18</td>
+                  <td class="td-mod">+4</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">10</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">11</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -3274,7 +2666,7 @@
               aren't cosmetic — and asked quietly for the blessing. The Elders
               made them sit. They asked their question. Hull answered it. The
               eldest said: we're calling you Hull. There was no argument. They
-              arrive last to register, slowest through Phase 1, first into the
+              arrive last to register, slowest through Act I, first into the
               Gauntlet. The Aether Bridge cuts every system on the course. On
               Hull, it doesn't seem to. Nobody has explained this. Hull has not
               been asked. When it matters most, when the field pulses and
@@ -3285,39 +2677,43 @@
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">The Covenant's Answer</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 2</span>
+              <div class="weapon-block">
+                <div class="weapon-name">The Covenant's Answer</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 2</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">2d6 + 2</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">2d6 + 2</span>
+                <div class="weapon-desc">
+                  What Hull brought to the Shrine Stall — a length of
+                  warship-grade armour plate, sharpened. The Elders saw it and
+                  called it the answer before Hull said a word. Piercing.
                 </div>
               </div>
-              <div class="weapon-desc">
-                What Hull brought to the Shrine Stall — a length of warship-grade armour plate, sharpened. The Elders saw it and called it the answer before Hull said a word. Piercing.
+              <div class="skill-block">
+                <div class="skill-name">Rage</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Uses</span
+                    ><span class="ssp-value">2 / Rest</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Bonus</span
+                    ><span class="ssp-value">+2 dmg</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Bonus action. Resistance to bludgeoning/piercing/slashing.
+                  Advantage on STR checks/saves. +2 melee damage. Lasts 1
+                  minute.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Rage</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Uses</span
-                  ><span class="ssp-value">2 / Rest</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Bonus</span
-                  ><span class="ssp-value">+2 dmg</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Bonus action. Resistance to bludgeoning/piercing/slashing. Advantage on STR checks/saves. +2 melee damage. Lasts 1 minute.
-              </div>
-            </div>
-          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -3326,14 +2722,14 @@
                 ><span class="boost-name">Unbroken.</span>
               </div>
               <span class="boost-phase"
-                >Phase 3 Only · Resilience Tiles · Declare BEFORE rolling</span
+                >Act III Only · Resilience Tiles · Declare BEFORE rolling</span
               >
             </div>
             <p class="boost-desc">
               When you are the chosen roller on a
               <strong>Resilience tile</strong>, declare before picking up the
               die. Your d20 result increases by <strong>+1</strong>. Your roll
-              only. Phase 3 only.
+              only. Act III only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -3345,93 +2741,93 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls. Any player. Rotate freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >Using your Boost? Say so before dice are touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >All uses declared out loud before the roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc">Goes wrong. Skip next turn.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → roll d20 + tile mod. Highest wins +1
+                    tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls. Any player. Rotate freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >Using your Boost? Say so before dice are touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >All uses declared out loud before the roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc">Goes wrong. Skip next turn.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → roll d20 + tile mod. Highest wins +1
-                tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
       <div class="inventory-block">
@@ -3500,45 +2896,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">9</td>
-                <td class="td-mod">−1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">11</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">12</td>
-                <td class="td-mod">+1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">18</td>
-                <td class="td-mod">+4</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">15</td>
-                <td class="td-mod">+2</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">9</td>
+                  <td class="td-mod">−1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">11</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">12</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">18</td>
+                  <td class="td-mod">+4</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">15</td>
+                  <td class="td-mod">+2</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -3584,46 +2983,50 @@
               vendor into a bulk discount on behalf of a crew they weren't part
               of, pocketed the difference, and bought their first race entry
               with it. They've never raced particularly fast. Never needed to.
-              The race is won in Phase 1, in the careful thirty seconds before
+              The race is won in Act I, in the careful thirty seconds before
               Grimshaw nods. Goose calls it what it is: <em>The Long Con.</em>
             </div>
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">The Manifest</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 4</span>
+              <div class="weapon-block">
+                <div class="weapon-name">The Manifest</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 4</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">1d4 + 4</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">1d4 + 4</span>
+                <div class="weapon-desc">
+                  Named after the livestock manifest that gave Goose their name
+                  — a genuine legal instrument, weighted for signature,
+                  sharpened at the nib. On hit: target makes DC 14 save or must
+                  hear the next sentence.
                 </div>
               </div>
-              <div class="weapon-desc">
-                Named after the livestock manifest that gave Goose their name — a genuine legal instrument, weighted for signature, sharpened at the nib. On hit: target makes DC 14 save or must hear the next sentence.
+              <div class="skill-block">
+                <div class="skill-name">Bardic Inspiration</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Uses</span
+                    ><span class="ssp-value">4 / Rest</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Die</span
+                    ><span class="ssp-value">1d6</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Bonus action. Choose a creature within 60ft. They add 1d6 to
+                  one attack roll, ability check, or save within 10 min.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Bardic Inspiration</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Uses</span
-                  ><span class="ssp-value">4 / Rest</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Die</span
-                  ><span class="ssp-value">1d6</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Bonus action. Choose a creature within 60ft. They add 1d6 to one attack roll, ability check, or save within 10 min.
-              </div>
-            </div>
-          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -3632,7 +3035,7 @@
                 ><span class="boost-name">The Long Con!</span>
               </div>
               <span class="boost-phase"
-                >Phase 1 Only · Any Vendor Challenge · Declare BEFORE
+                >Act I Only · Any Vendor Challenge · Declare BEFORE
                 rolling</span
               >
             </div>
@@ -3641,7 +3044,7 @@
               <strong>ALREADY IN THE BOOK.</strong> Declare before your table
               rolls a vendor challenge. Fen has run the odds. Adds
               <strong>+1 to the table's group d20 average</strong> on any vendor
-              challenge. Phase 1 only.
+              challenge. Act I only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -3653,93 +3056,93 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls. Any player. Rotate freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >Using your Boost? Say so before dice are touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >All uses declared out loud before the roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc">Goes wrong. Skip next turn.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → roll d20 + tile mod. Highest wins +1
+                    tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls. Any player. Rotate freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >Using your Boost? Say so before dice are touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >All uses declared out loud before the roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc">Goes wrong. Skip next turn.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → roll d20 + tile mod. Highest wins +1
-                tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
       <div class="inventory-block">
@@ -3807,45 +3210,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">9</td>
-                <td class="td-mod">−1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">11</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">11</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">18</td>
-                <td class="td-mod">+4</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">14</td>
-                <td class="td-mod">+2</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">9</td>
+                  <td class="td-mod">−1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">11</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">11</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">18</td>
+                  <td class="td-mod">+4</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">14</td>
+                  <td class="td-mod">+2</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -3898,39 +3304,43 @@
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">The Ledger</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 4</span>
+              <div class="weapon-block">
+                <div class="weapon-name">The Ledger</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 4</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">1d6 + 5</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">1d6 + 5</span>
+                <div class="weapon-desc">
+                  Her father's tax collection instrument — solid brass over
+                  hardwood, ceremonial in appearance. She repurposed it when she
+                  took her cut. Has not been used as a weapon in years. This is
+                  precisely what she wants people to believe. Bludgeoning.
                 </div>
               </div>
-              <div class="weapon-desc">
-                Her father's tax collection instrument — solid brass over hardwood, ceremonial in appearance. She repurposed it when she took her cut. Has not been used as a weapon in years. This is precisely what she wants people to believe. Bludgeoning.
+              <div class="skill-block">
+                <div class="skill-name">Sneak Attack</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Trigger</span
+                    ><span class="ssp-value">Advantage</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Bonus</span
+                    ><span class="ssp-value">+1d6</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Once per turn, deal extra 1d6 damage when you have advantage,
+                  or an ally is within 5ft of the target. Finesse/ranged.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Sneak Attack</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Trigger</span
-                  ><span class="ssp-value">Advantage</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Bonus</span
-                  ><span class="ssp-value">+1d6</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Once per turn, deal extra 1d6 damage when you have advantage, or an ally is within 5ft of the target. Finesse/ranged.
-              </div>
-            </div>
-          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -3939,14 +3349,14 @@
                 ><span class="boost-name">In Plain Sight!</span>
               </div>
               <span class="boost-phase"
-                >Phase 1 Only · Any Vendor Challenge · Declare BEFORE
+                >Act I Only · Any Vendor Challenge · Declare BEFORE
                 rolling</span
               >
             </div>
             <p class="boost-desc">
               Declare before your table rolls a vendor challenge. Adds
               <strong>+1 to the table's group d20 average</strong> on any vendor
-              challenge. Phase 1 only.
+              challenge. Act I only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -3958,93 +3368,93 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls. Any player. Rotate freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >Using your Boost? Say so before dice are touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >All uses declared out loud before the roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc">Goes wrong. Skip next turn.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → roll d20 + tile mod. Highest wins +1
+                    tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls. Any player. Rotate freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >Using your Boost? Say so before dice are touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >All uses declared out loud before the roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc">Goes wrong. Skip next turn.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → roll d20 + tile mod. Highest wins +1
-                tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
       <div class="inventory-block">
@@ -4113,45 +3523,48 @@
             <span class="portrait-label">Portrait</span>
           </div>
           <div>
-            <div class="section-title">Stat Block</div><table class="stat-table">
-            <thead>
-              <tr>
-                <th style="width: 64px">Skill</th>
-                <th class="center" style="width: 32px">Score</th>
-                <th class="center" style="width: 30px">Mod</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="td-skill">STRENGTH</td>
-                <td class="td-stat">10</td>
-                <td class="td-mod">+0</td>
-              </tr>
-              <tr>
-                <td class="td-skill">DEXTERITY</td>
-                <td class="td-stat">13</td>
-                <td class="td-mod">+1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CONSTITUTION</td>
-                <td class="td-stat">12</td>
-                <td class="td-mod">+1</td>
-              </tr>
-              <tr>
-                <td class="td-skill">CHARISMA</td>
-                <td class="td-stat">18</td>
-                <td class="td-mod">+4</td>
-              </tr>
-              <tr>
-                <td class="td-skill">WISDOM</td>
-                <td class="td-stat">15</td>
-                <td class="td-mod">+2</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="section-title">Stat Block</div>
+            <table class="stat-table">
+              <thead>
+                <tr>
+                  <th style="width: 64px">Skill</th>
+                  <th class="center" style="width: 32px">Score</th>
+                  <th class="center" style="width: 30px">Mod</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-skill">STRENGTH</td>
+                  <td class="td-stat">10</td>
+                  <td class="td-mod">+0</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">DEXTERITY</td>
+                  <td class="td-stat">13</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CONSTITUTION</td>
+                  <td class="td-stat">12</td>
+                  <td class="td-mod">+1</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">CHARISMA</td>
+                  <td class="td-stat">18</td>
+                  <td class="td-mod">+4</td>
+                </tr>
+                <tr>
+                  <td class="td-skill">WISDOM</td>
+                  <td class="td-stat">15</td>
+                  <td class="td-mod">+2</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modifier-block">
-            <div class="modifier-title"><span class="car-icon">🏎</span>Car &amp; Modifiers</div>
+            <div class="modifier-title">
+              <span class="car-icon">🏎</span>Car &amp; Modifiers
+            </div>
             <div class="modifier-field">
               <span class="modifier-label">Modifier 1</span>
               <div class="modifier-line"></div>
@@ -4197,48 +3610,53 @@
               notebook, annotated with what the favourite did wrong. At some
               point they started annotating what they would have done instead.
               Eventually that felt like a reason to find out. Fen still takes
-              the occasional side bet during Phase 1. They consider this
-              research. Before every big move they flip to a page, run a finger
-              down the numbers, and say it straight:
+              the occasional side bet during Act I. They consider this research.
+              Before every big move they flip to a page, run a finger down the
+              numbers, and say it straight:
               <em>Already in the Book.</em>
             </div>
           </div>
           <div>
             <div class="section-title">Weapons + Skills</div>
             <div class="weapon-skill-row">
-            <div class="weapon-block">
-              <div class="weapon-name">The Poison Pen</div>
-              <div class="weapon-row">
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">To Hit</span
-                  ><span class="wsp-value">d20 + 4</span>
+              <div class="weapon-block">
+                <div class="weapon-name">The Poison Pen</div>
+                <div class="weapon-row">
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">To Hit</span
+                    ><span class="wsp-value">d20 + 4</span>
+                  </div>
+                  <div class="weapon-stat-pill">
+                    <span class="wsp-label">Damage</span
+                    ><span class="wsp-value">1d6 + 4</span>
+                  </div>
                 </div>
-                <div class="weapon-stat-pill">
-                  <span class="wsp-label">Damage</span
-                  ><span class="wsp-value">1d6 + 4</span>
+                <div class="weapon-desc">
+                  A bookkeeper's fountain pen with a hollow nib that holds a
+                  single dose of contact venom. Loaded from the inkwell. The pen
+                  still writes — that's the trick. Piercing. Target makes a CON
+                  save on hit or takes a stacking poisoned condition until end
+                  of next round.
                 </div>
               </div>
-              <div class="weapon-desc">
-                A bookkeeper's fountain pen with a hollow nib that holds a single dose of contact venom. Loaded from the inkwell. The pen still writes — that's the trick. Piercing. Target makes a CON save on hit or takes a stacking poisoned condition until end of next round.
+              <div class="skill-block">
+                <div class="skill-name">Sneak Attack</div>
+                <div class="skill-row">
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Trigger</span
+                    ><span class="ssp-value">Advantage</span>
+                  </div>
+                  <div class="skill-stat-pill">
+                    <span class="ssp-label">Bonus</span
+                    ><span class="ssp-value">+1d6</span>
+                  </div>
+                </div>
+                <div class="skill-desc">
+                  Once per turn, deal extra 1d6 damage when you have advantage,
+                  or an ally is within 5ft of the target. Finesse/ranged.
+                </div>
               </div>
             </div>
-            <div class="skill-block">
-              <div class="skill-name">Sneak Attack</div>
-              <div class="skill-row">
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Trigger</span
-                  ><span class="ssp-value">Advantage</span>
-                </div>
-                <div class="skill-stat-pill">
-                  <span class="ssp-label">Bonus</span
-                  ><span class="ssp-value">+1d6</span>
-                </div>
-              </div>
-              <div class="skill-desc">
-                Once per turn, deal extra 1d6 damage when you have advantage, or an ally is within 5ft of the target. Finesse/ranged.
-              </div>
-            </div>
-          </div>
           </div>
           <div class="boost-block">
             <div class="boost-header">
@@ -4247,14 +3665,14 @@
                 ><span class="boost-name">Already in the Book.</span>
               </div>
               <span class="boost-phase"
-                >Phase 1 Only · Any Vendor Challenge · Declare BEFORE
+                >Act I Only · Any Vendor Challenge · Declare BEFORE
                 rolling</span
               >
             </div>
             <p class="boost-desc">
               Declare before your table rolls a vendor challenge. Adds
               <strong>+1 to the table's group d20 average</strong> on any vendor
-              challenge. Phase 1 only.
+              challenge. Act I only.
             </p>
             <div class="boost-uses-row">
               <span class="uses-label">Uses:</span>
@@ -4266,93 +3684,93 @@
               >
             </div>
           </div>
-        
+
           <div class="action-sheet single-col">
-        <div class="action-col">
-          <div class="action-col-title">
-            🏁 Racing
-            <span class="col-eyebrow"
-              >Phase 3 · one d20 per table per turn</span
-            >
+            <div class="action-col">
+              <div class="action-col-title">
+                🏁 Racing
+                <span class="col-eyebrow"
+                  >Act III · one d20 per table per turn</span
+                >
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  Before the roll — declare everything first
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Choose Roller</span
+                  ><span class="action-desc"
+                    >Table picks who rolls. Any player. Rotate freely.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Boost</span
+                  ><span class="action-desc"
+                    >Using your Boost? Say so before dice are touched.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Declare Sponsor</span
+                  ><span class="action-desc"
+                    >All uses declared out loud before the roll.</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">
+                  The roll — d20 + race attribute mod vs tile DC
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Advance</span
+                  ><span class="action-desc"
+                    >Beat the DC → move forward 1 tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Blazing Run</span
+                  ><span class="action-desc"
+                    >Beat DC by 5+ → move 2 tiles.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Partial Stall</span
+                  ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Hard Stall</span
+                  ><span class="action-desc"
+                    >Miss by 5+ → stay on tile. Terrain wins.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · top 50%</span
+                  ><span class="action-desc">Goes wrong. Skip next turn.</span>
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Nat 1 · bot 50%</span
+                  ><span class="action-desc"
+                    >Goes wrong. Free Boost next round (★).</span
+                  >
+                </div>
+              </div>
+              <div class="action-group">
+                <div class="action-group-label">Battles &amp; Boosts</div>
+                <div class="action-item">
+                  <span class="action-name">Battle Roll</span
+                  ><span class="action-desc"
+                    >2+ tables share tile → roll d20 + tile mod. Highest wins +1
+                    tile.</span
+                  >
+                </div>
+                <div class="action-item">
+                  <span class="action-name">Trailing Boost</span
+                  ><span class="action-desc"
+                    >3+ tiles behind → free Boost at round start.</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              Before the roll — declare everything first
-            </div>
-            <div class="action-item">
-              <span class="action-name">Choose Roller</span
-              ><span class="action-desc"
-                >Table picks who rolls. Any player. Rotate freely.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Boost</span
-              ><span class="action-desc"
-                >Using your Boost? Say so before dice are touched.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Declare Sponsor</span
-              ><span class="action-desc"
-                >All uses declared out loud before the roll.</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">
-              The roll — d20 + race attribute mod vs tile DC
-            </div>
-            <div class="action-item">
-              <span class="action-name">Advance</span
-              ><span class="action-desc"
-                >Beat the DC → move forward 1 tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Blazing Run</span
-              ><span class="action-desc"
-                >Beat DC by 5+ → move 2 tiles. MC calls it.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Partial Stall</span
-              ><span class="action-desc">Miss by 1–4 → stay on tile.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Hard Stall</span
-              ><span class="action-desc"
-                >Miss by 5+ → stay on tile. Terrain wins.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · top 50%</span
-              ><span class="action-desc">Goes wrong. Skip next turn.</span>
-            </div>
-            <div class="action-item">
-              <span class="action-name">Nat 1 · bot 50%</span
-              ><span class="action-desc"
-                >Goes wrong. Free Boost next round (★).</span
-              >
-            </div>
-          </div>
-          <div class="action-group">
-            <div class="action-group-label">Battles &amp; Boosts</div>
-            <div class="action-item">
-              <span class="action-name">Battle Roll</span
-              ><span class="action-desc"
-                >2+ tables share tile → roll d20 + tile mod. Highest wins +1
-                tile.</span
-              >
-            </div>
-            <div class="action-item">
-              <span class="action-name">Trailing Boost</span
-              ><span class="action-desc"
-                >3+ tiles behind → free Boost at round start.</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
         </div>
       </div>
       <div class="inventory-block">
@@ -4379,4 +3797,3 @@
     </div>
   </body>
 </html>
-                      
